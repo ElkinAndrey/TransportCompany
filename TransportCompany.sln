@@ -11,15 +11,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransportCompanyAPI.Present
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "transport-company-app", "transport-company-app\transport-company-app.esproj", "{7F815B3E-4FC2-4C6D-B3DA-9F0AC54DE91E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransportCompanyAPI.Domain", "TransportCompanyAPI.Domain\TransportCompanyAPI.Domain.csproj", "{54725728-630C-43D2-BA78-D750619506A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransportCompanyAPI.Domain", "TransportCompanyAPI.Domain\TransportCompanyAPI.Domain.csproj", "{54725728-630C-43D2-BA78-D750619506A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransportCompanyAPI.Tests", "TransportCompanyAPI.Tests\TransportCompanyAPI.Tests.csproj", "{8A681311-986B-4F80-A1E9-C9C5E9965D57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransportCompanyAPI.Tests", "TransportCompanyAPI.Tests\TransportCompanyAPI.Tests.csproj", "{8A681311-986B-4F80-A1E9-C9C5E9965D57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransportCompanyAPI.Persistence", "TransportCompanyAPI.Persistence\TransportCompanyAPI.Persistence.csproj", "{68409F1A-C2D6-4BAC-874C-51F389C03809}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransportCompanyAPI.Persistence", "TransportCompanyAPI.Persistence\TransportCompanyAPI.Persistence.csproj", "{68409F1A-C2D6-4BAC-874C-51F389C03809}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransportCompanyAPI.Service", "TransportCompanyAPI.Service\TransportCompanyAPI.Service.csproj", "{81BE0753-0CC2-4E00-A001-3D8E06806C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransportCompanyAPI.Service", "TransportCompanyAPI.Service\TransportCompanyAPI.Service.csproj", "{81BE0753-0CC2-4E00-A001-3D8E06806C16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransportCompanyAPI.Infrastructure", "TransportCompanyAPI.Infrastructure\TransportCompanyAPI.Infrastructure.csproj", "{7641C567-6AD6-4282-B486-DA0AB920A063}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TransportCompanyAPI.Infrastructure", "TransportCompanyAPI.Infrastructure\TransportCompanyAPI.Infrastructure.csproj", "{7641C567-6AD6-4282-B486-DA0AB920A063}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TransportCompanyDatabase", "TransportCompanyDatabase", "{E8D088D9-67A0-4498-A5D9-047A96CE929F}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TransportCompany.Database", "TransportCompany.Database\TransportCompany.Database.sqlproj", "{69424E3E-0C47-4400-B338-BAC829DEF34D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,12 @@ Global
 		{7641C567-6AD6-4282-B486-DA0AB920A063}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7641C567-6AD6-4282-B486-DA0AB920A063}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7641C567-6AD6-4282-B486-DA0AB920A063}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69424E3E-0C47-4400-B338-BAC829DEF34D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69424E3E-0C47-4400-B338-BAC829DEF34D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69424E3E-0C47-4400-B338-BAC829DEF34D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{69424E3E-0C47-4400-B338-BAC829DEF34D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69424E3E-0C47-4400-B338-BAC829DEF34D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69424E3E-0C47-4400-B338-BAC829DEF34D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +79,7 @@ Global
 		{68409F1A-C2D6-4BAC-874C-51F389C03809} = {B7B4D2AB-5C6D-4545-9DD0-2FF6AFEAF41A}
 		{81BE0753-0CC2-4E00-A001-3D8E06806C16} = {B7B4D2AB-5C6D-4545-9DD0-2FF6AFEAF41A}
 		{7641C567-6AD6-4282-B486-DA0AB920A063} = {B7B4D2AB-5C6D-4545-9DD0-2FF6AFEAF41A}
+		{69424E3E-0C47-4400-B338-BAC829DEF34D} = {E8D088D9-67A0-4498-A5D9-047A96CE929F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {48BF292B-C04B-47A9-A6E2-FFCAA8A27A4E}
