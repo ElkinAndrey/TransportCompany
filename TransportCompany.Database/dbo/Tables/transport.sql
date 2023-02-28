@@ -10,10 +10,12 @@
     [country_id]            SMALLINT      NOT NULL,
     [brand_id]              BIGINT        NOT NULL,
     PRIMARY KEY CLUSTERED ([transport_id] ASC),
-    FOREIGN KEY ([brand_id]) REFERENCES [dbo].[brand] ([brand_id]),
-    FOREIGN KEY ([country_id]) REFERENCES [dbo].[country] ([country_id]),
-    FOREIGN KEY ([transport_category_id]) REFERENCES [dbo].[transport_category] ([transport_category_id])
+    FOREIGN KEY ([brand_id]) REFERENCES [dbo].[brand] ([brand_id]) ON DELETE CASCADE,
+    FOREIGN KEY ([country_id]) REFERENCES [dbo].[country] ([country_id]) ON DELETE CASCADE,
+    FOREIGN KEY ([transport_category_id]) REFERENCES [dbo].[transport_category] ([transport_category_id]) ON DELETE CASCADE
 );
+
+
 
 
 
