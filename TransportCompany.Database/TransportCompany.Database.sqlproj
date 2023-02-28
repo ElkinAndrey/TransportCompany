@@ -63,5 +63,8 @@
     <Build Include="dbo\Tables\transport.sql" />
     <Build Include="dbo\Tables\transport_category.sql" />
     <Build Include="dbo\Tables\country.sql" />
+    <Build Include="dbo\Tables\brand_model.sql" />
+    <Build Include="dbo\Tables\brand_company.sql" />
+    <Build Include="dbo\Tables\brand.sql" />
   </ItemGroup>
 </Project>
