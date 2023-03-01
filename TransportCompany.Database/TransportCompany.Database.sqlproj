@@ -69,5 +69,6 @@
     <Build Include="dbo\Tables\brand.sql" />
     <Build Include="dbo\Functions\GetTransports.sql" />
     <Build Include="dbo\Tables\data_type.sql" />
+    <Build Include="dbo\Tables\transport_property.sql" />
   </ItemGroup>
 </Project>
