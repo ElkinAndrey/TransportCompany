@@ -84,7 +84,7 @@
 
 <a id="LogicalModel"></a>
 <p align="center">
-  <img src="ReadmeImages/LogicalModel.jpg" width="1000px">
+  <img src="ReadmeImages/LogicalModel.png" width="1000px">
 </p>  
 <p align="center">
   <b>Рисунок 1. Логическая модель базы данных</b>
