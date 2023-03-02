@@ -21,4 +21,12 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TransportCompanyAPI.Domain\TransportCompanyAPI.Domain.csproj" />
+    <ProjectReference Include="..\TransportCompanyAPI.Infrastructure\TransportCompanyAPI.Infrastructure.csproj" />
+    <ProjectReference Include="..\TransportCompanyAPI.Persistence\TransportCompanyAPI.Persistence.csproj" />
+    <ProjectReference Include="..\TransportCompanyAPI.Presentation\TransportCompanyAPI.Presentation.csproj" />
+    <ProjectReference Include="..\TransportCompanyAPI.Service\TransportCompanyAPI.Service.csproj" />
+  </ItemGroup>
+
 </Project>
