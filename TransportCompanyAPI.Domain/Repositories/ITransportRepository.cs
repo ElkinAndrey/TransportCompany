@@ -90,7 +90,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "RAW2"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetTransportModelsByCompaniesAsync(int companyId);
+        public Task<IEnumerable<string[]>> GetTransportModelsByCompaniesAsync(long companyId);
 
         /// <summary>
         /// Получить все годы транспорта по названию компании и модели
@@ -103,7 +103,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "2016"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetTransportYearByModelAsync(int modelId);
+        public Task<IEnumerable<string[]>> GetTransportYearByModelAsync(long modelId);
 
         /// <summary>
         /// Получить список всех уникальных характеристик транспорта по категории

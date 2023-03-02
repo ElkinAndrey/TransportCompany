@@ -61,5 +61,26 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             Assert.True(transport.CountryCode != "");
             Assert.True(transport.DecipheringCountry != "");
         }
+
+        /// <summary>
+        /// Проверка метода ADOTransportRepository.GetTransportCompaniesAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetTransportCompaniesAsync()
+        {
+
+            // Подготовка
+            ITransportRepository repository = new ADOTransportRepository();
+            IEnumerable<string[]> companies;
+
+            // Действие
+            companies = await repository.GetTransportCompaniesAsync();
+
+
+            Assert.True(companies.Count() != 0);
+            // Утверждение
+            foreach (var company in companies)
+                Assert.True(company.Length == 2);
+        }
     }
 }

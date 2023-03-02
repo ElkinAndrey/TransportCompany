@@ -119,7 +119,24 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<IEnumerable<string[]>> GetTransportCompaniesAsync()
         {
-            throw new NotImplementedException();
+            List<string[]> companies = new List<string[]>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetTransportCompanies()
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                companies.Add(new string[]
+                {
+                    row.Field<long>("company_id").ToString(),
+                    row.Field<string>("name") ?? "",
+                });
+            }
+
+            return companies;
         }
 
         public async Task<IEnumerable<string[]>> GetTransportCountriesAsync()
@@ -127,7 +144,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<string[]>> GetTransportModelsByCompaniesAsync(int companyId)
+        public async Task<IEnumerable<string[]>> GetTransportModelsByCompaniesAsync(long companyId)
         {
             throw new NotImplementedException();
         }
@@ -173,7 +190,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
             return transports;
         }
 
-        public async Task<IEnumerable<string[]>> GetTransportYearByModelAsync(int modelId)
+        public async Task<IEnumerable<string[]>> GetTransportYearByModelAsync(long modelId)
         {
             throw new NotImplementedException();
         }
