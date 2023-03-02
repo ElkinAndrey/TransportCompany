@@ -9,7 +9,10 @@ using TransportCompanyAPI.Persistence.Settings;
 
 namespace TransportCompanyAPI.Persistence.Repositories
 {
-    internal class RepositoryManager : IRepositoryManager
+    /// <summary>
+    /// Репозиторий для работы с остальными репозиториями
+    /// </summary>
+    public class RepositoryManager : IRepositoryManager
     {
         /// <summary>
         /// Строка подключения к базе данных
@@ -17,7 +20,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
         private string connectionString = ADOSettings.connectionString;
 
         /// <summary>
-        /// РЕопзиторий для работы с транспортом
+        /// Реопзиторий для работы с транспортом
         /// </summary>
         private readonly ITransportRepository transportRepository;
 

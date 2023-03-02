@@ -11,14 +11,9 @@ namespace TransportCompanyAPI.Persistence.Repositories
     public class ADOTransportRepository : ITransportRepository
     {
         /// <summary>
-        /// Строка подключения к базе данных
-        /// </summary>
-        private string connectionString = ADOSettings.connectionString;
-
-        /// <summary>
         /// Объект для отправки SQL запросов
         /// </summary>
-        private SqlQueries sqlQueries;
+        private readonly SqlQueries sqlQueries;
 
         /// <summary>
         /// Конструктор
