@@ -82,5 +82,26 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             foreach (var company in companies)
                 Assert.True(company.Length == 2);
         }
+
+        /// <summary>
+        /// Проверка метода ADOTransportRepository.GetTransportModelsByCompanyIdAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetTransportModelsByCompanyIdAsync()
+        {
+
+            // Подготовка
+            ITransportRepository repository = new ADOTransportRepository();
+            IEnumerable<string[]> models;
+
+            // Действие
+            models = await repository.GetTransportModelsByCompanyIdAsync(1);
+
+
+            Assert.True(models.Count() != 0);
+            // Утверждение
+            foreach (var model in models)
+                Assert.True(model.Length == 2);
+        }
     }
 }

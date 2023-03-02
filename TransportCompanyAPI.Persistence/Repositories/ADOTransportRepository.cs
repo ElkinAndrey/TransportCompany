@@ -128,13 +128,11 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
             DataTable dataTable = sqlQueries.QuerySelect(query);
             foreach (DataRow row in dataTable.Rows)
-            {
                 companies.Add(new string[]
                 {
                     row.Field<long>("company_id").ToString(),
                     row.Field<string>("name") ?? "",
                 });
-            }
 
             return companies;
         }
@@ -144,9 +142,26 @@ namespace TransportCompanyAPI.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<string[]>> GetTransportModelsByCompaniesAsync(long companyId)
+        public async Task<IEnumerable<string[]>> GetTransportModelsByCompanyIdAsync(long companyId)
         {
-            throw new NotImplementedException();
+            List<string[]> models = new List<string[]>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetTransportModelsByCompanyId({companyId})
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                models.Add(new string[]
+                {
+                    row.Field<long>("model_id").ToString(),
+                    row.Field<string>("name") ?? "",
+                });
+            }
+
+            return models;
         }
 
         public async Task<IEnumerable<Transport>> GetTransportsAsync(

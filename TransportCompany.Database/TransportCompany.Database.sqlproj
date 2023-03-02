@@ -74,6 +74,7 @@
     <Build Include="dbo\Tables\transport_category_transport_property.sql" />
     <Build Include="dbo\Functions\GetPropertyByTransportId.sql" />
     <Build Include="dbo\Functions\GetTransportById.sql" />
-    <Build Include="dbo\Functions\GetTransportCompanies_1.sql" />
+    <Build Include="dbo\Functions\GetTransportCompanies.sql" />
+    <Build Include="dbo\Functions\GetTransportModelsByCompanyId.sql" />
   </ItemGroup>
 </Project>

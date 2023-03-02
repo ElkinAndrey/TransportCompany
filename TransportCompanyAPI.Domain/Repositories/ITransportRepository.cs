@@ -90,7 +90,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "RAW2"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetTransportModelsByCompaniesAsync(long companyId);
+        public Task<IEnumerable<string[]>> GetTransportModelsByCompanyIdAsync(long companyId);
 
         /// <summary>
         /// Получить все годы транспорта по названию компании и модели
