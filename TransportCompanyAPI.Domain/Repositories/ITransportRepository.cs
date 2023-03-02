@@ -30,10 +30,10 @@ namespace TransportCompanyAPI.Domain.Repositories
             string regionCode,
             short transportCountryId,
             short transportCategoryId,
-            DateTime startBuy,
-            DateTime endBuy,
-            DateTime startWriteOff,
-            DateTime endWriteOff
+            DateTime? startBuy,
+            DateTime? endBuy,
+            DateTime? startWriteOff,
+            DateTime? endWriteOff
         );
 
         /// <summary>

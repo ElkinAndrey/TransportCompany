@@ -74,6 +74,6 @@ namespace TransportCompanyAPI.Domain.Entities.TransportEntities
         /// <summary>
         /// Год издания транспорта
         /// </summary>
-        public short YearPublishing { get; set; } = 0; 
+        public int YearPublishing { get; set; } = 0; 
     }
 }

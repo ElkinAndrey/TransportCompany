@@ -9,6 +9,6 @@ namespace TransportCompanyAPI.Persistence.Settings
     static public class ADOSettings
     {
         static public string connectionString { get; } =
-            "Server = (localdb)\\mssqllocaldb; Database = TransportCompany; Trusted_Connection = True";
+            "Server = (localdb)\\mssqllocaldb; Database = TransportCompanyDatabase; Trusted_Connection = True";
     }
 }

@@ -1,11 +1,15 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Reflection;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Repositories;
+using TransportCompanyAPI.Persistence.Features;
 using TransportCompanyAPI.Persistence.Settings;
 
-namespace TransportCompanyAPI.Persistence.Repository
+namespace TransportCompanyAPI.Persistence.Repositories
 {
-    class ADOTransportRepository : ITransportRepository
+    public class ADOTransportRepository : ITransportRepository
     {
         /// <summary>
         /// Строка подключения к базе данных
@@ -56,9 +60,43 @@ namespace TransportCompanyAPI.Persistence.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Transport>> GetTransportsAsync(long offset, long length, string series, string number, string regionCode, short transportCountryId, short transportCategoryId, DateTime startBuy, DateTime endBuy, DateTime startWriteOff, DateTime endWriteOff)
+        public async Task<IEnumerable<Transport>> GetTransportsAsync(
+            long offset, 
+            long length, 
+            string series, 
+            string number, 
+            string regionCode, 
+            short transportCountryId, 
+            short transportCategoryId, 
+            DateTime? startBuy,
+            DateTime? endBuy,
+            DateTime? startWriteOff,
+            DateTime? endWriteOff
+        )
         {
-            throw new NotImplementedException();
+            List<Transport> transports = new List<Transport>();
+            string query = @$"
+                SELECT * 
+                FROM GetTransports(
+                    {offset},
+                    {length}, 
+                    N'{series}',
+                    N'{number}',
+                    N'{regionCode}',
+                    {transportCountryId},
+                    {transportCategoryId},
+                    N'{Helpers.ConvertDateTimeInISO8601(startBuy)}',
+                    N'{Helpers.ConvertDateTimeInISO8601(endBuy)}',
+                    N'{Helpers.ConvertDateTimeInISO8601(startWriteOff)}',
+                    N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}'
+                )
+            ";
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+
+            foreach (DataRow row in dataTable.Rows)
+                transports.Add(TransportConvertDataRow.ConvertTransport(row));
+
+            return transports;
         }
 
         public async Task<IEnumerable<string[]>> GetTransportYearByModelAsync(int modelId)
