@@ -103,7 +103,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "2016"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetTransportYearByModelAsync(long modelId);
+        public Task<IEnumerable<string[]>> GetTransportYearByModelIdAsync(long modelId);
 
         /// <summary>
         /// Получить список всех уникальных характеристик транспорта по категории

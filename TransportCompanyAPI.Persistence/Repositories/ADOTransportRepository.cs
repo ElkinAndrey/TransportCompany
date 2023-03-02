@@ -153,13 +153,11 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
             DataTable dataTable = sqlQueries.QuerySelect(query);
             foreach (DataRow row in dataTable.Rows)
-            {
                 models.Add(new string[]
                 {
                     row.Field<long>("model_id").ToString(),
                     row.Field<string>("name") ?? "",
                 });
-            }
 
             return models;
         }
@@ -205,9 +203,24 @@ namespace TransportCompanyAPI.Persistence.Repositories
             return transports;
         }
 
-        public async Task<IEnumerable<string[]>> GetTransportYearByModelAsync(long modelId)
+        public async Task<IEnumerable<string[]>> GetTransportYearByModelIdAsync(long modelId)
         {
-            throw new NotImplementedException();
+            List<string[]> models = new List<string[]>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetTransportYearByModelId({modelId})
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            foreach (DataRow row in dataTable.Rows)
+                models.Add(new string[]
+                {
+                    row.Field<long>("brand_id").ToString(),
+                    row.Field<int>("year_publishing").ToString(),
+                });
+
+            return models;
         }
     }
 }

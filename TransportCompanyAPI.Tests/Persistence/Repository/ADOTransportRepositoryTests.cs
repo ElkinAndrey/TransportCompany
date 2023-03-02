@@ -103,5 +103,24 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             foreach (var model in models)
                 Assert.True(model.Length == 2);
         }
+
+        /// <summary>
+        /// Проверка метода ADOTransportRepository.GetTransportYearByModelIdAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetTransportYearByModelIdAsync()
+        {
+            // Подготовка
+            ITransportRepository repository = new ADOTransportRepository();
+            IEnumerable<string[]> years;
+
+            // Действие
+            years = await repository.GetTransportYearByModelIdAsync(1);
+
+            Assert.True(years.Count() != 0);
+            // Утверждение
+            foreach (var year in years)
+                Assert.True(year.Length == 2);
+        }
     }
 }
