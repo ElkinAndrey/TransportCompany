@@ -22,7 +22,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// <param name="startWriteOff">Начало периода даты окончания эксплуатации</param>
         /// <param name="endWriteOff">Конец периода даты окончания эксплуатации</param>
         /// <returns>Список транспорта</returns>
-        public Task<IEnumerable<Transport>> GetTransports(
+        public Task<IEnumerable<Transport>> GetTransportsAsync(
             long offset,
             long length,
             string series,
@@ -41,7 +41,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// </summary>
         /// <param name="id">id транспорта</param>
         /// <returns>транспорт</returns>
-        public Task<Transport> GetTransportById(Guid id);
+        public Task<Transport> GetTransportByIdAsync(Guid id);
 
         /// <summary>
         /// Получить все категории транспорта 
@@ -53,7 +53,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "Автобус"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetTransportCategories();
+        public Task<IEnumerable<string[]>> GetTransportCategoriesAsync();
 
         /// <summary>
         /// Получить все коды стран
@@ -65,7 +65,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "BY", "Белорусь"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetTransportCountries();
+        public Task<IEnumerable<string[]>> GetTransportCountriesAsync();
 
         /// <summary>
         /// Получить все компании, производящие транспорт
@@ -77,7 +77,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "КИА"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetTransportCompanies();
+        public Task<IEnumerable<string[]>> GetTransportCompaniesAsync();
 
         /// <summary>
         /// Получить все модели транспорта по названию компании
@@ -90,7 +90,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "RAW2"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetTransportModelsByCompanies(int companyId);
+        public Task<IEnumerable<string[]>> GetTransportModelsByCompaniesAsync(int companyId);
 
         /// <summary>
         /// Получить все годы транспорта по названию компании и модели
@@ -103,7 +103,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "2016"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetTransportYearByModel(int modelId);
+        public Task<IEnumerable<string[]>> GetTransportYearByModelAsync(int modelId);
 
         /// <summary>
         /// Получить список всех уникальных характеристик транспорта по категории
@@ -115,6 +115,6 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "Width"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetPropertiesByCategoryId();
+        public Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync();
     }
 }
