@@ -2,7 +2,9 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
+using Microsoft.SqlServer.Server;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
+using TransportCompanyAPI.Domain.Enum;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Persistence.Features;
 using TransportCompanyAPI.Persistence.Settings;
@@ -35,9 +37,79 @@ namespace TransportCompanyAPI.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Transport> GetTransportByIdAsync(Guid id)
+        public async Task<Transport> GetTransportByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            Transport transport;
+            TransportCategories categoryId;
+            string generalCharactQuery = @$"
+                SELECT * 
+                FROM GetTransportById({id})
+            ";
+            string uniqueCharactQuery = @$"
+                SELECT * 
+                FROM GetPropertyByTransportId({id})
+            ";
+
+            DataTable generalCharactTable = sqlQueries.QuerySelect(generalCharactQuery);
+            transport = TransportConvertDataRow.ConvertTransport(generalCharactTable.Rows[0]);
+            categoryId = (TransportCategories)generalCharactTable.Rows[0].Field<short>("category_id");
+            DataTable uniqueCharactTable = sqlQueries.QuerySelect(uniqueCharactQuery);
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            foreach (DataRow item in uniqueCharactTable.Rows)
+                data[item.Field<string>("name") ?? ""] = item.Field<string>("content") ?? "";
+
+            switch (categoryId)
+            {
+                case TransportCategories.Bus:
+                    transport = Downcast.TransportDowncast(
+                        transport,
+                        new Bus()
+                        {
+                            NumberSeats = Convert.ToInt32(data["number_seats"]),
+                            NumberStandingPlaces = Convert.ToInt32(data["number_standing_places"]),
+                            NumberPlacesForDisabled = Convert.ToInt32(data["number_placesFor_disabled"]),
+                        }
+                    );
+                    break;
+                case TransportCategories.Taxi:
+                    transport = Downcast.TransportDowncast(
+                        transport,
+                        new Taxi()
+                        {
+                            NumberSeats = Convert.ToInt32(data["number_seats"]),
+                        }
+                    );
+                    break;
+                case TransportCategories.ShuttleTaxi:
+                    transport = Downcast.TransportDowncast(
+                        transport,
+                        new ShuttleTaxi()
+                        {
+                            NumberSeats = Convert.ToInt32(data["number_seats"]),
+                        }
+                    );
+                    break;
+                case TransportCategories.FreightTransport:
+                    transport = Downcast.TransportDowncast(
+                        transport,
+                        new FreightTransport()
+                        {
+                            LoadCapacity = Convert.ToInt32(data["load_capacity"]),
+                            Height = Convert.ToDouble(data["height"].Replace('.', ',')),
+                        }
+                    );
+                    break;
+                case TransportCategories.CargoTransportation:
+                    transport = Downcast.TransportDowncast(
+                        transport,
+                        new AuxiliaryTransport()
+                        {
+                            Height = Convert.ToDouble(data["height"].Replace('.', ',')),
+                        }
+                    );
+                    break;
+            }
+            return transport;
         }
 
         public async Task<IEnumerable<string[]>> GetTransportCategoriesAsync()
@@ -91,10 +163,12 @@ namespace TransportCompanyAPI.Persistence.Repositories
                     N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}'
                 )
             ";
-            DataTable dataTable = sqlQueries.QuerySelect(query);
+            await Task.Run(() => {
+                DataTable dataTable = sqlQueries.QuerySelect(query);
 
-            foreach (DataRow row in dataTable.Rows)
-                transports.Add(TransportConvertDataRow.ConvertTransport(row));
+                foreach (DataRow row in dataTable.Rows)
+                    transports.Add(TransportConvertDataRow.ConvertTransport(row));
+            });
 
             return transports;
         }

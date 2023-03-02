@@ -8,6 +8,7 @@ RETURN
 	SELECT 
 		[transport].[transport_id],
 		[transport_category].[name] AS [category],
+		[transport].[transport_category_id] AS [category_id],
 		[transport].[series],
 		[transport].[number],
 		[transport].[region_code],

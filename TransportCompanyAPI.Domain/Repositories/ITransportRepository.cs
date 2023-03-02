@@ -41,7 +41,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// </summary>
         /// <param name="id">id транспорта</param>
         /// <returns>транспорт</returns>
-        public Task<Transport> GetTransportByIdAsync(Guid id);
+        public Task<Transport> GetTransportByIdAsync(long id);
 
         /// <summary>
         /// Получить все категории транспорта 

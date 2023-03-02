@@ -16,7 +16,7 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         /// Проверка метода ADOTransportRepository.GetTransportsAsync
         /// </summary>
         [Fact]
-        public async void CanChangeProductName()
+        public async void TestGetTransportsAsync()
         {
 
             // Подготовка
@@ -37,6 +37,29 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
                 Assert.True(transport.DecipheringCountry != "");
             }
             // Assert.Equal("New Name", p.Name);
+        }
+
+        /// <summary>
+        /// Проверка метода ADOTransportRepository.GetTransportByIdAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetTransportByIdAsync()
+        {
+
+            // Подготовка
+            ITransportRepository repository = new ADOTransportRepository();
+            Transport transport;
+
+            // Действие
+            transport = await repository.GetTransportByIdAsync(1);
+
+            // Утверждение
+            
+            Assert.True(transport.TransportId != 0);
+            Assert.True(transport.Mileage >= 0);
+            Assert.True(transport.Category != "");
+            Assert.True(transport.CountryCode != "");
+            Assert.True(transport.DecipheringCountry != "");
         }
     }
 }
