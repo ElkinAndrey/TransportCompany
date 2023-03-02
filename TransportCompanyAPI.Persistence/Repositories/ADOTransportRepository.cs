@@ -132,7 +132,22 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<IEnumerable<string[]>> GetTransportCategoriesAsync()
         {
-            throw new NotImplementedException();
+            List<string[]> categories = new List<string[]>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetTransportCategories()
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            foreach (DataRow row in dataTable.Rows)
+                categories.Add(new string[]
+                {
+                    row.Field<short>("category_id").ToString(),
+                    row.Field<string>("name") ?? "",
+                });
+
+            return categories;
         }
 
         public async Task<IEnumerable<string[]>> GetTransportCompaniesAsync()

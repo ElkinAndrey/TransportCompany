@@ -78,5 +78,6 @@
     <Build Include="dbo\Functions\GetTransportModelsByCompanyId.sql" />
     <Build Include="dbo\Functions\GetTransportYearByModelId.sql" />
     <Build Include="dbo\Functions\GetPropertiesByCategoryId.sql" />
+    <Build Include="dbo\Functions\GetTransportCategories.sql" />
   </ItemGroup>
 </Project>

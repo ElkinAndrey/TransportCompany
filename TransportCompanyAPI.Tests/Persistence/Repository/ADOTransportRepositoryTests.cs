@@ -141,5 +141,24 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             foreach (var property in properties)
                 Assert.True(property.Length == 4);
         }
+
+        /// <summary>
+        /// Проверка метода ADOTransportRepository.GetTransportCategoriesAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetTransportCategoriesAsync()
+        {
+            // Подготовка
+            ITransportRepository repository = new ADOTransportRepository();
+            IEnumerable<string[]> categories;
+
+            // Действие
+            categories = await repository.GetTransportCategoriesAsync();
+
+            Assert.True(categories.Count() != 0);
+            // Утверждение
+            foreach (var category in categories)
+                Assert.True(category.Length == 2);
+        }
     }
 }
