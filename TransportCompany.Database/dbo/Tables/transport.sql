@@ -28,3 +28,24 @@
 
 
 
+
+
+
+GO
+CREATE TRIGGER AddTransportProperty
+ON [transport]
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @transportId BIGINT = (SELECT [transport_id] FROM inserted)
+	DECLARE @transportCategiryId BIGINT = (SELECT [transport_category_id] FROM inserted)
+
+	INSERT INTO [transport_transport_property] ([transport_id], [transport_property_id])
+	SELECT
+		[transport_id] = @transportId,
+		[transport_category_transport_property].[transport_property_id]
+	FROM
+		[transport_category_transport_property]
+	WHERE 
+		[transport_category_transport_property].[transport_category_id] = @transportCategiryId
+END
