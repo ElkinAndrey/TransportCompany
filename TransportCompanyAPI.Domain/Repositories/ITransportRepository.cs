@@ -111,10 +111,10 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// <returns>
         /// Список с уникальными характеристиками
         /// [
-        ///     ["1", "Heigth"],
-        ///     ["2", "Width"],
+        ///     ["1", "Heigth", "Высота", "FLOAT"],
+        ///     ["2", "Width", "Ширина", "FLOAT"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync();
+        public Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync(short categoryId);
     }
 }

@@ -122,5 +122,24 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             foreach (var year in years)
                 Assert.True(year.Length == 2);
         }
+
+        /// <summary>
+        /// Проверка метода ADOTransportRepository.GetPropertiesByCategoryIdAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetPropertiesByCategoryIdAsync()
+        {
+            // Подготовка
+            ITransportRepository repository = new ADOTransportRepository();
+            IEnumerable<string[]> properties;
+
+            // Действие
+            properties = await repository.GetPropertiesByCategoryIdAsync(1);
+
+            Assert.True(properties.Count() != 0);
+            // Утверждение
+            foreach (var property in properties)
+                Assert.True(property.Length == 4);
+        }
     }
 }

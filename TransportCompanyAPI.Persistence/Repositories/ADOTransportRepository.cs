@@ -32,9 +32,27 @@ namespace TransportCompanyAPI.Persistence.Repositories
             sqlQueries = new SqlQueries(connection);
         }
 
-        public async Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync()
+        public async Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync(short categoryId)
         {
-            throw new NotImplementedException();
+            List<string[]> property = new List<string[]>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetPropertiesByCategoryId({categoryId})  
+            ";
+
+            DataTable dataTable1 = sqlQueries.QuerySelect(query);
+
+            foreach (DataRow row in dataTable1.Rows)
+                property.Add(new string[]
+                {
+                    row.Field<long>("property_id").ToString(),
+                    row.Field<string>("name") ?? "",
+                    row.Field<string>("translation") ?? "",
+                    row.Field<string>("type") ?? "",
+                });
+
+            return property;
         }
 
         public async Task<Transport> GetTransportByIdAsync(long id)
