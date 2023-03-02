@@ -172,7 +172,23 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<IEnumerable<string[]>> GetTransportCountriesAsync()
         {
-            throw new NotImplementedException();
+            List<string[]> countries = new List<string[]>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetTransportCountries()
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            foreach (DataRow row in dataTable.Rows)
+                countries.Add(new string[]
+                {
+                    row.Field<short>("country_id").ToString(),
+                    row.Field<string>("country_code") ?? "",
+                    row.Field<string>("deciphering_country") ?? "",
+                });
+
+            return countries;
         }
 
         public async Task<IEnumerable<string[]>> GetTransportModelsByCompanyIdAsync(long companyId)
