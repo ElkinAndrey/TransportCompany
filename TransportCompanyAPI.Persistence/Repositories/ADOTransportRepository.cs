@@ -1,8 +1,5 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Reflection;
-using Microsoft.SqlServer.Server;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Enum;
 using TransportCompanyAPI.Domain.Repositories;
@@ -26,10 +23,9 @@ namespace TransportCompanyAPI.Persistence.Repositories
         /// <summary>
         /// Конструктор
         /// </summary>
-        public ADOTransportRepository()
+        public ADOTransportRepository(SqlQueries sqlQueries)
         {
-            SqlConnection connection = new(connectionString);
-            sqlQueries = new SqlQueries(connection);
+            this.sqlQueries = sqlQueries;
         }
 
         public async Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync(short categoryId)
