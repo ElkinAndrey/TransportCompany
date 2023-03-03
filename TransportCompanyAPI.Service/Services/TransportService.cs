@@ -1,6 +1,8 @@
-﻿using TransportCompanyAPI.Domain.Entities.TransportEntities;
+﻿using System.Data.SqlClient;
+using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
+using TransportCompanyAPI.Service.Exceptions;
 
 namespace TransportCompanyAPI.Service.Services
 {
@@ -53,9 +55,47 @@ namespace TransportCompanyAPI.Service.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Transport>> GetTransportsAsync(long offset, long length, string series, string number, string regionCode, short transportCountryId, short transportCategoryId, DateTime? startBuy, DateTime? endBuy, DateTime? startWriteOff, DateTime? endWriteOff)
+        public async Task<IEnumerable<Transport>> GetTransportsAsync(
+            long offset, 
+            long length, 
+            string series, 
+            string number, 
+            string regionCode, 
+            short transportCountryId, 
+            short transportCategoryId, 
+            DateTime? startBuy, 
+            DateTime? endBuy, 
+            DateTime? startWriteOff, 
+            DateTime? endWriteOff
+        )
         {
-            throw new NotImplementedException();
+            if (offset <= 0 )
+                throw new NegativeStartScoreException(offset);
+
+            if (length < 0)
+                throw new NegativeLengthException(length);
+
+            try
+            {
+                IEnumerable<Transport> transports = await repositoryManager.TransportRepository.GetTransportsAsync(
+                offset,
+                length,
+                series,
+                number,
+                regionCode,
+                transportCountryId,
+                transportCategoryId,
+                startBuy,
+                endBuy,
+                startWriteOff,
+                endWriteOff
+            );
+                return transports;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public Task<IEnumerable<string[]>> GetTransportYearByModelIdAsync(long modelId)

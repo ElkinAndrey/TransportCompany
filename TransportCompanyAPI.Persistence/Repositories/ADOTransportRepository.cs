@@ -48,6 +48,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<Transport> GetTransportByIdAsync(long id)
         {
+            
             Transport transport;
             TransportCategories categoryId;
             string generalCharactQuery = @$"
@@ -74,9 +75,9 @@ namespace TransportCompanyAPI.Persistence.Repositories
                         transport,
                         new Bus()
                         {
-                            NumberSeats = Convert.ToInt32(data["number_seats"]),
-                            NumberStandingPlaces = Convert.ToInt32(data["number_standing_places"]),
-                            NumberPlacesForDisabled = Convert.ToInt32(data["number_placesFor_disabled"]),
+                            NumberSeats = Convert.ToInt32(data["NumberSeats"]),
+                            NumberStandingPlaces = Convert.ToInt32(data["NumberStandingPlaces"]),
+                            NumberPlacesForDisabled = Convert.ToInt32(data["NumberPlacesForDisabled"]),
                         }
                     );
                     break;
@@ -85,7 +86,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
                         transport,
                         new Taxi()
                         {
-                            NumberSeats = Convert.ToInt32(data["number_seats"]),
+                            NumberSeats = Convert.ToInt32(data["NumberSeats"]),
                         }
                     );
                     break;
@@ -94,7 +95,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
                         transport,
                         new ShuttleTaxi()
                         {
-                            NumberSeats = Convert.ToInt32(data["number_seats"]),
+                            NumberSeats = Convert.ToInt32(data["NumberSeats"]),
                         }
                     );
                     break;
@@ -103,8 +104,8 @@ namespace TransportCompanyAPI.Persistence.Repositories
                         transport,
                         new FreightTransport()
                         {
-                            LoadCapacity = Convert.ToInt32(data["load_capacity"]),
-                            Height = Convert.ToDouble(data["height"].Replace('.', ',')),
+                            LoadCapacity = Convert.ToInt32(data["LoadCapacity"]),
+                            Height = Convert.ToDouble(data["Height"].Replace('.', ',')),
                         }
                     );
                     break;
@@ -113,12 +114,13 @@ namespace TransportCompanyAPI.Persistence.Repositories
                         transport,
                         new AuxiliaryTransport()
                         {
-                            Height = Convert.ToDouble(data["height"].Replace('.', ',')),
+                            Height = Convert.ToDouble(data["Height"].Replace('.', ',')),
                         }
                     );
                     break;
             }
             return transport;
+            
         }
 
         public async Task<IEnumerable<string[]>> GetTransportCategoriesAsync()
@@ -218,21 +220,21 @@ namespace TransportCompanyAPI.Persistence.Repositories
         {
             List<Transport> transports = new List<Transport>();
             string query = @$"
-                SELECT * 
-                FROM GetTransports(
-                    {offset},
-                    {length}, 
-                    N'{series}',
-                    N'{number}',
-                    N'{regionCode}',
-                    {transportCountryId},
-                    {transportCategoryId},
-                    N'{Helpers.ConvertDateTimeInISO8601(startBuy)}',
-                    N'{Helpers.ConvertDateTimeInISO8601(endBuy)}',
-                    N'{Helpers.ConvertDateTimeInISO8601(startWriteOff)}',
-                    N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}'
-                )
-            ";
+            SELECT * 
+            FROM GetTransports(
+                {offset},
+                {length}, 
+                N'{series}',
+                N'{number}',
+                N'{regionCode}',
+                {transportCountryId},
+                {transportCategoryId},
+                N'{Helpers.ConvertDateTimeInISO8601(startBuy)}',
+                N'{Helpers.ConvertDateTimeInISO8601(endBuy)}',
+                N'{Helpers.ConvertDateTimeInISO8601(startWriteOff)}',
+                N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}'
+            )
+        ";
             await Task.Run(() => {
                 DataTable dataTable = sqlQueries.QuerySelect(query);
 

@@ -1,17 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Repositories;
+using TransportCompanyAPI.Persistence;
 using TransportCompanyAPI.Persistence.Repositories;
+using TransportCompanyAPI.Persistence.Settings;
 using Xunit;
 
 namespace TransportCompanyAPI.Tests.Persistence.Repository
 {
+    /// <summary>
+    /// Тесты класса TransportRepositoryTests
+    /// </summary>
     public class ADOTransportRepositoryTests
     {
+        /// <summary>
+        /// Строка подключения к базе данных
+        /// </summary>
+        private string connectionString = ADOSettings.connectionString;
+
+        /// <summary>
+        /// Реопзиторий для работы с транспортом
+        /// </summary>
+        private readonly ITransportRepository repository;
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public ADOTransportRepositoryTests()
+        {
+            SqlConnection connection = new(connectionString);
+            SqlQueries sqlQueries = new SqlQueries(connection);
+            repository = new ADOTransportRepository(sqlQueries);
+        }
+
         /// <summary>
         /// Проверка метода ADOTransportRepository.GetTransportsAsync
         /// </summary>
@@ -20,12 +46,11 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         {
 
             // Подготовка
-            ITransportRepository repository = new ADOTransportRepository();
             List<Transport> transports;
             int size = 1;
 
             // Действие
-            transports = (await repository.GetTransportsAsync(1, size, "", "", "", 0, 0, null, null, null, null)).ToList();
+            transports = (await repository.GetTransportsAsync(-1, size, "", "", "", 0, 0, null, null, null, null)).ToList();
 
             // Утверждение
             foreach (Transport transport in transports)
@@ -47,7 +72,6 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         {
 
             // Подготовка
-            ITransportRepository repository = new ADOTransportRepository();
             Transport transport;
 
             // Действие
@@ -70,7 +94,6 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         {
 
             // Подготовка
-            ITransportRepository repository = new ADOTransportRepository();
             IEnumerable<string[]> companies;
 
             // Действие
@@ -91,7 +114,6 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         {
 
             // Подготовка
-            ITransportRepository repository = new ADOTransportRepository();
             IEnumerable<string[]> models;
 
             // Действие
@@ -111,7 +133,6 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         public async void TestGetTransportYearByModelIdAsync()
         {
             // Подготовка
-            ITransportRepository repository = new ADOTransportRepository();
             IEnumerable<string[]> years;
 
             // Действие
@@ -130,7 +151,6 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         public async void TestGetPropertiesByCategoryIdAsync()
         {
             // Подготовка
-            ITransportRepository repository = new ADOTransportRepository();
             IEnumerable<string[]> properties;
 
             // Действие
@@ -149,7 +169,6 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         public async void TestGetTransportCategoriesAsync()
         {
             // Подготовка
-            ITransportRepository repository = new ADOTransportRepository();
             IEnumerable<string[]> categories;
 
             // Действие
@@ -168,7 +187,6 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         public async void TestGetTransportCountriesAsync()
         {
             // Подготовка
-            ITransportRepository repository = new ADOTransportRepository();
             IEnumerable<string[]> countries;
 
             // Действие

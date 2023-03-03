@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
+using System.Linq.Expressions;
 
 namespace TransportCompanyAPI.Persistence
 {
@@ -29,7 +30,6 @@ namespace TransportCompanyAPI.Persistence
         /// <returns>Таблица с данными</returns>
         public DataTable QuerySelect(string queryString)
         {
-            Console.WriteLine(queryString);
             SqlDataAdapter adapter = new SqlDataAdapter(queryString, connection);
             DataSet ds = new DataSet();
             adapter.Fill(ds);
