@@ -60,7 +60,15 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<IEnumerable<string[]>> GetTransportCategoriesAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<string[]> categories = await repositoryManager.TransportRepository.GetTransportCategoriesAsync();
+                return categories;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<string[]>> GetTransportCompaniesAsync()
