@@ -28,7 +28,18 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync(short categoryId)
         {
-            throw new NotImplementedException();
+            if (categoryId <= 0)
+                return new List<string[]>();
+
+            try
+            {
+                IEnumerable<string[]> properties = await repositoryManager.TransportRepository.GetPropertiesByCategoryIdAsync(categoryId);
+                return properties;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<Transport> GetTransportByIdAsync(long id)

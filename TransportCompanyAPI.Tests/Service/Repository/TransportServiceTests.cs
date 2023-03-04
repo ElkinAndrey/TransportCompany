@@ -97,5 +97,21 @@ namespace TransportCompanyAPI.Tests.Service.Repository
             }
         }
 
+        /// <summary>
+        /// Проверка метода TransportService.GetPropertiesByCategoryIdAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetPropertiesByCategoryIdAsync()
+        {
+
+            // Подготовка
+            IEnumerable<string[]> properties;
+
+            // Действие
+            properties = await transportService.GetPropertiesByCategoryIdAsync(-1);
+            Assert.True(properties.Count() == 0);
+            properties = await transportService.GetPropertiesByCategoryIdAsync(short.MaxValue);
+            Assert.True(properties.Count() == 0);
+        }
     }
 }
