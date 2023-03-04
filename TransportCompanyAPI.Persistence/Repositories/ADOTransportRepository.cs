@@ -235,12 +235,11 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}'
             )
         ";
-            await Task.Run(() => {
-                DataTable dataTable = sqlQueries.QuerySelect(query);
+            
+            DataTable dataTable = sqlQueries.QuerySelect(query);
 
-                foreach (DataRow row in dataTable.Rows)
-                    transports.Add(TransportConvertDataRow.ConvertTransport(row));
-            });
+            foreach (DataRow row in dataTable.Rows)
+                transports.Add(TransportConvertDataRow.ConvertTransport(row));
 
             return transports;
         }

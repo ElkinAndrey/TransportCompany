@@ -54,5 +54,5 @@ RETURN
 	LEFT JOIN [transport_category] ON 
 		[transport].[transport_category_id]=[transport_category].[transport_category_id]
 	ORDER BY [transport_id]
-	OFFSET @offset - 1 ROW FETCH NEXT @pageSize ROWS ONLY
+	OFFSET @offset ROW FETCH NEXT @pageSize ROWS ONLY
 );

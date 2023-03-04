@@ -69,11 +69,15 @@ namespace TransportCompanyAPI.Service.Services
             DateTime? endWriteOff
         )
         {
-            if (offset <= 0 )
+            if (offset < 0 )
                 throw new NegativeStartScoreException(offset);
 
             if (length < 0)
                 throw new NegativeLengthException(length);
+
+
+            if (length == 0)
+                return new List<Transport>();
 
             try
             {
