@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Infrastructure.ViewModels.Transport;
@@ -24,6 +25,20 @@ namespace TransportCompanyAPI.Presentation.Controllers
         public TransportController(IServiceManager serviceManager)
         {
             this.serviceManager = serviceManager;
+        }
+
+        /// <summary>
+        /// Получение транспотра по id
+        /// </summary>
+        /// <param name="transportId">id транспорта</param>
+        /// <returns>Транспорт</returns>
+        [HttpGet]
+        [Route("GetTransports/{transportId}")]
+        public async Task<IActionResult> GetTransportById(long transportId)
+        {
+            var transport = await serviceManager.TransportService.GetTransportByIdAsync(transportId);
+
+            return Ok(transport);
         }
 
         /// <summary>
