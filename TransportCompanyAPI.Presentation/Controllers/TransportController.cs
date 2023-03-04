@@ -83,5 +83,18 @@ namespace TransportCompanyAPI.Presentation.Controllers
 
             return Ok(properties);
         }
+
+        /// <summary>
+        /// Получение всех категорий транспорта в виде словаря 
+        /// </summary>
+        /// <returns>Словарь, где ключ - это название категории, а значение - это номер категории</returns>
+        [HttpGet]
+        [Route("GetTransportCategories")]
+        public async Task<IActionResult> GetTransportCategories()
+        {
+            var categiries = await serviceManager.TransportService.GetTransportCategoriesAsync();
+
+            return Ok(categiries);
+        }
     }
 }
