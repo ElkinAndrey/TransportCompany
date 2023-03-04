@@ -66,5 +66,36 @@ namespace TransportCompanyAPI.Tests.Service.Repository
 
             transports = (await transportService.GetTransportsAsync(1, 1, "11111111111111", "", "", 0, 0, null, null, null, null)).ToList();
         }
+
+        /// <summary>
+        /// Проверка метода TransportService.GetTransportByIdAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetTransportByIdAsync()
+        {
+
+            // Подготовка
+            Transport transports;
+
+            // Действие
+            try
+            {
+                transports = await transportService.GetTransportByIdAsync(-1);
+            }
+            catch (Exception ex)
+            {
+                Assert.Equal(ex.Message, new TransportNotFoundException(-1).Message);
+            }
+
+            try
+            {
+                transports = await transportService.GetTransportByIdAsync(long.MaxValue);
+            }
+            catch (Exception ex)
+            {
+                Assert.Equal(ex.Message, new TransportNotFoundException(long.MaxValue).Message);
+            }
+        }
+
     }
 }

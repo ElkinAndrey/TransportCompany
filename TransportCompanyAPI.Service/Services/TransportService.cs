@@ -3,6 +3,7 @@ using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
 using TransportCompanyAPI.Service.Exceptions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TransportCompanyAPI.Service.Services
 {
@@ -25,32 +26,43 @@ namespace TransportCompanyAPI.Service.Services
            this.repositoryManager = repositoryManager; 
         }
 
-        public Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync(short categoryId)
+        public async Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync(short categoryId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Transport> GetTransportByIdAsync(long id)
+        public async Task<Transport> GetTransportByIdAsync(long id)
+        {
+            if (id <= 0)
+                throw new TransportNotFoundException(id);
+
+            try
+            {
+                Transport transport = await repositoryManager.TransportRepository.GetTransportByIdAsync(id);
+                return transport;
+            }
+            catch (Exception ex)
+            {
+                throw new TransportNotFoundException(id);
+            }
+        }
+
+        public async Task<IEnumerable<string[]>> GetTransportCategoriesAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<string[]>> GetTransportCategoriesAsync()
+        public async Task<IEnumerable<string[]>> GetTransportCompaniesAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<string[]>> GetTransportCompaniesAsync()
+        public async Task<IEnumerable<string[]>> GetTransportCountriesAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<string[]>> GetTransportCountriesAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<string[]>> GetTransportModelsByCompanyIdAsync(long companyId)
+        public async Task<IEnumerable<string[]>> GetTransportModelsByCompanyIdAsync(long companyId)
         {
             throw new NotImplementedException();
         }
@@ -74,7 +86,6 @@ namespace TransportCompanyAPI.Service.Services
 
             if (length < 0)
                 throw new NegativeLengthException(length);
-
 
             if (length == 0)
                 return new List<Transport>();
@@ -102,7 +113,7 @@ namespace TransportCompanyAPI.Service.Services
             }
         }
 
-        public Task<IEnumerable<string[]>> GetTransportYearByModelIdAsync(long modelId)
+        public async Task<IEnumerable<string[]>> GetTransportYearByModelIdAsync(long modelId)
         {
             throw new NotImplementedException();
         }

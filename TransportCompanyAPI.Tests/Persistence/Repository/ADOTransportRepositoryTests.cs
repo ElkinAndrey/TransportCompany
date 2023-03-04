@@ -50,7 +50,7 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             int size = 1;
 
             // Действие
-            transports = (await repository.GetTransportsAsync(-1, size, "", "", "", 0, 0, null, null, null, null)).ToList();
+            transports = (await repository.GetTransportsAsync(1, size, "", "", "", 0, 0, null, null, null, null)).ToList();
 
             // Утверждение
             foreach (Transport transport in transports)
