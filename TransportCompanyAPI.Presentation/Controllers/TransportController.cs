@@ -69,5 +69,19 @@ namespace TransportCompanyAPI.Presentation.Controllers
 
             return Ok(transports);
         }
+
+        /// <summary>
+        /// Получить список уникальных характеристик транспорта по категории
+        /// </summary>
+        /// <param name="categoryId">Id категории траспорта</param>
+        /// <returns>Список с категориями транспорта</returns>
+        [HttpGet]
+        [Route("GetPropertiesByCategoryId/{categoryId}")]
+        public async Task<IActionResult> GetPropertiesByCategoryId(short categoryId)
+        {
+            var properties = await serviceManager.TransportService.GetPropertiesByCategoryIdAsync(categoryId);
+
+            return Ok(properties);
+        }
     }
 }
