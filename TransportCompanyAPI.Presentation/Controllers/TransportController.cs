@@ -36,9 +36,16 @@ namespace TransportCompanyAPI.Presentation.Controllers
         [Route("GetTransports/{transportId}")]
         public async Task<IActionResult> GetTransportById(long transportId)
         {
-            var transport = await serviceManager.TransportService.GetTransportByIdAsync(transportId);
+            try
+            {
+                var transport = await serviceManager.TransportService.GetTransportByIdAsync(transportId);
 
-            return Ok(transport);
+                return Ok(transport);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
@@ -51,23 +58,31 @@ namespace TransportCompanyAPI.Presentation.Controllers
         public async Task<IActionResult> GetTransports([FromBody]GetTransportsViewModel model)
         {
             if (model == null)
-                return BadRequest(ModelState);
+                return BadRequest("Неверный формат данных");
 
-            var transports = await serviceManager.TransportService.GetTransportsAsync(
-                model.OffSet,
-                model.Length,
-                model.Series,
-                model.Number,
-                model.RegionCode,
-                model.TransportCountryId,
-                model.TransportCategoryId,
-                model.StartBuy,
-                model.EndBuy,
-                model.StartWriteOff,
-                model.EndWriteOff
-            );
+            try
+            {
 
-            return Ok(transports);
+                var transports = await serviceManager.TransportService.GetTransportsAsync(
+                    model.OffSet,
+                    model.Length,
+                    model.Series,
+                    model.Number,
+                    model.RegionCode,
+                    model.TransportCountryId,
+                    model.TransportCategoryId,
+                    model.StartBuy,
+                    model.EndBuy,
+                    model.StartWriteOff,
+                    model.EndWriteOff
+                );
+
+                return Ok(transports);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
@@ -79,9 +94,16 @@ namespace TransportCompanyAPI.Presentation.Controllers
         [Route("GetPropertiesByCategoryId/{categoryId}")]
         public async Task<IActionResult> GetPropertiesByCategoryId(short categoryId)
         {
-            var properties = await serviceManager.TransportService.GetPropertiesByCategoryIdAsync(categoryId);
+            try
+            {
+                var properties = await serviceManager.TransportService.GetPropertiesByCategoryIdAsync(categoryId);
 
-            return Ok(properties);
+                return Ok(properties);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /// <summary>
@@ -92,9 +114,36 @@ namespace TransportCompanyAPI.Presentation.Controllers
         [Route("GetTransportCategories")]
         public async Task<IActionResult> GetTransportCategories()
         {
-            var categiries = await serviceManager.TransportService.GetTransportCategoriesAsync();
+            try
+            {
+                var categiries = await serviceManager.TransportService.GetTransportCategoriesAsync();
 
-            return Ok(categiries);
+                return Ok(categiries);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        // <summary>
+        /// Получение всех кодов стран в виде словаря (например RUS)
+        /// </summary>
+        /// <returns>Список стран</returns>
+        [HttpGet]
+        [Route("GetTransportCountries")]
+        public async Task<IActionResult> GetTransportCountries()
+        {
+            try
+            {
+                var countries = await serviceManager.TransportService.GetTransportCountriesAsync();
+
+                return Ok(countries);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
