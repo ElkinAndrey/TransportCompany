@@ -78,7 +78,15 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<IEnumerable<string[]>> GetTransportCountriesAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<string[]> countries = await repositoryManager.TransportRepository.GetTransportCountriesAsync();
+                return countries;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<string[]>> GetTransportModelsByCompanyIdAsync(long companyId)
