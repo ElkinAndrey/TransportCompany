@@ -105,8 +105,8 @@ namespace TransportCompanyAPI.Service.Services
 
             try
             {
-                IEnumerable<string[]> companies = await repositoryManager.TransportRepository.GetTransportCompaniesAsync();
-                return companies;
+                IEnumerable<string[]> models = await repositoryManager.TransportRepository.GetTransportModelsByCompanyIdAsync(companyId);
+                return models;
             }
             catch (Exception ex)
             {
@@ -167,8 +167,8 @@ namespace TransportCompanyAPI.Service.Services
 
             try
             {
-                IEnumerable<string[]> models = await repositoryManager.TransportRepository.GetTransportCompaniesAsync();
-                return models;
+                IEnumerable<string[]> years = await repositoryManager.TransportRepository.GetTransportYearByModelIdAsync(modelId);
+                return years;
             }
             catch (Exception ex)
             {

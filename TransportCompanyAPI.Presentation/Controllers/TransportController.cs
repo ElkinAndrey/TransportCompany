@@ -1,7 +1,4 @@
-﻿using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
-using TransportCompanyAPI.Domain.Entities.TransportEntities;
-using TransportCompanyAPI.Domain.Repositories;
+﻿using Microsoft.AspNetCore.Mvc;
 using TransportCompanyAPI.Infrastructure.ViewModels.Transport;
 using TransportCompanyAPI.Service.Abstractions;
 
@@ -141,6 +138,83 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return Ok(countries);
             }
             catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить список с компаниями, производящими транспорт
+        /// </summary>
+        /// <returns>
+        /// [
+        ///     ["1", "ВАЗ"],
+        ///     ["2", "BMW"]
+        /// ]
+        /// </returns>
+        [HttpGet]
+        [Route("GetTransportCompanies")]
+        public async Task<IActionResult> GetTransportCompanies()
+        {
+            try
+            {
+                var companies = await serviceManager.TransportService.GetTransportCompaniesAsync();
+
+                return Ok(companies);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить список с моделями транспорта по определенной компании
+        /// </summary>
+        /// <param name="companyId">Номер компании производителя</param>
+        /// <returns>
+        /// [
+        ///     ["1", "RAV4"],
+        ///     ["2", "Corolla"]
+        /// ]
+        /// </returns>
+        [HttpGet]
+        [Route("GetTransportModels/{companyId}")]
+        public async Task<IActionResult> GetTransportModelsByCompanyId(int companyId)
+        {
+            try
+            {
+                var models = await serviceManager.TransportService.GetTransportModelsByCompanyIdAsync(companyId);
+
+                return Ok(models);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить все годы издания автомобиля по модели
+        /// </summary>
+        /// <param name="modelId">Номер модели транспорта</param>
+        /// <returns>
+        /// [
+        ///     ["1", "2005"],
+        ///     ["2", "2019"]
+        /// ]
+        /// </returns>
+        [HttpGet]
+        [Route("GetTransportYears/{modelId}")]
+        public async Task<IActionResult> GetTransportYearByModelId(int modelId)
+        {
+            try
+            {
+                var years = await serviceManager.TransportService.GetTransportYearByModelIdAsync(modelId);
+
+                return Ok(years);
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
