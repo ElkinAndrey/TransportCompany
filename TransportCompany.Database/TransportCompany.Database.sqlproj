@@ -80,5 +80,6 @@
     <Build Include="dbo\Functions\GetPropertiesByCategoryId.sql" />
     <Build Include="dbo\Functions\GetTransportCategories.sql" />
     <Build Include="dbo\Functions\GetTransportCountries.sql" />
+    <Build Include="dbo\Functions\GetTransportCount.sql" />
   </ItemGroup>
 </Project>
