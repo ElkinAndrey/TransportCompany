@@ -14,6 +14,11 @@ builder.Services.AddTransient<IServiceManager, ServiceManager>();
 
 var app = builder.Build();
 
+app.UseCors(options =>
+    options.WithOrigins("https://localhost:3000") //  ому можно получать данные с сервера
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

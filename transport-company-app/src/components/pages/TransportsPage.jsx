@@ -1,8 +1,11 @@
 import React from 'react'
+import TransportTable from './../../utils/TransportTable/TransportTable';
 
 const TransportsPage = () => {
   return (
-    <div>TransportsPage</div>
+    <div>
+        <TransportTable/>
+    </div>
   )
 }
 
