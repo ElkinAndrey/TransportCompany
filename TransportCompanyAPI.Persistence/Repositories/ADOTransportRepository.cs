@@ -163,13 +163,33 @@ namespace TransportCompanyAPI.Persistence.Repositories
             return companies;
         }
 
-        public async Task<long> GetTransportCount()
+        public async Task<long> GetTransportCount(
+            string series,
+            string number,
+            string regionCode,
+            short transportCountryId,
+            short transportCategoryId,
+            DateTime? startBuy,
+            DateTime? endBuy,
+            DateTime? startWriteOff,
+            DateTime? endWriteOff
+        )
         {
             long count;
 
             string query = @$"
                 SELECT *
-                FROM GetTransportCount()
+                FROM GetTransportCount(
+                    N'{series}',
+                    N'{number}',
+                    N'{regionCode}',
+                    {transportCountryId},
+                    {transportCategoryId},
+                    N'{Helpers.ConvertDateTimeInISO8601(startBuy)}',
+                    N'{Helpers.ConvertDateTimeInISO8601(endBuy)}',
+                    N'{Helpers.ConvertDateTimeInISO8601(startWriteOff)}',
+                    N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}'
+                )
             ";
 
             DataTable dataTable = sqlQueries.QuerySelect(query);

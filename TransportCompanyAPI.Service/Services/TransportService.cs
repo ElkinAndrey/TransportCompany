@@ -85,11 +85,31 @@ namespace TransportCompanyAPI.Service.Services
             }
         }
 
-        public async Task<long> GetTransportCount()
+        public async Task<long> GetTransportCount(
+            string series,
+            string number,
+            string regionCode,
+            short transportCountryId,
+            short transportCategoryId,
+            DateTime? startBuy,
+            DateTime? endBuy,
+            DateTime? startWriteOff,
+            DateTime? endWriteOff
+        )
         {
             try
             {
-                long count = await repositoryManager.TransportRepository.GetTransportCount();
+                long count = await repositoryManager.TransportRepository.GetTransportCount(
+                    series,
+                    number,
+                    regionCode,
+                    transportCountryId,
+                    transportCategoryId,
+                    startBuy,
+                    endBuy,
+                    startWriteOff,
+                    endWriteOff
+                );
                 return count;
             }
             catch (Exception ex)

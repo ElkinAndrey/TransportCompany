@@ -219,5 +219,35 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Получить количество транспорта
+        /// </summary>
+        /// <returns>Количество транспорта</returns>
+        [HttpPost]
+        [Route("GetTransportCount")]
+        public async Task<IActionResult> GetTransportCount([FromBody] GetTransportCount model)
+        {
+            try
+            {
+                var count = await serviceManager.TransportService.GetTransportCount(
+                    model.Series,
+                    model.Number,
+                    model.RegionCode,
+                    model.TransportCountryId,
+                    model.TransportCategoryId,
+                    model.StartBuy,
+                    model.EndBuy,
+                    model.StartWriteOff,
+                    model.EndWriteOff
+                );
+
+                return Ok(count);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

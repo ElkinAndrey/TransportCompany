@@ -120,7 +120,26 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// <summary>
         /// Получить количество транспорта
         /// </summary>
+        /// <param name="series">Серия</param>
+        /// <param name="number">Номер</param>
+        /// <param name="regionCode">Код региона</param>
+        /// <param name="transportCountryId">Id страна госномера</param>
+        /// <param name="transportCategoryId">Id категории транспорта</param>
+        /// <param name="startBuy">Начало периода даты начала эксплуатации</param>
+        /// <param name="endBuy">Конец периода даты начала эксплуатации</param>
+        /// <param name="startWriteOff">Начало периода даты окончания эксплуатации</param>
+        /// <param name="endWriteOff">Конец периода даты окончания эксплуатации</param>
         /// <returns>Количество транспорта</returns>
-        public Task<long> GetTransportCount();
+        public Task<long> GetTransportCount(
+            string series,
+            string number,
+            string regionCode,
+            short transportCountryId,
+            short transportCategoryId,
+            DateTime? startBuy,
+            DateTime? endBuy,
+            DateTime? startWriteOff,
+            DateTime? endWriteOff
+        );
     }
 }
