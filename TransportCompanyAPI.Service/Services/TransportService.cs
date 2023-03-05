@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.ComponentModel.Design;
+using System.Data.SqlClient;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
@@ -73,7 +74,15 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<IEnumerable<string[]>> GetTransportCompaniesAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<string[]> companies = await repositoryManager.TransportRepository.GetTransportCompaniesAsync();
+                return companies;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<string[]>> GetTransportCountriesAsync()
@@ -91,7 +100,18 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<IEnumerable<string[]>> GetTransportModelsByCompanyIdAsync(long companyId)
         {
-            throw new NotImplementedException();
+            if (companyId <= 0)
+                throw new NegativeStartScoreException(companyId);
+
+            try
+            {
+                IEnumerable<string[]> companies = await repositoryManager.TransportRepository.GetTransportCompaniesAsync();
+                return companies;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Transport>> GetTransportsAsync(
@@ -142,7 +162,18 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<IEnumerable<string[]>> GetTransportYearByModelIdAsync(long modelId)
         {
-            throw new NotImplementedException();
+            if (modelId <= 0)
+                throw new NegativeStartScoreException(modelId);
+
+            try
+            {
+                IEnumerable<string[]> models = await repositoryManager.TransportRepository.GetTransportCompaniesAsync();
+                return models;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
