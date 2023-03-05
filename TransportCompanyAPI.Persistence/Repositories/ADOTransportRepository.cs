@@ -163,6 +163,21 @@ namespace TransportCompanyAPI.Persistence.Repositories
             return companies;
         }
 
+        public async Task<long> GetTransportCount()
+        {
+            long count;
+
+            string query = @$"
+                SELECT *
+                FROM GetTransportCount()
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            count = dataTable.Rows[0].Field<long>("count");
+
+            return count;
+        }
+
         public async Task<IEnumerable<string[]>> GetTransportCountriesAsync()
         {
             List<string[]> countries = new List<string[]>();

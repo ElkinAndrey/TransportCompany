@@ -197,5 +197,21 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             foreach (var country in countries)
                 Assert.True(country.Length == 3);
         }
+
+        /// <summary>
+        /// Проверка метода ADOTransportRepository.GetTransportCount
+        /// </summary>
+        [Fact]
+        public async void TestGetTransportCount()
+        {
+            // Подготовка
+            long count;
+
+            // Действие
+            count = await repository.GetTransportCount();
+
+            // Утверждение
+            Assert.True(count >= 0);
+        }
     }
 }
