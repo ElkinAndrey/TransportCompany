@@ -85,6 +85,19 @@ namespace TransportCompanyAPI.Service.Services
             }
         }
 
+        public async Task<long> GetTransportCount()
+        {
+            try
+            {
+                long count = await repositoryManager.TransportRepository.GetTransportCount();
+                return count;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<IEnumerable<string[]>> GetTransportCountriesAsync()
         {
             try

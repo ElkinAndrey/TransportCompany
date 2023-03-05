@@ -121,5 +121,11 @@ namespace TransportCompanyAPI.Service.Abstractions
         /// ]
         /// </returns>
         public Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync(short categoryId);
+
+        /// <summary>
+        /// Получить количество транспорта
+        /// </summary>
+        /// <returns>Количество транспорта</returns>
+        public Task<long> GetTransportCount();
     }
 }
