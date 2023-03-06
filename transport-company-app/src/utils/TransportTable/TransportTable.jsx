@@ -2,14 +2,13 @@ import { React, useEffect, useRef, useState } from "react";
 import { useFetching } from "./../../hooks/useFetching";
 import Transport from "./../../api/transport";
 
-const TransportTable = () => {
-  const dataFetchedRef = useRef(false);
-
+const TransportTable = ({ page, setEnd, setTransportCount }) => {
+  const len = 4;
   let [transports, setTransport] = useState([]);
 
   let [params, setParams] = useState({
-    offset: 0,
-    length: 10,
+    offset: (page - 1) * len,
+    length: len,
     series: "",
     number: "",
     regionCode: "",
@@ -28,11 +27,17 @@ const TransportTable = () => {
     }
   );
 
+  const [fetchTransportCount, isTransportCountLoading, transportCountError] =
+    useFetching(async (p) => {
+      const response = await Transport.getTransportCount(p);
+      setTransportCount(response.data);
+      setEnd(Math.floor((response.data - 1) / len + 1));
+    });
+
   useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-    fetchTransport(params);
-  }, []);
+    fetchTransport({ ...params, offset: (page - 1) * len, length: len });
+    fetchTransportCount(params);
+  }, [page]);
 
   return (
     <table>

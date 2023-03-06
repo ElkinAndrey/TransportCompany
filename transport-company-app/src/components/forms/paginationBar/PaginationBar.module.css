@@ -1,0 +1,53 @@
+button {
+  height: 30px;
+  min-width: 30px;
+  border: #ffffff solid 2px;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+
+button:hover {
+  background-color: #e6e6e6;
+  border: #e6e6e6 solid 2px;
+}
+
+.active {
+  background-color: #57c49e;
+  border: #57c49e solid 2px;
+  color: #ffffff;
+}
+
+.active:hover {
+  background-color: #57c49e;
+  border: #57c49e solid 2px;
+}
+
+.buttons {
+  border: #e6e6e6 solid 1px;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.switch {
+  border: #e6e6e6 solid 2px;
+  background-color: #e6e6e6;
+}
+
+.switch:hover {
+  background-color: #57c49e;
+  border: #57c49e solid 2px;
+  color: #ffffff;
+}
+
+.pass {
+  height: 30px;
+  width: 30px;
+  border: #ffffff solid 0px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.paginationBar {
+    display: flex;
+}

@@ -8,4 +8,9 @@ export default class Transport {
     const response = await axios.post(`${URL}/GetTransports/`, params);
     return response;
   }
+
+  static async getTransportCount(params) {
+    const response = await axios.post(`${URL}/GetTransportCount/`, params);
+    return response;
+  }
 }
