@@ -1,6 +1,6 @@
 ﻿CREATE FUNCTION GetTransports (
 	@offset BIGINT,
-	@pageSize BIGINT,
+	@length BIGINT,
 	@series NVARCHAR(MAX) = '',
 	@number NVARCHAR(MAX) = '',
 	@regionCode NVARCHAR(MAX) = '',
@@ -54,5 +54,5 @@ RETURN
 	LEFT JOIN [transport_category] ON 
 		[transport].[transport_category_id]=[transport_category].[transport_category_id]
 	ORDER BY [transport_id]
-	OFFSET @offset ROW FETCH NEXT @pageSize ROWS ONLY
+	OFFSET @offset ROW FETCH NEXT @length ROWS ONLY
 );
