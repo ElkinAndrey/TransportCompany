@@ -25,15 +25,24 @@ namespace TransportCompanyAPI.Persistence.Repositories
         private readonly ITransportRepository transportRepository;
 
         /// <summary>
+        /// Реопзиторий для работы с людьми
+        /// </summary>
+        private readonly IPersonRepository personRepository;
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         public RepositoryManager()
         {
             SqlConnection connection = new(connectionString);
             SqlQueries sqlQueries = new SqlQueries(connection);
+
             transportRepository = new ADOTransportRepository(sqlQueries);
+            personRepository = new ADOPersonRepository(sqlQueries);
         }
 
         public ITransportRepository TransportRepository => transportRepository;
+
+        public IPersonRepository PersonRepository => personRepository;
     }
 }
