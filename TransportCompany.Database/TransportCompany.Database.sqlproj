@@ -81,6 +81,7 @@
     <Build Include="dbo\Functions\GetTransportCategories.sql" />
     <Build Include="dbo\Functions\GetTransportCountries.sql" />
     <Build Include="dbo\Functions\GetTransportCount.sql" />
-    <Build Include="dbo\Tables\person_position_1.sql" />
+    <Build Include="dbo\Tables\person_position.sql" />
+    <Build Include="dbo\Tables\person.sql" />
   </ItemGroup>
 </Project>
