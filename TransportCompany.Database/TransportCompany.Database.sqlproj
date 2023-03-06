@@ -83,5 +83,6 @@
     <Build Include="dbo\Functions\GetTransportCount.sql" />
     <Build Include="dbo\Tables\person_position.sql" />
     <Build Include="dbo\Tables\person.sql" />
+    <Build Include="dbo\Tables\person_property.sql" />
   </ItemGroup>
 </Project>
