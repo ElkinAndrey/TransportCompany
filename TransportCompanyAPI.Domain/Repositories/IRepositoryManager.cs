@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TransportCompanyAPI.Domain.Repositories
+﻿namespace TransportCompanyAPI.Domain.Repositories
 {
     /// <summary>
     /// Менеджер репозиториев, интерфейс отвечает за управление всеми репозиториями приложения
@@ -15,5 +9,10 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// Репозиторий, отвечающий за работу с транспортом
         /// </summary>
         ITransportRepository TransportRepository { get; }
+
+        /// <summary>
+        /// Репозиторий, отвечающий за работу с людьми
+        /// </summary>
+        IPersonRepository PersonRepository { get; }
     }
 }
