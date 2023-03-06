@@ -14,6 +14,7 @@ const TransportsPage = () => {
       <PaginationBar start={1} end={end} page={page} setPage={setPage} />
       <TransportTable
         page={page}
+        setPage={setPage}
         setEnd={setEnd}
         setTransportCount={setTransportCount}
       />

@@ -13,4 +13,14 @@ export default class Transport {
     const response = await axios.post(`${URL}/GetTransportCount/`, params);
     return response;
   }
+
+  static async getTransportCategories() {
+    const response = await axios.get(`${URL}/GetTransportCategories/`);
+    return response;
+  }
+
+  static async getTransportCountries() {
+    const response = await axios.get(`${URL}/GetTransportCountries/`);
+    return response;
+  }
 }

@@ -41,7 +41,6 @@ const PaginationBar = ({ start, end, page, setPage }) => {
     if (page < start) {
       setPage(start);
     }
-    console.log(1);
   }, []);
   return (
     <div className={classes.paginationBar}>

@@ -1,4 +1,4 @@
-button {
+.paginationBar button {
   height: 30px;
   min-width: 30px;
   border: #ffffff solid 2px;
@@ -6,40 +6,40 @@ button {
   background-color: #ffffff;
 }
 
-button:hover {
+.paginationBar button:hover {
   background-color: #e6e6e6;
   border: #e6e6e6 solid 2px;
 }
 
-.active {
+.paginationBar .active {
   background-color: #57c49e;
   border: #57c49e solid 2px;
   color: #ffffff;
 }
 
-.active:hover {
+.paginationBar .active:hover {
   background-color: #57c49e;
   border: #57c49e solid 2px;
 }
 
-.buttons {
+.paginationBar .buttons {
   border: #e6e6e6 solid 1px;
   display: inline-block;
   border-radius: 4px;
 }
 
-.switch {
+.paginationBar .switch {
   border: #e6e6e6 solid 2px;
   background-color: #e6e6e6;
 }
 
-.switch:hover {
+.paginationBar .switch:hover {
   background-color: #57c49e;
   border: #57c49e solid 2px;
   color: #ffffff;
 }
 
-.pass {
+.paginationBar .pass {
   height: 30px;
   width: 30px;
   border: #ffffff solid 0px;
