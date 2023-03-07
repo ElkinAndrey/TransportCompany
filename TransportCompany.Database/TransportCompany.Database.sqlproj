@@ -87,5 +87,6 @@
     <Build Include="dbo\Tables\person_person_property.sql" />
     <Build Include="dbo\Tables\person_position_person_property.sql" />
     <Build Include="dbo\Functions\GetPersons.sql" />
+    <Build Include="dbo\Functions\GetPersonCount.sql" />
   </ItemGroup>
 </Project>
