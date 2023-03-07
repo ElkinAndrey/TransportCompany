@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TransportCompanyAPI.Domain.Enum
 {
+    /// <summary>
+    /// Категории транспорта
+    /// </summary>
     public enum TransportCategories : int
     {
         /// <summary>

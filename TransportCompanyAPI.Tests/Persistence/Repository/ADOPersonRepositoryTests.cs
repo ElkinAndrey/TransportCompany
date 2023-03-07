@@ -78,5 +78,37 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
                 Assert.True(position.Length == 2);
             }
         }
+
+        /// <summary>
+        /// Проверка метода ADOPersonRepository.GetPersonCountAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetPersonCountAsync()
+        {
+
+            // Подготовка
+            long count;
+
+            // Действие
+            count = await repository.GetPersonCountAsync("", "", "", 0, null, null, null, null);
+
+            Assert.True(count >= 0);
+        }
+
+        /// <summary>
+        /// Проверка метода ADOPersonRepository.GetPersonByIdAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetPersonByIdAsync()
+        {
+
+            // Подготовка
+            Person person;
+
+            // Действие
+            person = await repository.GetPersonByIdAsync(1);
+
+            Assert.True(person.PersonId != 0);
+        }
     }
 }

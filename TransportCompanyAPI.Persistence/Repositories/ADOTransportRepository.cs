@@ -47,8 +47,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
         }
 
         public async Task<Transport> GetTransportByIdAsync(long id)
-        {
-            
+        {            
             Transport transport;
             TransportCategories categoryId;
             string generalCharactQuery = @$"
@@ -119,8 +118,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
                     );
                     break;
             }
-            return transport;
-            
+            return transport;            
         }
 
         public async Task<IEnumerable<string[]>> GetTransportCategoriesAsync()

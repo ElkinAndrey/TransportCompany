@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransportCompanyAPI.Domain.Entities.PersonEntities;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 
 namespace TransportCompanyAPI.Persistence.Features
@@ -33,6 +34,26 @@ namespace TransportCompanyAPI.Persistence.Features
             uniqeTransport.YearPublishing = transport.YearPublishing;
 
             return uniqeTransport;
+        }
+
+        /// <summary>
+        /// Передать общие характеристики транспорта
+        /// </summary>
+        /// <typeparam name="T">Класс наследник транспорта</typeparam>
+        /// <param name="transport">Общие характеристики</param>
+        /// <param name="uniqeTransport">Уникальные характеристики</param>
+        /// <returns>Транспорт со скопированными общими характеристиками</returns>
+        public static T PersonDowncast<T>(Person person, T uniqePerson) where T : Person
+        {
+            uniqePerson.PersonId = person.PersonId;
+            uniqePerson.Name = person.Name;
+            uniqePerson.Surname = person.Surname;
+            uniqePerson.Patronymic = person.Patronymic;
+            uniqePerson.HireDate = person.HireDate;
+            uniqePerson.DismissalDate = person.DismissalDate;
+            uniqePerson.PersonPosition = person.PersonPosition;
+
+            return uniqePerson;
         }
     }
 }

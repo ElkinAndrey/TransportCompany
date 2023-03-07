@@ -12,7 +12,8 @@ RETURN
 		[person].[patronymic],
 		[person].[start],
 		[person].[end],
-		[person_position].[name] AS [position]
+		[person_position].[name] AS [position],
+		[person_position].[person_position_id] AS [position_id]
 	FROM (
 		SELECT * 
 		FROM [person] 
