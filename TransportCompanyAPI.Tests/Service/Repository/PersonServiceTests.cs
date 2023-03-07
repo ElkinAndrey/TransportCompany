@@ -58,5 +58,25 @@ namespace TransportCompanyAPI.Tests.Service.Repository
 
             transports = (await personService.GetPersonsAsync(1, 1, "11111111111111", "", "", 0, null, null, null, null)).ToList();
         }
+
+        /// <summary>
+        /// Проверка метода TransportService.GetPersonByIdAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetPersonByIdAsync()
+        {
+
+            // Подготовка
+            Person person;
+
+            try
+            {
+                person = (await personService.GetPersonByIdAsync(-1));
+            }
+            catch (Exception ex)
+            {
+                Assert.Equal(ex.Message, new PersonNotFoundException(-1).Message);
+            }
+        }
     }
 }

@@ -9,6 +9,7 @@ using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using TransportCompanyAPI.Service.Exceptions;
+using System.Xml.Linq;
 
 namespace TransportCompanyAPI.Service.Services
 {
@@ -33,7 +34,18 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<Person> GetPersonByIdAsync(long personId)
         {
-            throw new NotImplementedException();
+            if (personId <= 0)
+                throw new PersonNotFoundException(personId);
+
+            try
+            {
+                Person persons = await repositoryManager.PersonRepository.GetPersonByIdAsync(personId);
+                return persons;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<long> GetPersonCountAsync(
