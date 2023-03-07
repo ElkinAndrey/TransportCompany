@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 
 namespace TransportCompanyAPI.Domain.Entities.PersonEntities
 {
@@ -14,6 +10,6 @@ namespace TransportCompanyAPI.Domain.Entities.PersonEntities
         /// <summary>
         /// Участок
         /// </summary>
-        // public Region Region { get; set; }
+        public Region Region { get; set; }
     }
 }
