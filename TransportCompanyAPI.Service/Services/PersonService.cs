@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransportCompanyAPI.Domain.Entities.PersonEntities;
+using TransportCompanyAPI.Domain.Entities.TransportEntities;
+using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using TransportCompanyAPI.Service.Exceptions;
 
 namespace TransportCompanyAPI.Service.Services
 {
@@ -13,6 +17,20 @@ namespace TransportCompanyAPI.Service.Services
     /// </summary>
     public class PersonService : IPersonService
     {
+        /// <summary>
+        /// Репозитории
+        /// </summary>
+        private readonly IRepositoryManager repositoryManager;
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="repositoryManager"></param>
+        public PersonService(IRepositoryManager repositoryManager)
+        {
+            this.repositoryManager = repositoryManager;
+        }
+
         public async Task<Person> GetPersonByIdAsync(long personId)
         {
             throw new NotImplementedException();
@@ -50,7 +68,35 @@ namespace TransportCompanyAPI.Service.Services
             DateTime? endDismissalDate
         )
         {
-            throw new NotImplementedException();
+            if (offset < 0)
+                throw new NegativeStartScoreException(offset);
+
+            if (length < 0)
+                throw new NegativeLengthException(length);
+
+            if (length == 0)
+                return new List<Person>();
+
+            try
+            {
+                IEnumerable<Person> persons = await repositoryManager.PersonRepository.GetPersonsAsync(
+                    offset,
+                    length,
+                    name,
+                    surname,
+                    patronymic,
+                    positionId,
+                    startHireDate,
+                    endHireDate,
+                    startDismissalDate,
+                    endDismissalDate
+                );
+                return persons;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
