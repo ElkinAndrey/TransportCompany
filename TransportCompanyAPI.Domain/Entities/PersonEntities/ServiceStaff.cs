@@ -1,4 +1,6 @@
-﻿namespace TransportCompanyAPI.Domain.Entities.PersonEntities
+﻿using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
+
+namespace TransportCompanyAPI.Domain.Entities.PersonEntities
 {
     /// <summary>
     /// Обслуживающий персонал
@@ -8,6 +10,6 @@
         /// <summary>
         /// Бригада
         /// </summary>
-        // public Brigade Brigade { get; set; }
+        public Brigade Brigade { get; set; }
     }
 }

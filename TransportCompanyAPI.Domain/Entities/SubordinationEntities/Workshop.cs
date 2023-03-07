@@ -25,7 +25,7 @@ namespace TransportCompanyAPI.Domain.Entities.SubordinationEntities
         /// <summary>
         /// Бригады в мастерской
         /// </summary>
-        // public IEnumerable<Brigade> Brigades { get; set; }
+        public IEnumerable<Brigade> Brigades { get; set; }
 
         /// <summary>
         /// Мастер в мастерской

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 
 namespace TransportCompanyAPI.Domain.Entities.TransportEntities
 {
@@ -74,6 +75,11 @@ namespace TransportCompanyAPI.Domain.Entities.TransportEntities
         /// <summary>
         /// Год издания транспорта
         /// </summary>
-        public int YearPublishing { get; set; } = 0; 
+        public int YearPublishing { get; set; } = 0;
+
+        /// <summary>
+        /// Бригада
+        /// </summary>
+        public Brigade Brigade { get; set; }
     }
 }
