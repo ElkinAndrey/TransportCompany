@@ -146,16 +146,16 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         }
 
         /// <summary>
-        /// Проверка метода ADOTransportRepository.GetPropertiesByCategoryIdAsync
+        /// Проверка метода ADOTransportRepository.GetTransportPropertiesByCategoryIdAsync
         /// </summary>
         [Fact]
-        public async void TestGetPropertiesByCategoryIdAsync()
+        public async void TestGetTransportPropertiesByCategoryId()
         {
             // Подготовка
             IEnumerable<string[]> properties;
 
             // Действие
-            properties = await repository.GetPropertiesByCategoryIdAsync(1);
+            properties = await repository.GetTransportPropertiesByCategoryIdAsync(1);
 
             Assert.True(properties.Count() != 0);
             // Утверждение

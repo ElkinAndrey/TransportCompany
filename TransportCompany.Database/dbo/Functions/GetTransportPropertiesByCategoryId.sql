@@ -1,4 +1,4 @@
-﻿CREATE FUNCTION GetPropertiesByCategoryId (
+﻿CREATE FUNCTION GetTransportPropertiesByCategoryId (
 	@categoryId BIGINT
 )
 RETURNS TABLE

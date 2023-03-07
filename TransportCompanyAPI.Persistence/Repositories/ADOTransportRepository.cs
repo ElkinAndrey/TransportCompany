@@ -23,13 +23,13 @@ namespace TransportCompanyAPI.Persistence.Repositories
             this.sqlQueries = sqlQueries;
         }
 
-        public async Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync(short categoryId)
+        public async Task<IEnumerable<string[]>> GetTransportPropertiesByCategoryIdAsync(short categoryId)
         {
             List<string[]> property = new List<string[]>();
 
             string query = @$"
                 SELECT * 
-                FROM GetPropertiesByCategoryId({categoryId})  
+                FROM GetTransportPropertiesByCategoryId({categoryId})  
             ";
 
             DataTable dataTable1 = sqlQueries.QuerySelect(query);

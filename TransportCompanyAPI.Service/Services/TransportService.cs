@@ -27,14 +27,14 @@ namespace TransportCompanyAPI.Service.Services
            this.repositoryManager = repositoryManager; 
         }
 
-        public async Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync(short categoryId)
+        public async Task<IEnumerable<string[]>> GetTransportPropertiesByCategoryIdAsync(short categoryId)
         {
             if (categoryId <= 0)
                 return new List<string[]>();
 
             try
             {
-                IEnumerable<string[]> properties = await repositoryManager.TransportRepository.GetPropertiesByCategoryIdAsync(categoryId);
+                IEnumerable<string[]> properties = await repositoryManager.TransportRepository.GetTransportPropertiesByCategoryIdAsync(categoryId);
                 return properties;
             }
             catch (Exception ex)

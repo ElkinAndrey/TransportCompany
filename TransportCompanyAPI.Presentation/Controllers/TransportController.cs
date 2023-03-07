@@ -88,12 +88,12 @@ namespace TransportCompanyAPI.Presentation.Controllers
         /// <param name="categoryId">Id категории траспорта</param>
         /// <returns>Список с категориями транспорта</returns>
         [HttpGet]
-        [Route("GetPropertiesByCategoryId/{categoryId}")]
-        public async Task<IActionResult> GetPropertiesByCategoryId(short categoryId)
+        [Route("GetTransportPropertiesByCategoryId/{categoryId}")]
+        public async Task<IActionResult> GetTransportPropertiesByCategoryId(short categoryId)
         {
             try
             {
-                var properties = await serviceManager.TransportService.GetPropertiesByCategoryIdAsync(categoryId);
+                var properties = await serviceManager.TransportService.GetTransportPropertiesByCategoryIdAsync(categoryId);
 
                 return Ok(properties);
             }

@@ -77,7 +77,6 @@
     <Build Include="dbo\Functions\GetTransportCompanies.sql" />
     <Build Include="dbo\Functions\GetTransportModelsByCompanyId.sql" />
     <Build Include="dbo\Functions\GetTransportYearByModelId.sql" />
-    <Build Include="dbo\Functions\GetPropertiesByCategoryId.sql" />
     <Build Include="dbo\Functions\GetTransportCategories.sql" />
     <Build Include="dbo\Functions\GetTransportCountries.sql" />
     <Build Include="dbo\Functions\GetTransportCount.sql" />
@@ -91,5 +90,7 @@
     <Build Include="dbo\Functions\GetPersonPositions.sql" />
     <Build Include="dbo\Functions\GetPersonById.sql" />
     <Build Include="dbo\Functions\GetPropertyByPersonId.sql" />
+    <Build Include="dbo\Functions\GetTransportPropertiesByCategoryId.sql" />
+    <Build Include="dbo\Functions\GetPersonPropertiesByPositionId.sql" />
   </ItemGroup>
 </Project>

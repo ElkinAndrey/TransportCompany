@@ -120,7 +120,7 @@ namespace TransportCompanyAPI.Service.Abstractions
         ///     ["2", "Width", "Ширина", "FLOAT"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetPropertiesByCategoryIdAsync(short categoryId);
+        public Task<IEnumerable<string[]>> GetTransportPropertiesByCategoryIdAsync(short categoryId);
 
         /// <summary>
         /// Получить количество транспорта

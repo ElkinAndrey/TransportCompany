@@ -98,7 +98,7 @@ namespace TransportCompanyAPI.Tests.Service.Repository
         }
 
         /// <summary>
-        /// Проверка метода TransportService.GetPropertiesByCategoryIdAsync
+        /// Проверка метода TransportService.GetTransportPropertiesByCategoryIdAsync
         /// </summary>
         [Fact]
         public async void TestGetPropertiesByCategoryIdAsync()
@@ -108,9 +108,9 @@ namespace TransportCompanyAPI.Tests.Service.Repository
             IEnumerable<string[]> properties;
 
             // Действие
-            properties = await transportService.GetPropertiesByCategoryIdAsync(-1);
+            properties = await transportService.GetTransportPropertiesByCategoryIdAsync(-1);
             Assert.True(properties.Count() == 0);
-            properties = await transportService.GetPropertiesByCategoryIdAsync(short.MaxValue);
+            properties = await transportService.GetTransportPropertiesByCategoryIdAsync(short.MaxValue);
             Assert.True(properties.Count() == 0);
         }
 
