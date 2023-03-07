@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 using TransportCompanyAPI.Infrastructure.ViewModels.Person;
 using TransportCompanyAPI.Service.Abstractions;
 
@@ -98,6 +99,31 @@ namespace TransportCompanyAPI.Presentation.Controllers
                     model.StartDismissalDate,
                     model.EndDismissalDate
                 );
+
+                return Ok(persons);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить все возможные должности людей
+        /// </summary>
+        /// <returns>
+        /// [
+        ///     ["1", "Водитель"],
+        ///     ["2", "Сварщик"]
+        /// ]
+        /// </returns>
+        [HttpGet]
+        [Route("GetPersonPositions")]
+        public async Task<IActionResult> GetPersonPositions()
+        {
+            try
+            {
+                var persons = await serviceManager.PersonService.GetPersonPositionsAsync();
 
                 return Ok(persons);
             }
