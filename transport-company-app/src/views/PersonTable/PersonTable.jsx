@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useFetching } from "./../../hooks/useFetching";
 import Person from "./../../api/person";
+import { getDateForInput } from "./../../utils/getDateForInput";
 
 const PersonTable = ({ page, setPage, setEnd, setPersonCount }) => {
-  const len = 3;
+  const len = 10;
 
   let [positions, setPositions] = useState([]);
   let [persons, setPersons] = useState([]);
@@ -15,10 +16,10 @@ const PersonTable = ({ page, setPage, setEnd, setPersonCount }) => {
     regionCode: "",
     transportCountryId: 0,
     transportCategoryId: 0,
-    startBuy: null,
-    endBuy: null,
-    startWriteOff: null,
-    endWriteOff: null,
+    startHireDate: null,
+    endHireDate: null,
+    startDismissalDate: null,
+    endDismissalDate: null,
   });
   let [oldParams, setOldParams] = useState({
     offset: (page - 1) * len,
@@ -34,12 +35,10 @@ const PersonTable = ({ page, setPage, setEnd, setPersonCount }) => {
     endWriteOff: null,
   });
 
-  const [fetchPerson, isPersonLoading, personError] = useFetching(
-    async (p) => {
-      const response = await Person.getPersons(p);
-      setPersons(response.data);
-    }
-  );
+  const [fetchPerson, isPersonLoading, personError] = useFetching(async (p) => {
+    const response = await Person.getPersons(p);
+    setPersons(response.data);
+  });
 
   const [fetchPersonCount, isPersonCountLoading, personCountError] =
     useFetching(async (p) => {
@@ -50,9 +49,9 @@ const PersonTable = ({ page, setPage, setEnd, setPersonCount }) => {
       );
     });
 
-  const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(
+  const [fetchPositions, isPositionsLoading, positionsError] = useFetching(
     async () => {
-      const response = await Person.getPersontCategories();
+      const response = await Person.getPersonPositions();
       setPositions(response.data);
     }
   );
@@ -63,11 +62,21 @@ const PersonTable = ({ page, setPage, setEnd, setPersonCount }) => {
   }, [page]);
 
   useEffect(() => {
-    fetchCategories();
+    fetchPositions();
   }, []);
+
+  const update = () => {
+    setOldParams({ ...params });
+    fetchPerson(params);
+    fetchPersonCount(params);
+    setPage(1);
+  };
 
   return (
     <div>
+      <div>
+        <button onClick={update}>Обновить таблицу</button>
+      </div>
       <table>
         <thead>
           <tr>
@@ -77,6 +86,164 @@ const PersonTable = ({ page, setPage, setEnd, setPersonCount }) => {
             <th>Должность</th>
             <th>Дата приема на работу</th>
             <th>Дата увольнения</th>
+          </tr>
+          <tr>
+            <th>
+              <input
+                value={params.surname}
+                onChange={(e) =>
+                  setParams({ ...params, surname: e.target.value })
+                }
+              />
+            </th>
+            <th>
+              <input
+                value={params.name}
+                onChange={(e) => setParams({ ...params, name: e.target.value })}
+              />
+            </th>
+            <th>
+              <input
+                value={params.patronymic}
+                onChange={(e) =>
+                  setParams({ ...params, patronymic: e.target.value })
+                }
+              />
+            </th>
+            <th>
+              <select
+                value={params.positionId}
+                onChange={(e) =>
+                  setParams({ ...params, positionId: e.target.value })
+                }
+              >
+                <option value={0}>Всё</option>
+                {positions.map((position) => (
+                  <option key={position[0]} value={position[0]}>
+                    {position[1]}
+                  </option>
+                ))}
+              </select>
+            </th>
+            <th>
+              <div>
+                <label>Начало</label>
+                <input
+                  type={"date"}
+                  value={getDateForInput(params.startHireDate)}
+                  onChange={(e) => {
+                    setParams({
+                      ...params,
+                      startHireDate: new Date(e.target.value),
+                    });
+                  }}
+                />
+              </div>
+
+              <div>
+                <label>Конец</label>
+                <input
+                  type={"date"}
+                  value={getDateForInput(params.endHireDate)}
+                  onChange={(e) => {
+                    setParams({
+                      ...params,
+                      endHireDate: new Date(e.target.value),
+                    });
+                  }}
+                />
+              </div>
+              <button
+                onClick={() =>
+                  setParams({
+                    ...params,
+                    startHireDate: null,
+                    endHireDate: null,
+                  })
+                }
+              >
+                Сбросить
+              </button>
+            </th>
+            <th>
+              <div>
+                <label>Начало</label>
+                <input
+                  type={"date"}
+                  value={getDateForInput(params.startDismissalDate)}
+                  onChange={(e) => {
+                    setParams({
+                      ...params,
+                      startDismissalDate: new Date(e.target.value),
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <label>Конец</label>
+                <input
+                  type={"date"}
+                  value={getDateForInput(params.endDismissalDate)}
+                  onChange={(e) => {
+                    setParams({
+                      ...params,
+                      endDismissalDate: new Date(e.target.value),
+                    });
+                  }}
+                />
+              </div>
+              <button
+                onClick={() =>
+                  setParams({
+                    ...params,
+                    startDismissalDate: null,
+                    endDismissalDate: null,
+                  })
+                }
+              >
+                Сбросить
+              </button>
+            </th>
+            {/*
+            <th>
+              <div>
+                <label>Начало</label>
+                <input
+                  type={"date"}
+                  value={getDateForInput(params.startDismissalDate)}
+                  onChange={(e) => {
+                    setParams({
+                      ...params,
+                      startDismissalDate: new Date(e.target.value),
+                    });
+                  }}
+                />
+              </div>
+              <div>
+                <label>Конец</label>
+                <input
+                  type={"date"}
+                  value={getDateForInput(params.endDismissalDate)}
+                  onChange={(e) => {
+                    setParams({
+                      ...params,
+                      endDismissalDate: new Date(e.target.value),
+                    });
+                  }}
+                />
+              </div>
+              <button
+                onClick={() =>
+                  setParams({
+                    ...params,
+                    startDismissalDate: null,
+                    endDismissalDate: null,
+                  })
+                }
+              >
+                Сбросить
+              </button>
+            </th> */}
           </tr>
         </thead>
         {!personError.message && !isPersonLoading && persons.length !== 0 ? (
