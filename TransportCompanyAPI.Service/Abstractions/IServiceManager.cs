@@ -16,5 +16,10 @@ namespace TransportCompanyAPI.Service.Abstractions
         /// Сервис, отвечающий за работу с транспортом
         /// </summary>
         ITransportService TransportService { get; }
+
+        /// <summary>
+        /// Сервис, отвечающий за работу с людьми
+        /// </summary>
+        IPersonService PersonService { get; }
     }
 }
