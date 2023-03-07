@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TransportCompanyAPI.Domain.Entities.PersonEntities;
+﻿using TransportCompanyAPI.Domain.Entities.PersonEntities;
 
 namespace TransportCompanyAPI.Domain.Entities.SubordinationEntities
 {
@@ -25,7 +20,7 @@ namespace TransportCompanyAPI.Domain.Entities.SubordinationEntities
         /// <summary>
         /// Объект гаражного хозяйства
         /// </summary>
-        // public ObjectCivilEconomy ObjectCivilEconomy { get; set; }
+        public GarageFacility GarageFacility { get; set; }
 
         /// <summary>
         /// Бригады в мастерской
