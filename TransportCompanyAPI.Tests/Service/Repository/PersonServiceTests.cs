@@ -78,5 +78,20 @@ namespace TransportCompanyAPI.Tests.Service.Repository
                 Assert.Equal(ex.Message, new PersonNotFoundException(-1).Message);
             }
         }
+
+        /// <summary>
+        /// Проверка метода TransportService.GetPersonCountAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetPersonCountAsync()
+        {
+
+            // Подготовка
+            long count;
+            
+            count = (await personService.GetPersonCountAsync("", "", "", 0, null, null, null, null));
+
+            Assert.True(count >= 0);
+        }
     }
 }

@@ -59,7 +59,24 @@ namespace TransportCompanyAPI.Service.Services
             DateTime? endDismissalDate
         )
         {
-            throw new NotImplementedException();
+            try
+            {
+                long persons = await repositoryManager.PersonRepository.GetPersonCountAsync(
+                    name,
+                    surname,
+                    patronymic,
+                    positionId,
+                    startHireDate,
+                    endHireDate,
+                    startDismissalDate,
+                    endDismissalDate
+                );
+                return persons;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<string[]>> GetPersonPositionsAsync()
