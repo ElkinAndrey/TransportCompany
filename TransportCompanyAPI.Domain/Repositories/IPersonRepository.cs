@@ -21,7 +21,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// <param name="startDismissalDate">Начало периода даты конца эксплуатации</param>
         /// <param name="endDismissalDate">Конец периода даты окончания эксплуатации</param>
         /// <returns>Список людей</returns>
-        public Task<IEnumerable<Person>> GetPersons(
+        public Task<IEnumerable<Person>> GetPersonsAsync(
             long offset, 
             long length, 
             string name, 
@@ -46,7 +46,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// <param name="startDismissalDate">Начало периода даты конца эксплуатации</param>
         /// <param name="endDismissalDate">Конец периода даты окончания эксплуатации</param>
         /// <returns>Количество людей</returns>
-        public Task<long> GetPersonCount(
+        public Task<long> GetPersonCountAsync(
             string name,
             string surname,
             string patronymic,
@@ -62,7 +62,7 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// </summary>
         /// <param name="personId">Id человека</param>
         /// <returns>Человек</returns>
-        public Task<Person> GetPersonById(long personId);
+        public Task<Person> GetPersonByIdAsync(long personId);
 
         /// <summary>
         /// Получить список со всеми должностями людей
@@ -74,6 +74,6 @@ namespace TransportCompanyAPI.Domain.Repositories
         ///     ["2", "Водитель"],
         /// ]
         /// </returns>
-        public Task<IEnumerable<string[]>> GetPersonPositions();
+        public Task<IEnumerable<string[]>> GetPersonPositionsAsync();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ using Xunit;
 namespace TransportCompanyAPI.Tests.Persistence.Repository
 {
     /// <summary>
-    /// Тесты класса TransportRepositoryTests
+    /// Тесты класса ADOTransportRepository
     /// </summary>
     public class ADOTransportRepositoryTests
     {
@@ -208,7 +209,7 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             long count;
 
             // Действие
-            count = await repository.GetTransportCount();
+            count = await repository.GetTransportCount("", "", "", 0, 0, null, null, null, null);
 
             // Утверждение
             Assert.True(count >= 0);

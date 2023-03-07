@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TransportCompanyAPI.Domain.Entities.PersonEntities;
 using TransportCompanyAPI.Domain.Repositories;
+using TransportCompanyAPI.Persistence.Features;
 using TransportCompanyAPI.Persistence.Settings;
 
 namespace TransportCompanyAPI.Persistence.Repositories
@@ -29,12 +32,12 @@ namespace TransportCompanyAPI.Persistence.Repositories
             this.sqlQueries = sqlQueries;
         }
 
-        public Task<Person> GetPersonById(long personId)
+        public async Task<Person> GetPersonByIdAsync(long personId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<long> GetPersonCount(
+        public async Task<long> GetPersonCountAsync(
             string name, 
             string surname, 
             string patronymic, 
@@ -48,12 +51,12 @@ namespace TransportCompanyAPI.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<string[]>> GetPersonPositions()
+        public async Task<IEnumerable<string[]>> GetPersonPositionsAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Person>> GetPersons(
+        public async Task<IEnumerable<Person>> GetPersonsAsync(
             long offset, 
             long length, 
             string name, 
@@ -66,7 +69,29 @@ namespace TransportCompanyAPI.Persistence.Repositories
             DateTime? endDismissalDate
         )
         {
-            throw new NotImplementedException();
+            List<Person> persons = new List<Person>();
+
+            string query = @$"
+                SELECT * FROM GetPersons (
+	                {offset},
+	                {length},
+	                N'{name}',
+	                N'{surname}',
+	                N'{patronymic}',
+	                {positionId},
+	                N'{Helpers.ConvertDateTimeInISO8601(startHireDate)}',
+	                N'{Helpers.ConvertDateTimeInISO8601(endHireDate)}',
+	                N'{Helpers.ConvertDateTimeInISO8601(startDismissalDate)}',
+	                N'{Helpers.ConvertDateTimeInISO8601(endDismissalDate)}'
+                )
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+
+            foreach (DataRow row in dataTable.Rows)
+                persons.Add(PersonConvertDataRow.ConvertPerson(row));
+
+            return persons;
         }
     }
 }
