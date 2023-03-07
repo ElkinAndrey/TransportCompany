@@ -81,7 +81,15 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<IEnumerable<string[]>> GetPersonPositionsAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var personPositions = await repositoryManager.PersonRepository.GetPersonPositionsAsync();
+                return personPositions;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Person>> GetPersonsAsync(
