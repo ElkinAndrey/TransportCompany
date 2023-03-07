@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Persistence.Settings;
 
@@ -30,6 +25,11 @@ namespace TransportCompanyAPI.Persistence.Repositories
         private readonly IPersonRepository personRepository;
 
         /// <summary>
+        /// Реопзиторий для работы с подчиненностью
+        /// </summary>
+        private readonly ISubordinationRepository subordinationRepository;
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         public RepositoryManager()
@@ -39,10 +39,13 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
             transportRepository = new ADOTransportRepository(sqlQueries);
             personRepository = new ADOPersonRepository(sqlQueries);
+            subordinationRepository = new ADOSubordinationRepository(sqlQueries);
         }
 
         public ITransportRepository TransportRepository => transportRepository;
 
         public IPersonRepository PersonRepository => personRepository;
+
+        public ISubordinationRepository SubordinationRepository => subordinationRepository;
     }
 }

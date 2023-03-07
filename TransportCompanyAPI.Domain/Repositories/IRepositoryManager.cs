@@ -14,5 +14,10 @@
         /// Репозиторий, отвечающий за работу с людьми
         /// </summary>
         IPersonRepository PersonRepository { get; }
+
+        /// <summary>
+        /// Репозиторий, отвечающий за работу с подчиненностью
+        /// </summary>
+        ISubordinationRepository SubordinationRepository { get; }
     }
 }
