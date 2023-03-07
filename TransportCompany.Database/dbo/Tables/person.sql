@@ -13,3 +13,24 @@
 
 
 
+
+
+
+GO
+CREATE TRIGGER AddPersonProperty
+ON [person]
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @personId BIGINT = (SELECT [person_id] FROM inserted)
+	DECLARE @personPositionId BIGINT = (SELECT [person_position_id] FROM inserted)
+
+	INSERT INTO [person_person_property] ([person_id], [person_property_id])
+	SELECT
+		[person_id] = @personId,
+		[person_position_person_property].[person_property_id]
+	FROM
+		[person_position_person_property]
+	WHERE 
+		[person_position_person_property].[person_position_id] = @personPositionId
+END
