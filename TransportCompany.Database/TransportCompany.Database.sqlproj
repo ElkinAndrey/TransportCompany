@@ -90,5 +90,6 @@
     <Build Include="dbo\Functions\GetPersonCount.sql" />
     <Build Include="dbo\Functions\GetPersonPositions.sql" />
     <Build Include="dbo\Functions\GetPersonById.sql" />
+    <Build Include="dbo\Functions\GetPropertyByPersonId.sql" />
   </ItemGroup>
 </Project>
