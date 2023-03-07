@@ -53,7 +53,22 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<IEnumerable<string[]>> GetPersonPositionsAsync()
         {
-            throw new NotImplementedException();
+            List<string[]> positions = new List<string[]>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetPersonPositions()
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            foreach (DataRow row in dataTable.Rows)
+                positions.Add(new string[]
+                {
+                    row.Field<short>("position_id").ToString(),
+                    row.Field<string>("name") ?? "",
+                });
+
+            return positions;
         }
 
         public async Task<IEnumerable<Person>> GetPersonsAsync(

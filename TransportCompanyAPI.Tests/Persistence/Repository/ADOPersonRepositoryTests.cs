@@ -58,5 +58,25 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
                 Assert.True(transport.PersonId != 0);
             }
         }
+
+        /// <summary>
+        /// Проверка метода ADOPersonRepository.GetPersonPositionsAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetPersonPositionsAsync()
+        {
+
+            // Подготовка
+            List<string[]> positions;
+
+            // Действие
+            positions = (await repository.GetPersonPositionsAsync()).ToList();
+
+            // Утверждение
+            foreach (string[] position in positions)
+            {
+                Assert.True(position.Length == 2);
+            }
+        }
     }
 }
