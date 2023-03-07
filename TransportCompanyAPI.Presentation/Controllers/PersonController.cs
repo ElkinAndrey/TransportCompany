@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TransportCompanyAPI.Infrastructure.ViewModels.Person;
 using TransportCompanyAPI.Service.Abstractions;
 
 namespace TransportCompanyAPI.Presentation.Controllers
@@ -37,6 +38,38 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 var person = await serviceManager.PersonService.GetPersonByIdAsync(personId);
 
                 return Ok(person);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить людей
+        /// </summary>
+        /// <param name="model">Параметры отбора</param>
+        /// <returns>Список людей</returns>
+        [HttpPost]
+        [Route("GetPersons")]
+        public async Task<IActionResult> GetPersons([FromBody] GetPersonsViewModel model)
+        {
+            try
+            {
+                var persons = await serviceManager.PersonService.GetPersonsAsync(
+                    model.OffSet,
+                    model.Length,
+                    model.Name,
+                    model.Surname,
+                    model.Patronymic,
+                    model.PositionId,
+                    model.StartHireDate,
+                    model.EndHireDate,
+                    model.StartDismissalDate,
+                    model.EndDismissalDate
+                );
+
+                return Ok(persons);
             }
             catch (Exception ex)
             {
