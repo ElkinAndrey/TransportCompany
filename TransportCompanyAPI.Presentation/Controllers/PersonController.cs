@@ -123,6 +123,15 @@ namespace TransportCompanyAPI.Presentation.Controllers
         {
             try
             {
+                /*
+                var persons = new[] { new { Id = "", Name = "" } }.Skip(1).ToList();
+
+                foreach (var person in await serviceManager.PersonService.GetPersonPositionsAsync())
+                    persons.Add(new { Id = person[0], Name = person[1] });
+
+                return Ok(persons);
+                */
+
                 var persons = await serviceManager.PersonService.GetPersonPositionsAsync();
 
                 return Ok(persons);
