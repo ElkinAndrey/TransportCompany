@@ -76,5 +76,35 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Получить количество людей
+        /// </summary>
+        /// <param name="model">Параметры отбора</param>
+        /// <returns>Список людей</returns>
+        [HttpPost]
+        [Route("GetPersonCount")]
+        public async Task<IActionResult> GetPersonCount([FromBody] GetPersonCountViewModel model)
+        {
+            try
+            {
+                var persons = await serviceManager.PersonService.GetPersonCountAsync(
+                    model.Name,
+                    model.Surname,
+                    model.Patronymic,
+                    model.PositionId,
+                    model.StartHireDate,
+                    model.EndHireDate,
+                    model.StartDismissalDate,
+                    model.EndDismissalDate
+                );
+
+                return Ok(persons);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

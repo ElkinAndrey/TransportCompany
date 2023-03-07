@@ -9,7 +9,7 @@ namespace TransportCompanyAPI.Infrastructure.ViewModels.Transport
     /// <summary>
     /// Параметры для получения количества транспорта
     /// </summary>
-    public class GetTransportCount
+    public class GetTransportCountViewModel
     {
         /// <summary>
         /// Только транспорт, содержащий часть серии

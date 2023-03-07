@@ -226,7 +226,7 @@ namespace TransportCompanyAPI.Presentation.Controllers
         /// <returns>Количество транспорта</returns>
         [HttpPost]
         [Route("GetTransportCount")]
-        public async Task<IActionResult> GetTransportCount([FromBody] GetTransportCount model)
+        public async Task<IActionResult> GetTransportCount([FromBody] GetTransportCountViewModel model)
         {
             try
             {

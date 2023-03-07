@@ -200,7 +200,7 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         }
 
         /// <summary>
-        /// Проверка метода ADOTransportRepository.GetTransportCount
+        /// Проверка метода ADOTransportRepository.GetTransportCountViewModel
         /// </summary>
         [Fact]
         public async void TestGetTransportCount()
