@@ -6,6 +6,9 @@
     [garage_facility_id] BIGINT         NOT NULL,
     PRIMARY KEY CLUSTERED ([workshop_id] ASC),
     FOREIGN KEY ([garage_facility_id]) REFERENCES [dbo].[garage_facility] ([garage_facility_id]) ON DELETE CASCADE,
+    FOREIGN KEY ([master_id]) REFERENCES [dbo].[person] ([person_id]),
     FOREIGN KEY ([region_id]) REFERENCES [dbo].[region] ([region_id]) ON DELETE CASCADE
 );
+
+
 

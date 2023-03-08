@@ -6,10 +6,14 @@
     [start]              DATETIME       NOT NULL,
     [end]                DATETIME       NULL,
     [person_position_id] SMALLINT       NOT NULL,
+    [brigade_id]         BIGINT         NULL,
     PRIMARY KEY CLUSTERED ([person_id] ASC),
     CHECK ([start]<[end]),
+    FOREIGN KEY ([brigade_id]) REFERENCES [dbo].[brigade] ([brigade_id]),
     FOREIGN KEY ([person_position_id]) REFERENCES [dbo].[person_position] ([person_position_id]) ON DELETE CASCADE
 );
+
+
 
 
 
