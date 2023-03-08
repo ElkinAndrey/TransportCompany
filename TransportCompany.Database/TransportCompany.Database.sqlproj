@@ -97,5 +97,6 @@
     <Build Include="dbo\Tables\garage_facility.sql" />
     <Build Include="dbo\Tables\workshop.sql" />
     <Build Include="dbo\Tables\brigade.sql" />
+    <Build Include="dbo\Functions\GetRegions.sql" />
   </ItemGroup>
 </Project>
