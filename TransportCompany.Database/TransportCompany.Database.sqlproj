@@ -92,5 +92,6 @@
     <Build Include="dbo\Functions\GetPropertyByPersonId.sql" />
     <Build Include="dbo\Functions\GetTransportPropertiesByCategoryId.sql" />
     <Build Include="dbo\Functions\GetPersonPropertiesByPositionId.sql" />
+    <Build Include="dbo\Tables\region.sql" />
   </ItemGroup>
 </Project>
