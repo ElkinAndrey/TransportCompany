@@ -19,16 +19,24 @@ namespace TransportCompanyAPI.Service.Services
         private readonly IPersonService personService;
 
         /// <summary>
+        /// Реопзиторий для работы с подчиненностью
+        /// </summary>
+        private readonly ISubordinationService subordinationService;
+
+        /// <summary>
         /// Конструктор
         /// </summary>
         public ServiceManager(IRepositoryManager repositoryManager)
         {
             transportService = new TransportService(repositoryManager);
             personService = new PersonService(repositoryManager);
+            subordinationService = new SubordinationService(repositoryManager);
         }
 
         public ITransportService TransportService => transportService;
 
         public IPersonService PersonService => personService;
+
+        public ISubordinationService SubordinationService => subordinationService;
     }
 }

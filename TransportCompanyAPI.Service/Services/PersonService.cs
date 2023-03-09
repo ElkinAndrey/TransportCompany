@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TransportCompanyAPI.Domain.Entities.PersonEntities;
-using TransportCompanyAPI.Domain.Entities.TransportEntities;
+﻿using TransportCompanyAPI.Domain.Entities.PersonEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using TransportCompanyAPI.Service.Exceptions;
-using System.Xml.Linq;
 
 namespace TransportCompanyAPI.Service.Services
 {

@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.Design;
-using System.Data.SqlClient;
-using TransportCompanyAPI.Domain.Entities.TransportEntities;
+﻿using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
 using TransportCompanyAPI.Service.Exceptions;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TransportCompanyAPI.Service.Services
 {
