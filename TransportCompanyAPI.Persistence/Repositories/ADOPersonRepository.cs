@@ -11,6 +11,7 @@ using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Enum;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Persistence.Features;
+using TransportCompanyAPI.Persistence.Queries;
 using TransportCompanyAPI.Persistence.Settings;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -188,29 +189,21 @@ namespace TransportCompanyAPI.Persistence.Repositories
             DateTime? endDismissalDate
         )
         {
-            List<Person> persons = new List<Person>();
+            IEnumerable<Person> persons;
 
-            string query = @$"
-                SELECT * FROM GetPersons (
-	                {offset},
-	                {length},
-	                N'{name}',
-	                N'{surname}',
-	                N'{patronymic}',
-	                {positionId},
-	                N'{Helpers.ConvertDateTimeInISO8601(startHireDate)}',
-	                N'{Helpers.ConvertDateTimeInISO8601(endHireDate)}',
-	                N'{Helpers.ConvertDateTimeInISO8601(startDismissalDate)}',
-	                N'{Helpers.ConvertDateTimeInISO8601(endDismissalDate)}',
-                    default,
-                    default
-                )
-            ";
-
-            DataTable dataTable = sqlQueries.QuerySelect(query);
-
-            foreach (DataRow row in dataTable.Rows)
-                persons.Add(ConvertDataRow.ConvertPerson(row));
+            GetPersons getPersons = new GetPersons(sqlQueries);
+            persons = getPersons.Action(
+                offset: offset,
+                length: length,
+                name: name,
+                surname: surname,
+                patronymic: patronymic,
+                positionId: positionId,
+                startHireDate: startHireDate,
+                endHireDate: endHireDate,
+                startDismissalDate: startDismissalDate,
+                endDismissalDate: endDismissalDate
+            );
 
             return persons;
         }
