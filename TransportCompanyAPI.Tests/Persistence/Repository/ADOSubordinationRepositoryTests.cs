@@ -92,5 +92,22 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             // Утверждение
             Assert.True(workshop.WorkshopId != 0);
         }
+
+        /// <summary>
+        /// Проверка метода ADOPersonRepository.GetBrigadeAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetBrigadeAsync()
+        {
+
+            // Подготовка
+            Brigade brigade;
+
+            // Действие
+            brigade = (await repository.GetBrigadeAsync(1));
+
+            // Утверждение
+            Assert.True(brigade.BrigadeId != 0);
+        }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System.Data;
+using System.Xml.Linq;
 using TransportCompanyAPI.Domain.Entities.PersonEntities;
 using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Persistence.Features;
+using TransportCompanyAPI.Persistence.Queries;
 
 namespace TransportCompanyAPI.Persistence.Repositories
 {
@@ -27,16 +29,22 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<Brigade> GetBrigadeAsync(long brigadeId)
         {
-            Brigade brigade = new Brigade();
+            Brigade brigade;
 
-            /*string brigadeQuery = @$"
+            string brigadeQuery = @$"
                 SELECT *
                 FROM GetBrigadeById({brigadeId})
             ";
             DataTable brigadeTable = sqlQueries.QuerySelect(brigadeQuery);
 
             brigade = ConvertDataRow.ConvertBrigade(brigadeTable.Rows[0]);
-            brigade.Workshop = ConvertDataRow.ConvertWorkshop(brigadeTable.Rows[0]);*/
+            brigade.Workshop = ConvertDataRow.ConvertWorkshop(brigadeTable.Rows[0]);
+
+            GetPersons getPersons = new GetPersons(sqlQueries);
+            brigade.ServiceStaffs = getPersons.Action(
+                length: 100,
+                brigadeId: brigadeId
+            );
 
             return brigade;
         }
