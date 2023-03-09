@@ -4,6 +4,7 @@ import TransportsPage from './../components/pages/TransportsPage';
 import RegionsPage from './../components/pages/RegionsPage';
 import RegionPage from './../components/pages/RegionPage';
 import WorkshopPage from './../components/pages/WorkshopPage';
+import BrigadePage from '../components/pages/BrigadePage';
 
 export const routes = [
   { path: "/", element: <Navigate to="/transport" />, exact: true },
@@ -13,4 +14,5 @@ export const routes = [
   { path: "/region", element: <RegionsPage />, exact: true },
   { path: "/region/:regionId", element: <RegionPage />, exact: true },
   { path: "/workshop/:workshopId", element: <WorkshopPage />, exact: true },
+  { path: "/brigade/:brigadeId", element: <BrigadePage />, exact: true },
 ];
