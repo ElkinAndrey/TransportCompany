@@ -98,5 +98,6 @@
     <Build Include="dbo\Tables\workshop.sql" />
     <Build Include="dbo\Tables\brigade.sql" />
     <Build Include="dbo\Functions\GetRegions.sql" />
+    <Build Include="dbo\Functions\GetWorkshopsByRegionId.sql" />
   </ItemGroup>
 </Project>
