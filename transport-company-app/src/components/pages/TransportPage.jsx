@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFetching } from "./../../hooks/useFetching";
 import Transport from "./../../api/transport";
-import UniqueTransportCharacteristics from './../../views/UniqueTransportCharacteristics/UniqueTransportCharacteristics';
-import PersonMiniTable from './../../views/Tables/PersonMiniTable/PersonMiniTable';
+import UniqueTransportCharacteristics from "./../../views/UniqueTransportCharacteristics/UniqueTransportCharacteristics";
+import PersonMiniTable from "./../../views/Tables/PersonMiniTable/PersonMiniTable";
+import TableLink from "./../forms/tableLink/TableLink";
 
 const TransportPage = () => {
   const dataFetchedRef = useRef(false);
@@ -23,7 +24,10 @@ const TransportPage = () => {
     manufacturerCompany: "",
     transportModel: "",
     yearPublishing: "",
-    brigade: null,
+    brigade: {
+      brigadeId: "",
+      name: "",
+    },
     drivers: [],
   });
 
@@ -37,14 +41,8 @@ const TransportPage = () => {
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
-    fetchTransport(params.id);
+    fetchTransport(params.transportId);
   }, []);
-
-  const redirectBrigade = (brigadeId) => {
-    history(`/brigade/${brigadeId}`);
-  };
-
-  console.log(transport);
 
   return (
     <div>
@@ -92,30 +90,24 @@ const TransportPage = () => {
             <tr>
               <th>Уникальный Id</th>
               <th>Название</th>
-              <th>ФИО бригадира</th>
             </tr>
           </thead>
           <tbody>
             <tr
               key={transport.brigade.brigadeId}
               className={"stringTable"}
-              onClick={() => {
-                redirectBrigade(transport.brigade.brigadeId);
-              }}
+              style={{ position: "relative" }}
             >
               <td>{transport.brigade.brigadeId}</td>
               <td>{transport.brigade.name}</td>
-              <td>
-                {transport.brigade.foreman.surname}{" "}
-                {transport.brigade.foreman.name}{" "}
-                {transport.brigade.foreman.patronymic}
-              </td>
+              <TableLink to={`/brigade/${transport.brigade.brigadeId}`} />
             </tr>
           </tbody>
         </table>
       </div>
 
-      <PersonMiniTable persons={transport.drivers}/>
+      <h1>Водители</h1>
+      <PersonMiniTable persons={transport.drivers} />
 
       {transport.hasOwnProperty("transportId") && (
         <div>

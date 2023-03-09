@@ -76,7 +76,7 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             Transport transport;
 
             // Действие
-            transport = await repository.GetTransportByIdAsync(1);
+            transport = await repository.GetTransportByIdAsync(4);
 
             // Утверждение
             

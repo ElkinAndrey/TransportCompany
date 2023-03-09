@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useFetching } from "./../../hooks/useFetching";
 import Person from "./../../api/person";
 import TableLink from "./../forms/tableLink/TableLink";
-import TransportMiniTable from './../../views/Tables/TransportMiniTable/TransportMiniTable';
+import TransportMiniTable from "./../../views/Tables/TransportMiniTable/TransportMiniTable";
 
 const PersonPage = () => {
   const dataFetchedRef = useRef(false);
@@ -23,10 +23,10 @@ const PersonPage = () => {
     fetchPerson(params.personId);
   }, []);
 
-  console.log(person);
   return (
     <div>
       <h1>Общие характеристики</h1>
+      <div>Уникальный Id : {person.personId}</div>
       <div>Должность : {person.personPosition}</div>
       <h4>ФИО</h4>
       <div>Имя : {person.name}</div>

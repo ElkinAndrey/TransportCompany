@@ -1,7 +1,8 @@
 import { React, useEffect, useRef, useState } from "react";
 import Transport from "./../../../api/transport";
-import { getDateForInput } from './../../../utils/getDateForInput';
-import { useFetching } from './../../../hooks/useFetching';
+import { getDateForInput } from "./../../../utils/getDateForInput";
+import { useFetching } from "./../../../hooks/useFetching";
+import TableLink from "./../../../components/forms/tableLink/TableLink";
 
 const TransportTable = ({ page, setPage, setEnd, setTransportCount }) => {
   const len = 10;
@@ -48,7 +49,9 @@ const TransportTable = ({ page, setPage, setEnd, setTransportCount }) => {
     useFetching(async (p) => {
       const response = await Transport.getTransportCount(p);
       setTransportCount(response.data);
-      setEnd(response.data === 0 ? 1 : Math.floor((response.data - 1) / len + 1));
+      setEnd(
+        response.data === 0 ? 1 : Math.floor((response.data - 1) / len + 1)
+      );
     });
 
   const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(
@@ -79,7 +82,7 @@ const TransportTable = ({ page, setPage, setEnd, setTransportCount }) => {
     setOldParams({ ...params });
     fetchTransport(params);
     fetchTransportCount(params);
-    setPage(1)
+    setPage(1);
   };
 
   return (
@@ -243,7 +246,7 @@ const TransportTable = ({ page, setPage, setEnd, setTransportCount }) => {
         transports.length !== 0 ? (
           <tbody>
             {transports.map((t) => (
-              <tr key={t.transportId}>
+              <tr key={t.transportId} style={{ position: "relative" }}>
                 <td>{t.category}</td>
                 <td>{t.series}</td>
                 <td>{t.number}</td>
@@ -256,6 +259,7 @@ const TransportTable = ({ page, setPage, setEnd, setTransportCount }) => {
                 <td>{t.manufacturerCompany}</td>
                 <td>{t.transportModel}</td>
                 <td>{t.yearPublishing}</td>
+                <TableLink to={`/transport/${t.transportId}`} />
               </tr>
             ))}
           </tbody>

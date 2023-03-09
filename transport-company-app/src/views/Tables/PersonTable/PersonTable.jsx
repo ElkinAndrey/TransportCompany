@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import Person from "./../../../api/person";
 import { getDateForInput } from "./../../../utils/getDateForInput";
-import { useFetching } from './../../../hooks/useFetching';
+import { useFetching } from "./../../../hooks/useFetching";
+import TableLink from "./../../../components/forms/tableLink/TableLink";
 
 const PersonTable = ({ page, setPage, setEnd, setPersonCount }) => {
   const len = 10;
@@ -204,52 +205,12 @@ const PersonTable = ({ page, setPage, setEnd, setPersonCount }) => {
                 Сбросить
               </button>
             </th>
-            {/*
-            <th>
-              <div>
-                <label>Начало</label>
-                <input
-                  type={"date"}
-                  value={getDateForInput(params.startDismissalDate)}
-                  onChange={(e) => {
-                    setParams({
-                      ...params,
-                      startDismissalDate: new Date(e.target.value),
-                    });
-                  }}
-                />
-              </div>
-              <div>
-                <label>Конец</label>
-                <input
-                  type={"date"}
-                  value={getDateForInput(params.endDismissalDate)}
-                  onChange={(e) => {
-                    setParams({
-                      ...params,
-                      endDismissalDate: new Date(e.target.value),
-                    });
-                  }}
-                />
-              </div>
-              <button
-                onClick={() =>
-                  setParams({
-                    ...params,
-                    startDismissalDate: null,
-                    endDismissalDate: null,
-                  })
-                }
-              >
-                Сбросить
-              </button>
-            </th> */}
           </tr>
         </thead>
         {!personError.message && !isPersonLoading && persons.length !== 0 ? (
           <tbody>
             {persons.map((person) => (
-              <tr key={person.personId}>
+              <tr key={person.personId} style={{ position: "relative" }}>
                 <td>{person.surname}</td>
                 <td>{person.name}</td>
                 <td>{person.patronymic}</td>
@@ -260,6 +221,7 @@ const PersonTable = ({ page, setPage, setEnd, setPersonCount }) => {
                     ? "Не уволен"
                     : person.dismissalDate}
                 </td>
+                <TableLink to={`/person/${person.personId}`} />
               </tr>
             ))}
           </tbody>
