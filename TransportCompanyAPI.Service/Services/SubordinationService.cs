@@ -1,6 +1,8 @@
-﻿using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
+﻿using TransportCompanyAPI.Domain.Entities.PersonEntities;
+using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
+using TransportCompanyAPI.Service.Exceptions;
 
 namespace TransportCompanyAPI.Service.Services
 {
@@ -35,7 +37,15 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<IEnumerable<Region>> GetRegionsAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                IEnumerable<Region> regions = await repositoryManager.SubordinationRepository.GetRegionsAsync();
+                return regions;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<SubordinationCount> GetSubordinationCountAsync(long RegionId, long WorkshopId, long BrigadeId)
