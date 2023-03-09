@@ -66,7 +66,18 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<Workshop> GetWorkshopAsync(long workshopId)
         {
-            throw new NotImplementedException();
+            if (workshopId <= 0)
+                throw new WorkshopNotFoundException(workshopId);
+
+            try
+            {
+                Workshop region = await repositoryManager.SubordinationRepository.GetWorkshopAsync(workshopId);
+                return region;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

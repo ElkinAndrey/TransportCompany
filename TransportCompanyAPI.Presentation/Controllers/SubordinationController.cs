@@ -67,5 +67,26 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Получить мастерскую с мастером и списком бригад в мастерской
+        /// </summary>
+        /// <param name="workshopId">Id мастерской</param>
+        /// <returns>Мастерская</returns>
+        [HttpGet]
+        [Route("GetWorkshop/{workshopId}")]
+        public async Task<IActionResult> GetWorkshop(long workshopId)
+        {
+            try
+            {
+                var region = await serviceManager.SubordinationService.GetWorkshopAsync(workshopId);
+
+                return Ok(region);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
