@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useFetching } from "./../../hooks/useFetching";
 import Subordination from "./../../api/subordination";
 import { Link } from "react-router-dom";
+import TableLink from "../forms/tableLink/TableLink";
 
 const RegionsPage = () => {
   const dataFetchedRef = useRef(false);
@@ -69,7 +70,7 @@ const RegionsPage = () => {
                 {region.regionChief.surname} {region.regionChief.name}{" "}
                 {region.regionChief.patronymic}
               </td>
-              <Link to={`/person/${region.regionId}`} className="tableLink"></Link>
+              <TableLink to={`/region/${region.regionId}`} />
             </tr>
           ))}
         </tbody>

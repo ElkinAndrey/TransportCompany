@@ -30,21 +30,6 @@ table td {
   border-color: #d4d4d4;
 }
 
-.stringTable:hover {
-  outline: red 3px solid;
-  z-index: 9999;
-}
-
 .selectTh td {
   background: #57c49e;
-}
-
-.tableLink {
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  margin: 0px;
-  top: 0px;
-  bottom: 0px;
-  font-size: 0px;
 }
