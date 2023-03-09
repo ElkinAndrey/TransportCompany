@@ -1,10 +1,8 @@
 ﻿using System.Data;
-using System.Data.SqlClient;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Enum;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Persistence.Features;
-using TransportCompanyAPI.Persistence.Settings;
 
 namespace TransportCompanyAPI.Persistence.Repositories
 {
@@ -60,7 +58,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
             ";
 
             DataTable generalCharactTable = sqlQueries.QuerySelect(generalCharactQuery);
-            transport = TransportConvertDataRow.ConvertTransport(generalCharactTable.Rows[0]);
+            transport = ConvertDataRow.ConvertTransport(generalCharactTable.Rows[0]);
             categoryId = (TransportCategories)generalCharactTable.Rows[0].Field<short>("category_id");
             DataTable uniqueCharactTable = sqlQueries.QuerySelect(uniqueCharactQuery);
             Dictionary<string, string> data = new Dictionary<string, string>();
@@ -253,28 +251,28 @@ namespace TransportCompanyAPI.Persistence.Repositories
         {
             List<Transport> transports = new List<Transport>();
             string query = @$"
-            SELECT * 
-            FROM GetTransports(
-                {offset},
-                {length}, 
-                N'{series}',
-                N'{number}',
-                N'{regionCode}',
-                {transportCountryId},
-                {transportCategoryId},
-                N'{Helpers.ConvertDateTimeInISO8601(startBuy)}',
-                N'{Helpers.ConvertDateTimeInISO8601(endBuy)}',
-                N'{Helpers.ConvertDateTimeInISO8601(startWriteOff)}',
-                N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}',
-                default,
-                default
-            )
-        ";
+                SELECT * 
+                FROM GetTransports(
+                    {offset},
+                    {length}, 
+                    N'{series}',
+                    N'{number}',
+                    N'{regionCode}',
+                    {transportCountryId},
+                    {transportCategoryId},
+                    N'{Helpers.ConvertDateTimeInISO8601(startBuy)}',
+                    N'{Helpers.ConvertDateTimeInISO8601(endBuy)}',
+                    N'{Helpers.ConvertDateTimeInISO8601(startWriteOff)}',
+                    N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}',
+                    default,
+                    default
+                )
+            ";
             
             DataTable dataTable = sqlQueries.QuerySelect(query);
 
             foreach (DataRow row in dataTable.Rows)
-                transports.Add(TransportConvertDataRow.ConvertTransport(row));
+                transports.Add(ConvertDataRow.ConvertTransport(row));
 
             return transports;
         }

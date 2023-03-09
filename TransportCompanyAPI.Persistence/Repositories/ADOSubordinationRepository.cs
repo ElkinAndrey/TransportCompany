@@ -35,8 +35,8 @@ namespace TransportCompanyAPI.Persistence.Repositories
             ";
             DataTable brigadeTable = sqlQueries.QuerySelect(brigadeQuery);
 
-            brigade = SubordinationConvertDataRow.ConvertBrigade(brigadeTable.Rows[0]);
-            brigade.Workshop = SubordinationConvertDataRow.ConvertWorkshop(brigadeTable.Rows[0]);*/
+            brigade = ConvertDataRow.ConvertBrigade(brigadeTable.Rows[0]);
+            brigade.Workshop = ConvertDataRow.ConvertWorkshop(brigadeTable.Rows[0]);*/
 
             return brigade;
         }
@@ -51,7 +51,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 FROM GetRegionById({regionId})
             ";
             DataTable regionTable = sqlQueries.QuerySelect(regionQuery);
-            region = SubordinationConvertDataRow.ConvertRegion(regionTable.Rows[0]);
+            region = ConvertDataRow.ConvertRegion(regionTable.Rows[0]);
 
             string workshopsQuery = @$"
                 SELECT *
@@ -60,7 +60,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
             DataTable workshopsTable = sqlQueries.QuerySelect(workshopsQuery);
             workshops = new List<Workshop>();
             foreach (DataRow item in workshopsTable.Rows)
-                workshops.Add(SubordinationConvertDataRow.ConvertWorkshop(item));
+                workshops.Add(ConvertDataRow.ConvertWorkshop(item));
 
             region.Workshops = workshops;
 
@@ -78,7 +78,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
             DataTable table = sqlQueries.QuerySelect(query);
 
             foreach (DataRow item in table.Rows)
-                regions.Add(SubordinationConvertDataRow.ConvertRegion(item));
+                regions.Add(ConvertDataRow.ConvertRegion(item));
 
             return regions;
         }
@@ -95,11 +95,11 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
             string workshopQuery = @$"
                 SELECT *
-                FROM GetWorkshopById({workshopId})
+                FROM GetWorkshopById({workshopId})  
             ";
             DataTable workshopTable = sqlQueries.QuerySelect(workshopQuery);
-            workshop = SubordinationConvertDataRow.ConvertWorkshop(workshopTable.Rows[0]);
-            workshop.Region = SubordinationConvertDataRow.ConvertRegion(workshopTable.Rows[0]);
+            workshop = ConvertDataRow.ConvertWorkshop(workshopTable.Rows[0]);
+            workshop.Region = ConvertDataRow.ConvertRegion(workshopTable.Rows[0]);
 
             string brigadesQuery = @$"
                 SELECT *
@@ -108,7 +108,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
             DataTable brigadesTable = sqlQueries.QuerySelect(brigadesQuery);
             brigades = new List<Brigade>();
             foreach (DataRow item in brigadesTable.Rows)
-                brigades.Add(SubordinationConvertDataRow.ConvertBrigade(item));
+                brigades.Add(ConvertDataRow.ConvertBrigade(item));
 
             workshop.Brigades = brigades;
 

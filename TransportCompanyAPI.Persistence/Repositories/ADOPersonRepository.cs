@@ -49,7 +49,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
             ";
 
             DataTable generalCharactTable = sqlQueries.QuerySelect(generalCharactQuery);
-            person = PersonConvertDataRow.ConvertPerson(generalCharactTable.Rows[0]);
+            person = ConvertDataRow.ConvertPerson(generalCharactTable.Rows[0]);
             positionId = (PersonPositions)generalCharactTable.Rows[0].Field<short>("position_id");
             DataTable uniqueCharactTable = sqlQueries.QuerySelect(uniqueCharactQuery);
             Dictionary<string, string> data = new Dictionary<string, string>();
@@ -210,7 +210,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
             DataTable dataTable = sqlQueries.QuerySelect(query);
 
             foreach (DataRow row in dataTable.Rows)
-                persons.Add(PersonConvertDataRow.ConvertPerson(row));
+                persons.Add(ConvertDataRow.ConvertPerson(row));
 
             return persons;
         }
