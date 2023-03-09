@@ -32,6 +32,7 @@ namespace TransportCompanyAPI.Persistence.Features
             uniqeTransport.ManufacturerCompany = transport.ManufacturerCompany;
             uniqeTransport.TransportModel = transport.TransportModel;
             uniqeTransport.YearPublishing = transport.YearPublishing;
+            uniqeTransport.Brigade = transport.Brigade;
 
             return uniqeTransport;
         }

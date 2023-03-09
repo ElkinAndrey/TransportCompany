@@ -19,7 +19,10 @@ RETURN
 		[transport].[mileage],
 		[brand_company].[name] AS [manufacturer_company],
 		[brand_model].[name] AS [transport_model], 
-		[brand].[year_publishing]
+		[brand].[year_publishing],		
+
+		[brigade].[brigade_id] AS [brigade_id],
+		[brigade].[name] AS [brigade_name]
 	FROM (
 		SELECT * 
 		FROM [transport] 
@@ -35,4 +38,6 @@ RETURN
 		[transport].[country_id]=[country].[country_id]
 	LEFT JOIN [transport_category] ON 
 		[transport].[transport_category_id]=[transport_category].[transport_category_id]
+	LEFT JOIN [brigade] ON 
+		[transport].[brigade_id]=[brigade].[brigade_id]
 );

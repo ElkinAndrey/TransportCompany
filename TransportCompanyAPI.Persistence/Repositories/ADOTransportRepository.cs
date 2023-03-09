@@ -63,6 +63,12 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
             DataTable generalCharactTable = sqlQueries.QuerySelect(generalCharactQuery);
             transport = ConvertDataRow.ConvertTransport(generalCharactTable.Rows[0]);
+            transport.Brigade = new Brigade()
+            {
+                BrigadeId = generalCharactTable.Rows[0].Field<long>("brigade_id"),
+                Name = generalCharactTable.Rows[0].Field<string>("brigade_name") ?? "",
+            };
+
             categoryId = (TransportCategories)generalCharactTable.Rows[0].Field<short>("category_id");
             DataTable uniqueCharactTable = sqlQueries.QuerySelect(uniqueCharactQuery);
             Dictionary<string, string> data = new Dictionary<string, string>();
