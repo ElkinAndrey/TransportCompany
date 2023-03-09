@@ -37,9 +37,30 @@ namespace TransportCompanyAPI.Presentation.Controllers
         {
             try
             {
-                var person = await serviceManager.SubordinationService.GetRegionsAsync();
+                var regions = await serviceManager.SubordinationService.GetRegionsAsync();
 
-                return Ok(person);
+                return Ok(regions);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить участок с начальником и списком мастерских на участке
+        /// </summary>
+        /// <param name="regionId">Id участка, на котором нужно получить мастерские</param>
+        /// <returns>Участок</returns>
+        [HttpGet]
+        [Route("GetRegion/{regionId}")]
+        public async Task<IActionResult> GetRegion(long regionId)
+        {
+            try
+            {
+                var region = await serviceManager.SubordinationService.GetRegionAsync(regionId);
+
+                return Ok(region);
             }
             catch (Exception ex)
             {

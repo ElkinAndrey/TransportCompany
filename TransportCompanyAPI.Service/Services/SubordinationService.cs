@@ -32,7 +32,18 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<Region> GetRegionAsync(long regionId)
         {
-            throw new NotImplementedException();
+            if (regionId <= 0)
+                throw new RegionNotFoundException(regionId);
+
+            try
+            {
+                Region region = await repositoryManager.SubordinationRepository.GetRegionAsync(regionId);
+                return region;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Region>> GetRegionsAsync()
