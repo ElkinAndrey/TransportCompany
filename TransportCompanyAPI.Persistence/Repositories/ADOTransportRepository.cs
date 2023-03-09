@@ -48,17 +48,17 @@ namespace TransportCompanyAPI.Persistence.Repositories
             return property;
         }
 
-        public async Task<Transport> GetTransportByIdAsync(long id)
+        public async Task<Transport> GetTransportByIdAsync(long transportId)
         {            
             Transport transport;
             TransportCategories categoryId;
             string generalCharactQuery = @$"
                 SELECT * 
-                FROM GetTransportById({id})
+                FROM GetTransportById({transportId})
             ";
             string uniqueCharactQuery = @$"
                 SELECT * 
-                FROM GetPropertyByTransportId({id})
+                FROM GetPropertyByTransportId({transportId})
             ";
 
             DataTable generalCharactTable = sqlQueries.QuerySelect(generalCharactQuery);
@@ -120,6 +120,13 @@ namespace TransportCompanyAPI.Persistence.Repositories
                     );
                     break;
             }
+
+            GetPersons getPersons = new GetPersons(sqlQueries);
+            transport.Drivers = getPersons.Action(
+                length: 100,
+                transportId: transportId
+            );
+
             return transport;            
         }
 
