@@ -27,7 +27,18 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<Brigade> GetBrigadeAsync(long brigadeId)
         {
-            throw new NotImplementedException();
+            if (brigadeId <= 0)
+                throw new WorkshopNotFoundException(brigadeId);
+
+            try
+            {
+                Brigade brigade = await repositoryManager.SubordinationRepository.GetBrigadeAsync(brigadeId);
+                return brigade;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<Region> GetRegionAsync(long regionId)
@@ -71,8 +82,8 @@ namespace TransportCompanyAPI.Service.Services
 
             try
             {
-                Workshop region = await repositoryManager.SubordinationRepository.GetWorkshopAsync(workshopId);
-                return region;
+                Workshop workshop = await repositoryManager.SubordinationRepository.GetWorkshopAsync(workshopId);
+                return workshop;
             }
             catch (Exception ex)
             {

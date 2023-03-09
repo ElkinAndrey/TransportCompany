@@ -79,9 +79,30 @@ namespace TransportCompanyAPI.Presentation.Controllers
         {
             try
             {
-                var region = await serviceManager.SubordinationService.GetWorkshopAsync(workshopId);
+                var workshop = await serviceManager.SubordinationService.GetWorkshopAsync(workshopId);
 
-                return Ok(region);
+                return Ok(workshop);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить бригаду с бригадиром и списком работников бригады
+        /// </summary>
+        /// <param name="brigadeId">Id мастерской</param>
+        /// <returns>Бригада</returns>
+        [HttpGet]
+        [Route("GetBrigade/{brigadeId}")]
+        public async Task<IActionResult> GetBrigade(long brigadeId)
+        {
+            try
+            {
+                var brigade = await serviceManager.SubordinationService.GetBrigadeAsync(brigadeId);
+
+                return Ok(brigade);
             }
             catch (Exception ex)
             {
