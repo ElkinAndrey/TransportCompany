@@ -107,5 +107,6 @@
     <Build Include="dbo\Functions\GetSubordinationCount.sql" />
     <Build Include="dbo\Functions\GetBrigadeByForemanId.sql" />
     <Build Include="dbo\Functions\GetWorkshopByMasterId.sql" />
+    <Build Include="dbo\Functions\GetRegionByRegionChiefId.sql" />
   </ItemGroup>
 </Project>

@@ -112,6 +112,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
                         person,
                         new RegionChief()
                         {
+                            Region = GetRegionByRegionChiefId(personId)
                         }
                     );
                     break;
@@ -267,6 +268,30 @@ namespace TransportCompanyAPI.Persistence.Repositories
             };
 
             return workshop;
+        }
+
+        /// <summary>
+        /// Получить участок по Id начальника участка
+        /// </summary>
+        /// <param name="regionChiefId">Id начальника участка</param>
+        /// <returns>Участок</returns>
+        private Region GetRegionByRegionChiefId(long regionChiefId)
+        {
+            Region region;
+
+            string query = @$"
+                SELECT * 
+                FROM GetRegionByRegionChiefId({regionChiefId})
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            region = new Region
+            {
+                RegionId = dataTable.Rows[0].Field<long>("region_id"),
+                Name = dataTable.Rows[0].Field<string>("region_name") ?? "",
+            };
+
+            return region;
         }
     }
 }
