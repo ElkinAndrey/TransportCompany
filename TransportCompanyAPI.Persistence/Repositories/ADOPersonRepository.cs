@@ -61,12 +61,17 @@ namespace TransportCompanyAPI.Persistence.Repositories
             switch (positionId)
             {
                 case PersonPositions.Driver:
+                    GetTransports getTransports = new GetTransports(sqlQueries);
                     person = Downcast.PersonDowncast(
                         person,
                         new Driver()
                         {
                             LicenseNumber = data["LicenseNumber"],
                             DateIssueLicense = Convert.ToDateTime(data["DateIssueLicense"]),
+                            Transports = getTransports.Action(
+                                length: 100,
+                                personId: personId
+                            ),
                         }
                     );
                     break;
