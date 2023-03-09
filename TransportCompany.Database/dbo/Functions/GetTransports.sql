@@ -10,7 +10,8 @@
 	@endBuy NVARCHAR(MAX) = '',
 	@startWriteOff NVARCHAR(MAX) = '',
 	@endWriteOff NVARCHAR(MAX) = '',
-	@brigadeId BIGINT = 0
+	@brigadeId BIGINT = 0,
+	@personId BIGINT = 0
 )
 RETURNS TABLE
 AS
@@ -43,7 +44,15 @@ RETURN
 			(@endBuy = ''				OR	CONVERT(DATETIME, @endBuy) >= [start])			AND			
 			(@startWriteOff = ''		OR	CONVERT(DATETIME, @startWriteOff) <= [end])		AND
 			(@endWriteOff = ''			OR	CONVERT(DATETIME, @endWriteOff) >= [end])		AND
-			(@brigadeId = 0				OR	@brigadeId = [brigade_id])
+			(@brigadeId = 0				OR	@brigadeId = [brigade_id])						AND
+			(@personId = 0				OR	EXISTS(
+												SELECT [transport_id] 
+												FROM [transport_person] 
+												WHERE 
+													[transport_person].[person_id] = @personId AND 
+													[transport].[transport_id] = [transport_person].[transport_id]
+											)
+			)
 	) AS [transport]
 	LEFT JOIN [brand] ON 
 		[transport].[brand_id]=[brand].[brand_id]
