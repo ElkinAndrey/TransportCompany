@@ -265,7 +265,8 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 N'{Helpers.ConvertDateTimeInISO8601(startBuy)}',
                 N'{Helpers.ConvertDateTimeInISO8601(endBuy)}',
                 N'{Helpers.ConvertDateTimeInISO8601(startWriteOff)}',
-                N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}'
+                N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}',
+                default
             )
         ";
             

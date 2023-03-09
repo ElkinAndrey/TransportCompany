@@ -9,7 +9,8 @@
 	@startBuy NVARCHAR(MAX) = '',
 	@endBuy NVARCHAR(MAX) = '',
 	@startWriteOff NVARCHAR(MAX) = '',
-	@endWriteOff NVARCHAR(MAX) = ''
+	@endWriteOff NVARCHAR(MAX) = '',
+	@brigadeId BIGINT = 0
 )
 RETURNS TABLE
 AS
@@ -37,11 +38,12 @@ RETURN
 			(@number = ''				OR	[number] like '%' + @number + '%')				AND
 			(@regionCode = ''			OR	[region_code] like '%' + @regionCode + '%')		AND
 			(@transportCategoryId = 0	OR	@transportCategoryId = [transport_category_id])	AND
-			(@transportCountryId = 0	OR	@transportCountryId = [country_id])		AND
+			(@transportCountryId = 0	OR	@transportCountryId = [country_id])				AND
 			(@startBuy = ''				OR	CONVERT(DATETIME, @startBuy) <= [start])		AND
 			(@endBuy = ''				OR	CONVERT(DATETIME, @endBuy) >= [start])			AND			
-			(@startWriteOff = ''		OR	CONVERT(DATETIME, @startWriteOff) <= [end])AND
-			(@endWriteOff = ''			OR	CONVERT(DATETIME, @endWriteOff) >= [end])
+			(@startWriteOff = ''		OR	CONVERT(DATETIME, @startWriteOff) <= [end])		AND
+			(@endWriteOff = ''			OR	CONVERT(DATETIME, @endWriteOff) >= [end])		AND
+			(@brigadeId = 0				OR	@brigadeId = [brigade_id])
 	) AS [transport]
 	LEFT JOIN [brand] ON 
 		[transport].[brand_id]=[brand].[brand_id]
