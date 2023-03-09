@@ -2,13 +2,13 @@ import React from "react";
 import { routes } from './../../router/index';
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
-import Headre from "../layout/Header/Headre";
+import Header from "../layout/Header/Header";
 
 const AppRouter = () => {
   return (
     <div>
       <div style={{ margin: "10px" }}>
-        <Headre/>
+        <Header/>
         <Routes path="/">
           {routes.map((rout) => (
             <Route
