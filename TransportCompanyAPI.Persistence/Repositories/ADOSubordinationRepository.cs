@@ -44,6 +44,12 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 brigadeId: brigadeId
             );
 
+            GetTransports getTransports = new GetTransports(sqlQueries);
+            brigade.Transports = getTransports.Action(
+                length: 100,
+                brigadeId: brigadeId
+            );
+
             return brigade;
         }
 
