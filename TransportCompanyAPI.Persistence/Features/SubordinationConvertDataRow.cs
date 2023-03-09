@@ -54,5 +54,16 @@ namespace TransportCompanyAPI.Persistence.Features
                 Address = row.Field<string>("garage_facility_address") ?? "",
                 Category = row.Field<string>("garage_facility_category") ?? "",
             };
+
+        static public Brigade ConvertBrigade(DataRow row) =>
+            new Brigade()
+            {
+                BrigadeId = row.Field<long>("brigade_id"),
+                Name = row.Field<string>("brigade_name") ?? "",
+                Foreman = Downcast.PersonDowncast(
+                    ConvertSubordinationPerson("foreman", row),
+                    new Foreman()
+                ),
+            };
     }
 }

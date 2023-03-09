@@ -79,7 +79,29 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<Workshop> GetWorkshopAsync(long workshopId)
         {
-            throw new NotImplementedException();
+            Workshop workshop; 
+            List<Brigade> brigades;
+
+            string workshopQuery = @$"
+                SELECT *
+                FROM GetWorkshopById({workshopId})
+            ";
+            DataTable workshopTable = sqlQueries.QuerySelect(workshopQuery);
+            workshop = SubordinationConvertDataRow.ConvertWorkshop(workshopTable.Rows[0]);
+            workshop.Region = SubordinationConvertDataRow.ConvertRegion(workshopTable.Rows[0]);
+
+            string brigadesQuery = @$"
+                SELECT *
+                FROM GetBrigadesByWorkshopId({workshopId})
+            ";
+            DataTable brigadesTable = sqlQueries.QuerySelect(brigadesQuery);
+            brigades = new List<Brigade>();
+            foreach (DataRow item in brigadesTable.Rows)
+                brigades.Add(SubordinationConvertDataRow.ConvertBrigade(item));
+
+            workshop.Brigades = brigades;
+
+            return workshop;
         }
     }
 }
