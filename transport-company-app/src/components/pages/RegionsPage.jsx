@@ -3,6 +3,7 @@ import { useFetching } from "./../../hooks/useFetching";
 import Subordination from "./../../api/subordination";
 import { Link } from "react-router-dom";
 import TableLink from "../forms/tableLink/TableLink";
+import RegionTable from "./../../views/RegionTable/RegionTable";
 
 const RegionsPage = () => {
   const dataFetchedRef = useRef(false);
@@ -49,32 +50,7 @@ const RegionsPage = () => {
       </div>
 
       <h1>Участки</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Уникальный Id</th>
-            <th>Название</th>
-            <th>ФИО начальника</th>
-          </tr>
-        </thead>
-        <tbody>
-          {regions.map((region) => (
-            <tr
-              key={region.regionId}
-              className={"stringTable"}
-              style={{ position: "relative" }}
-            >
-              <td>{region.regionId}</td>
-              <td>{region.name}</td>
-              <td>
-                {region.regionChief.surname} {region.regionChief.name}{" "}
-                {region.regionChief.patronymic}
-              </td>
-              <TableLink to={`/region/${region.regionId}`} />
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <RegionTable regions={regions} />
     </div>
   );
 };

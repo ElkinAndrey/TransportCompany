@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Subordination from "./../../api/subordination";
 import { useFetching } from "./../../hooks/useFetching";
-import { Link } from "react-router-dom";
-import TableLink from "./../forms/tableLink/TableLink";
+import WorkshopTable from "../../views/WorkshopTable/WorkshopTable";
+import PersonMiniTable from "./../../views/PersonMiniTable/PersonMiniTable";
 
 const RegionPage = () => {
   const dataFetchedRef = useRef(false);
@@ -67,61 +67,10 @@ const RegionPage = () => {
       </div>
 
       <h2>Начальник участка</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Уникальный Id</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Отчество</th>
-            <th>Дата приема на работу</th>
-            <th>Дата увольнения</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className={"stringTable"} style={{ position: "relative" }}>
-            <td>{region.regionChief.personId}</td>
-            <td>{region.regionChief.name}</td>
-            <td>{region.regionChief.surname}</td>
-            <td>{region.regionChief.patronymic}</td>
-            <td>{region.regionChief.hireDate}</td>
-            <td>
-              {region.regionChief.dismissalDate === null
-                ? "Не уволен"
-                : region.regionChief.dismissalDate}
-            </td>
-            <TableLink to={`/person/${region.regionChief.personId}`} />
-          </tr>
-        </tbody>
-      </table>
+      <PersonMiniTable persons={[region.regionChief]} />
 
       <h2>Мастерские</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Уникальный Id</th>
-            <th>Название</th>
-            <th>ФИО мастера</th>
-            <th>Адрес</th>
-            <th>Категория</th>
-          </tr>
-        </thead>
-        <tbody>
-          {region.workshops.map((workshop) => (
-            <tr key={workshop.workshopId} style={{ position: "relative" }}>
-              <td>{workshop.workshopId}</td>
-              <td>{workshop.name}</td>
-              <td>
-                {workshop.master.surname} {workshop.master.name}{" "}
-                {workshop.master.patronymic}
-              </td>
-              <td>{workshop.garageFacility.address}</td>
-              <td>{workshop.garageFacility.category}</td>
-              <TableLink to={`/workshop/${workshop.workshopId}`} />
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <WorkshopTable workshops={region.workshops} />
     </div>
   );
 };

@@ -1,15 +1,16 @@
 import React, { useEffect, useReducer } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import Subordination from "./../../api/subordination";
 import { useFetching } from "./../../hooks/useFetching";
-import TableLink from "./../forms/tableLink/TableLink";
+import BrigadeTable from "./../../views/BrigadeTable/BrigadeTable";
+import RegionTable from "./../../views/RegionTable/RegionTable";
+import PersonMiniTable from "./../../views/PersonMiniTable/PersonMiniTable";
+import GarageFacility from "./../../views/GarageFacility/GarageFacility";
 
 const WorkshopPage = () => {
   const dataFetchedRef = useReducer(false);
   const params = useParams();
-  let history = useNavigate();
   let [workshop, setWorkshop] = useState({
     workshopId: "",
     name: "",
@@ -84,106 +85,16 @@ const WorkshopPage = () => {
       </div>
 
       <h2>Участок</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Уникальный Id</th>
-            <th>Название</th>
-            <th>ФИО начальника</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            key={workshop.region.regionId}
-            className={"stringTable"}
-            style={{ position: "relative" }}
-          >
-            <td>{workshop.region.regionId}</td>
-            <td>{workshop.region.name}</td>
-            <td>
-              {workshop.region.regionChief.surname}{" "}
-              {workshop.region.regionChief.name}{" "}
-              {workshop.region.regionChief.patronymic}
-            </td>
-            <TableLink to={`/region/${workshop.region.regionId}`} />
-          </tr>
-        </tbody>
-      </table>
+      <RegionTable regions={[workshop.region]} />
 
       <h2>Мастер</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Уникальный Id</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Отчество</th>
-            <th>Дата приема на работу</th>
-            <th>Дата увольнения</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className={"stringTable"} style={{ position: "relative" }}>
-            <td>{workshop.master.personId}</td>
-            <td>{workshop.master.name}</td>
-            <td>{workshop.master.surname}</td>
-            <td>{workshop.master.patronymic}</td>
-            <td>{workshop.master.hireDate}</td>
-            <td>
-              {workshop.master.dismissalDate === null
-                ? "Не уволен"
-                : workshop.master.dismissalDate}
-            </td>
-            <TableLink to={`/person/${workshop.master.personId}`} />
-          </tr>
-        </tbody>
-      </table>
+      <PersonMiniTable persons={[workshop.master]} />
 
       <h2>Объект гражданского хозяйства</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Уникальный Id</th>
-            <th>Адрес</th>
-            <th>Категория</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{workshop.garageFacility.garageFacilityId}</td>
-            <td>{workshop.garageFacility.address}</td>
-            <td>{workshop.garageFacility.category}</td>
-          </tr>
-        </tbody>
-      </table>
+      <GarageFacility garageFacility={workshop.garageFacility} />
 
       <h2>Бригады</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Уникальный Id</th>
-            <th>Название</th>
-            <th>ФИО бригадира</th>
-          </tr>
-        </thead>
-        <tbody>
-          {workshop.brigades.map((brigade) => (
-            <tr
-              key={brigade.brigadeId}
-              className={"stringTable"}
-              style={{ position: "relative" }}
-            >
-              <td>{brigade.brigadeId}</td>
-              <td>{brigade.name}</td>
-              <td>
-                {brigade.foreman.surname} {brigade.foreman.name}{" "}
-                {brigade.foreman.patronymic}
-              </td>
-              <TableLink to={`/brigade/${brigade.brigadeId}`} />
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <BrigadeTable brigades={workshop.brigades} />
     </div>
   );
 };
