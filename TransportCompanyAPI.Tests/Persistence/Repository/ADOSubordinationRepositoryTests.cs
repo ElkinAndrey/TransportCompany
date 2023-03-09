@@ -58,5 +58,22 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
                 Assert.True(transport.RegionId != 0);
             }
         }
+
+        /// <summary>
+        /// Проверка метода ADOPersonRepository.GetRegionAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetRegionAsync()
+        {
+
+            // Подготовка
+            Region region;
+
+            // Действие
+            region = (await repository.GetRegionAsync(1));
+
+            // Утверждение
+            Assert.True(region.RegionId != 0);
+        }
     }
 }

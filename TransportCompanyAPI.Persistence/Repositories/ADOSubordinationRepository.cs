@@ -32,7 +32,28 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<Region> GetRegionAsync(long regionId)
         {
-            throw new NotImplementedException();
+            Region region;
+            List<Workshop> workshops;
+
+            string regionQuery = @$"
+                SELECT *
+                FROM GetRegionById({regionId})
+            ";
+            DataTable regionTable = sqlQueries.QuerySelect(regionQuery);
+            region = SubordinationConvertDataRow.ConvertRegion(regionTable.Rows[0]);
+
+            string workshopsQuery = @$"
+                SELECT *
+                FROM GetWorkshopsByRegionId({regionId})
+            ";
+            DataTable workshopsTable = sqlQueries.QuerySelect(workshopsQuery);
+            workshops = new List<Workshop>();
+            foreach (DataRow item in workshopsTable.Rows)
+                workshops.Add(SubordinationConvertDataRow.ConvertWorkshop(item));
+
+            region.Workshops = workshops;
+
+            return region;
         }
 
         public async Task<IEnumerable<Region>> GetRegionsAsync()
@@ -46,15 +67,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
             DataTable table = sqlQueries.QuerySelect(query);
 
             foreach (DataRow item in table.Rows)
-                regions.Add(new Region()
-                {
-                    RegionId = item.Field<long>("region_id"),
-                    Name = item.Field<string>("region_name") ?? "",
-                    RegionChief = Downcast.PersonDowncast<RegionChief>(
-                        SubordinationConvertDataRow.ConvertSubordinationPerson("region_chief", item),
-                        new RegionChief()
-                    )
-                });
+                regions.Add(SubordinationConvertDataRow.ConvertRegion(item));
 
             return regions;
         }
