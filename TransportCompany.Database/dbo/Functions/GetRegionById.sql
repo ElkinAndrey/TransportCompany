@@ -1,4 +1,6 @@
-﻿CREATE FUNCTION GetRegions ()
+﻿CREATE FUNCTION GetRegionById (
+	@regionId BIGINT
+)
 RETURNS TABLE
 AS
 RETURN
@@ -17,6 +19,8 @@ RETURN
 	FROM (
 		SELECT *
 		FROM [region]
+		WHERE 
+			@regionId = [region].[region_id]
 	) AS [region]
 	LEFT JOIN [person] ON 
 		[person].[person_id]=[region].[region_chief_id]
