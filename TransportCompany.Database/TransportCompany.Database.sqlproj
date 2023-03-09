@@ -100,5 +100,6 @@
     <Build Include="dbo\Functions\GetRegions.sql" />
     <Build Include="dbo\Functions\GetWorkshopsByRegionId.sql" />
     <Build Include="dbo\Functions\GetRegionById.sql" />
+    <Build Include="dbo\Functions\GetWorkshopById.sql" />
   </ItemGroup>
 </Project>
