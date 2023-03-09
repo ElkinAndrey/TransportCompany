@@ -106,7 +106,7 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
             Person person;
 
             // Действие
-            person = await repository.GetPersonByIdAsync(1);
+            person = await repository.GetPersonByIdAsync(20003);
 
             Assert.True(person.PersonId != 0);
         }

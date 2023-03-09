@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TransportCompanyAPI.Domain.Entities.PersonEntities;
+using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Enum;
 using TransportCompanyAPI.Domain.Repositories;
@@ -118,6 +119,22 @@ namespace TransportCompanyAPI.Persistence.Repositories
                         }
                     );
                     break;
+            }
+
+            // Ввод бригады у обслуживающего персонала
+            long? brigadeId = generalCharactTable.Rows[0].Field<long?>("brigade_id");
+            string? brigadeName = generalCharactTable.Rows[0].Field<string?>("brigade_name");
+
+            ServiceStaff? serviceStaff = person as ServiceStaff;
+
+            if (serviceStaff != null && brigadeId != null)
+            {
+                serviceStaff.Brigade = new Brigade()
+                {
+                    BrigadeId = brigadeId ?? 0,
+                    Name = brigadeName ?? "",
+                };
+                person = serviceStaff;
             }
 
             return person;
