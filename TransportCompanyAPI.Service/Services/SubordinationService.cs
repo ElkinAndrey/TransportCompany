@@ -72,7 +72,15 @@ namespace TransportCompanyAPI.Service.Services
 
         public async Task<SubordinationCount> GetSubordinationCountAsync(long RegionId, long WorkshopId, long BrigadeId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                SubordinationCount subordinationCount = await repositoryManager.SubordinationRepository.GetSubordinationCountAsync(RegionId, WorkshopId, BrigadeId);
+                return subordinationCount;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<Workshop> GetWorkshopAsync(long workshopId)

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TransportCompanyAPI.Domain.Entities.PersonEntities;
 using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
+using TransportCompanyAPI.Infrastructure.ViewModels.Subordination;
 using TransportCompanyAPI.Service.Abstractions;
 
 namespace TransportCompanyAPI.Presentation.Controllers
@@ -103,6 +104,31 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 var brigade = await serviceManager.SubordinationService.GetBrigadeAsync(brigadeId);
 
                 return Ok(brigade);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить колчиество подчиненных 
+        /// </summary>
+        /// <param name="model">Параметры</param>
+        /// <returns>Количество подчиненных</returns>
+        [HttpPost]
+        [Route("GetSubordinationCount")]
+        public async Task<IActionResult> GetSubordinationCount([FromBody]GetSubordinationCountViewModel model)
+        {
+            try
+            {
+                var subordinationCount = await serviceManager.SubordinationService.GetSubordinationCountAsync(
+                    model.RegionId, 
+                    model.WorkshopId, 
+                    model.BrigadeId
+                );
+
+                return Ok(subordinationCount);
             }
             catch (Exception ex)
             {
