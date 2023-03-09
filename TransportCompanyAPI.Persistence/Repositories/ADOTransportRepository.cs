@@ -1,8 +1,12 @@
 ﻿using System.Data;
+using System.Xml.Linq;
+using TransportCompanyAPI.Domain.Entities.PersonEntities;
+using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Enum;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Persistence.Features;
+using TransportCompanyAPI.Persistence.Queries;
 
 namespace TransportCompanyAPI.Persistence.Repositories
 {
@@ -249,30 +253,20 @@ namespace TransportCompanyAPI.Persistence.Repositories
             DateTime? endWriteOff
         )
         {
-            List<Transport> transports = new List<Transport>();
-            string query = @$"
-                SELECT * 
-                FROM GetTransports(
-                    {offset},
-                    {length}, 
-                    N'{series}',
-                    N'{number}',
-                    N'{regionCode}',
-                    {transportCountryId},
-                    {transportCategoryId},
-                    N'{Helpers.ConvertDateTimeInISO8601(startBuy)}',
-                    N'{Helpers.ConvertDateTimeInISO8601(endBuy)}',
-                    N'{Helpers.ConvertDateTimeInISO8601(startWriteOff)}',
-                    N'{Helpers.ConvertDateTimeInISO8601(endWriteOff)}',
-                    default,
-                    default
-                )
-            ";
-            
-            DataTable dataTable = sqlQueries.QuerySelect(query);
-
-            foreach (DataRow row in dataTable.Rows)
-                transports.Add(ConvertDataRow.ConvertTransport(row));
+            GetTransports getTransports = new GetTransports(sqlQueries);
+            var transports = getTransports.Action(
+                offset: offset,
+                length: length,
+                series: series,
+                number: number,
+                regionCode: regionCode,
+                transportCountryId: transportCountryId,
+                transportCategoryId: transportCategoryId,
+                startBuy: startBuy,
+                endBuy: endBuy,
+                startWriteOff: startWriteOff,
+                endWriteOff: endWriteOff
+            );
 
             return transports;
         }
