@@ -5,12 +5,14 @@ import RegionsPage from './../components/pages/RegionsPage';
 import RegionPage from './../components/pages/RegionPage';
 import WorkshopPage from './../components/pages/WorkshopPage';
 import BrigadePage from '../components/pages/BrigadePage';
+import PersonPage from './../components/pages/PersonPage';
 
 export const routes = [
   { path: "/", element: <Navigate to="/transport" />, exact: true },
   { path: "*", element: <Navigate to="/transport" />, exact: true },
   { path: "/transport", element: <TransportsPage />, exact: true },
   { path: "/person", element: <PersonsPage />, exact: true },
+  { path: "/person/:personId", element: <PersonPage />, exact: true },
   { path: "/region", element: <RegionsPage />, exact: true },
   { path: "/region/:regionId", element: <RegionPage />, exact: true },
   { path: "/workshop/:workshopId", element: <WorkshopPage />, exact: true },

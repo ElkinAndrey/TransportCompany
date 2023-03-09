@@ -1,11 +1,11 @@
 import axios from "axios";
 import { defaultURL } from "./apiSettings";
 
-
 const URL = `${defaultURL}/Person`;
 
 export default class Person {
   static async getPersonById(id) {
+    console.log(id);
     const response = await axios.get(`${URL}/GetPersons/${id}`);
     return response;
   }
