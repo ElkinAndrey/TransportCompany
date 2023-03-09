@@ -9,7 +9,8 @@
 	@endHireDate NVARCHAR(MAX) = '',
 	@startDismissalDate NVARCHAR(MAX) = '',
 	@endDismissalDate NVARCHAR(MAX) = '',
-	@brigadeId BIGINT = 0
+	@brigadeId BIGINT = 0,
+	@transportId BIGINT = 0
 )
 RETURNS TABLE
 AS
@@ -35,7 +36,15 @@ RETURN
 			(@endHireDate = ''			OR	CONVERT(DATETIME, @endHireDate) >= [start])					AND			
 			(@startDismissalDate = ''	OR	CONVERT(DATETIME, @startDismissalDate) <= [end])			AND
 			(@endDismissalDate = ''		OR	CONVERT(DATETIME, @endDismissalDate) >= [end])				AND
-			(@brigadeId = 0				OR	@brigadeId = [brigade_id])
+			(@brigadeId = 0				OR	@brigadeId = [brigade_id])									AND
+			(@transportId = 0			OR	EXISTS(
+												SELECT [person_id] 
+												FROM [transport_person] 
+												WHERE 
+													[transport_person].[transport_id] = @transportId AND 
+													[person].[person_id] = [transport_person].[person_id]
+											)
+			)
 	) AS [person]
 	LEFT JOIN [person_position] ON 
 		[person].[person_position_id]=[person_position].[person_position_id]

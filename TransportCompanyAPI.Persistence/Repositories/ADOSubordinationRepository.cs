@@ -27,7 +27,18 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<Brigade> GetBrigadeAsync(long brigadeId)
         {
-            throw new NotImplementedException();
+            Brigade brigade = new Brigade();
+
+            /*string brigadeQuery = @$"
+                SELECT *
+                FROM GetBrigadeById({brigadeId})
+            ";
+            DataTable brigadeTable = sqlQueries.QuerySelect(brigadeQuery);
+
+            brigade = SubordinationConvertDataRow.ConvertBrigade(brigadeTable.Rows[0]);
+            brigade.Workshop = SubordinationConvertDataRow.ConvertWorkshop(brigadeTable.Rows[0]);*/
+
+            return brigade;
         }
 
         public async Task<Region> GetRegionAsync(long regionId)
