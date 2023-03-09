@@ -40,7 +40,7 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         }
 
         /// <summary>
-        /// Проверка метода ADOPersonRepository.GetRegionsAsync
+        /// Проверка метода ADOSubordinationRepository.GetRegionsAsync
         /// </summary>
         [Fact]
         public async void TestGetRegionsAsync()
@@ -60,7 +60,7 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         }
 
         /// <summary>
-        /// Проверка метода ADOPersonRepository.GetRegionAsync
+        /// Проверка метода ADOSubordinationRepository.GetRegionAsync
         /// </summary>
         [Fact]
         public async void TestGetRegionAsync()
@@ -77,7 +77,7 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         }
 
         /// <summary>
-        /// Проверка метода ADOPersonRepository.GetWorkshopAsync
+        /// Проверка метода ADOSubordinationRepository.GetWorkshopAsync
         /// </summary>
         [Fact]
         public async void TestGetWorkshopAsync()
@@ -94,7 +94,7 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
         }
 
         /// <summary>
-        /// Проверка метода ADOPersonRepository.GetBrigadeAsync
+        /// Проверка метода ADOSubordinationRepository.GetBrigadeAsync
         /// </summary>
         [Fact]
         public async void TestGetBrigadeAsync()
@@ -108,6 +108,26 @@ namespace TransportCompanyAPI.Tests.Persistence.Repository
 
             // Утверждение
             Assert.True(brigade.BrigadeId != 0);
+        }
+
+        /// <summary>
+        /// Проверка метода ADOSubordinationRepository.GetSubordinationCountAsync
+        /// </summary>
+        [Fact]
+        public async void TestGetSubordinationCountAsync()
+        {
+
+            // Подготовка
+            SubordinationCount subordinationCount;
+            
+            // Действие
+            subordinationCount = await repository.GetSubordinationCountAsync(0, 0, 0);
+
+            // Утверждение
+            Assert.True(subordinationCount.RegionCount >= 0);
+            Assert.True(subordinationCount.WorkshopCount >= 0);
+            Assert.True(subordinationCount.BrigadeCount >= 0);
+            Assert.True(subordinationCount.PersonCount >= 0);
         }
     }
 }

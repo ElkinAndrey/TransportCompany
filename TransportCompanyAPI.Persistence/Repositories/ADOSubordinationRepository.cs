@@ -1,6 +1,4 @@
 ﻿using System.Data;
-using System.Xml.Linq;
-using TransportCompanyAPI.Domain.Entities.PersonEntities;
 using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Persistence.Features;
@@ -93,7 +91,21 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<SubordinationCount> GetSubordinationCountAsync(long RegionId, long WorkshopId, long BrigadeId)
         {
-            throw new NotImplementedException();
+            string query = @$"
+                SELECT *
+                FROM GetSubordinationCount({RegionId}, {WorkshopId}, {BrigadeId})
+            ";
+
+            DataTable table = sqlQueries.QuerySelect(query);
+            var subordinationCount = new SubordinationCount()
+            {
+                RegionCount = table.Rows[0].Field<long?>("region_count"),
+                WorkshopCount = table.Rows[0].Field<long?>("workshop_count"),
+                BrigadeCount = table.Rows[0].Field<long?>("brigade_count"),
+                PersonCount = table.Rows[0].Field<long?>("person_count"),
+            };
+
+            return subordinationCount;
         }
 
         public async Task<Workshop> GetWorkshopAsync(long workshopId)
