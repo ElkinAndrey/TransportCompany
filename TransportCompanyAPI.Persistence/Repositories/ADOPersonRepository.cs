@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using TransportCompanyAPI.Domain.Entities.PersonEntities;
 using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
-using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Enum;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Persistence.Features;
 using TransportCompanyAPI.Persistence.Queries;
-using TransportCompanyAPI.Persistence.Settings;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TransportCompanyAPI.Persistence.Repositories
 {
@@ -104,10 +94,10 @@ namespace TransportCompanyAPI.Persistence.Repositories
                         person,
                         new Foreman()
                         {
+                            Brigade = GetBrigadeByForemanId(personId),
                         }
                     );
                     break;
-
                 case PersonPositions.Master:
                     person = Downcast.PersonDowncast(
                         person,
@@ -228,6 +218,30 @@ namespace TransportCompanyAPI.Persistence.Repositories
             );
 
             return persons;
+        }
+
+        /// <summary>
+        /// Получить бригаду по Id бригадира
+        /// </summary>
+        /// <param name="foremanId">Id бригадира</param>
+        /// <returns>Бригада</returns>
+        private Brigade GetBrigadeByForemanId(long foremanId)
+        {
+            Brigade brigade;
+
+            string query = @$"
+                SELECT * 
+                FROM GetBrigadeByForemanId({foremanId})
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            brigade = new Brigade
+            {
+                BrigadeId = dataTable.Rows[0].Field<long>("brigade_id"),
+                Name = dataTable.Rows[0].Field<string>("brigade_name") ?? "",
+            };
+
+            return brigade;
         }
     }
 }

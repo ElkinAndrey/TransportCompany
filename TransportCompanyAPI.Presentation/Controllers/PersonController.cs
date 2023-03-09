@@ -31,7 +31,7 @@ namespace TransportCompanyAPI.Presentation.Controllers
         /// <param name="personId">id транспорта</param>
         /// <returns>Транспорт</returns>
         [HttpGet]
-        [Route("GetPerson/{personId}")]
+        [Route("GetPersons/{personId}")]
         public async Task<IActionResult> GetPersonById(long personId)
         {
             try
