@@ -1,17 +1,15 @@
 import React, { useEffect, useReducer } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { useFetching } from "./../../hooks/useFetching";
 import Subordination from "./../../api/subordination";
-import TableLink from "./../forms/tableLink/TableLink";
 import WorkshopTable from "./../../views/WorkshopTable/WorkshopTable";
 import PersonMiniTable from "./../../views/PersonMiniTable/PersonMiniTable";
+import TransportMiniTable from './../../views/TransportMiniTable/TransportMiniTable';
 
 const BrigadePage = () => {
   const dataFetchedRef = useReducer(false);
   const params = useParams();
-  let history = useNavigate();
   let [brigade, setBrigade] = useState({
     brigadeId: "",
     name: "",
@@ -42,6 +40,7 @@ const BrigadePage = () => {
       },
     },
     serviceStaffs: [],
+    transports: [],
   });
   let [count, setCount] = useState({
     regionCount: "",
@@ -71,14 +70,6 @@ const BrigadePage = () => {
     fetchCount({ brigadeId: params.brigadeId });
   }, []);
 
-  const redirectPerson = (personId) => {
-    history(`/person/${personId}`);
-  };
-
-  const redirectWorkshop = (workshopId) => {
-    history(`/workshop/${workshopId}`);
-  };
-
   return (
     <div>
       <h1>Бригада</h1>
@@ -89,7 +80,7 @@ const BrigadePage = () => {
       <div>
         Общее число человек : {1 + count.brigadeCount + count.personCount}
       </div>
-      
+
       <h2>Мастерская</h2>
       <WorkshopTable workshops={[brigade.workshop]} />
 
@@ -98,6 +89,9 @@ const BrigadePage = () => {
 
       <h2>Работники</h2>
       <PersonMiniTable persons={brigade.serviceStaffs} />
+
+      <h2>Транспорт</h2>
+      <TransportMiniTable transports={brigade.transports} />
     </div>
   );
 };
