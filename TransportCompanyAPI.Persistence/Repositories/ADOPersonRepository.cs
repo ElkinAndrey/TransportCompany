@@ -201,7 +201,8 @@ namespace TransportCompanyAPI.Persistence.Repositories
 	                N'{Helpers.ConvertDateTimeInISO8601(startHireDate)}',
 	                N'{Helpers.ConvertDateTimeInISO8601(endHireDate)}',
 	                N'{Helpers.ConvertDateTimeInISO8601(startDismissalDate)}',
-	                N'{Helpers.ConvertDateTimeInISO8601(endDismissalDate)}'
+	                N'{Helpers.ConvertDateTimeInISO8601(endDismissalDate)}',
+                    default
                 )
             ";
 
