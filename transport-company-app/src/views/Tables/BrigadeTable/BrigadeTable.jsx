@@ -1,5 +1,5 @@
 import React from "react";
-import TableLink from "./../../components/forms/tableLink/TableLink";
+import TableLink from './../../../components/forms/tableLink/TableLink';
 
 const BrigadeTable = ({ brigades }) => {
   return (

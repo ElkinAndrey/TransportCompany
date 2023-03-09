@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFetching } from "./../../hooks/useFetching";
 import Subordination from "./../../api/subordination";
-import WorkshopTable from "./../../views/WorkshopTable/WorkshopTable";
-import PersonMiniTable from "./../../views/PersonMiniTable/PersonMiniTable";
-import TransportMiniTable from './../../views/TransportMiniTable/TransportMiniTable';
+import TransportMiniTable from './../../views/Tables/TransportMiniTable/TransportMiniTable';
+import WorkshopTable from './../../views/Tables/WorkshopTable/WorkshopTable';
+import PersonMiniTable from './../../views/Tables/PersonMiniTable/PersonMiniTable';
 
 const BrigadePage = () => {
   const dataFetchedRef = useReducer(false);

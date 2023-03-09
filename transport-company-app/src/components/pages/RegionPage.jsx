@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Subordination from "./../../api/subordination";
 import { useFetching } from "./../../hooks/useFetching";
-import WorkshopTable from "../../views/WorkshopTable/WorkshopTable";
-import PersonMiniTable from "./../../views/PersonMiniTable/PersonMiniTable";
+import WorkshopTable from './../../views/Tables/WorkshopTable/WorkshopTable';
+import PersonMiniTable from './../../views/Tables/PersonMiniTable/PersonMiniTable';
 
 const RegionPage = () => {
   const dataFetchedRef = useRef(false);

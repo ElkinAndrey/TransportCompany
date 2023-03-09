@@ -1,7 +1,7 @@
 import { React, useEffect, useRef, useState } from "react";
-import { useFetching } from "./../../hooks/useFetching";
-import Transport from "./../../api/transport";
-import { getDateForInput } from './../../utils/getDateForInput';
+import Transport from "./../../../api/transport";
+import { getDateForInput } from './../../../utils/getDateForInput';
+import { useFetching } from './../../../hooks/useFetching';
 
 const TransportTable = ({ page, setPage, setEnd, setTransportCount }) => {
   const len = 10;

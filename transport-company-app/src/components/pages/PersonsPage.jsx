@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import PersonTable from "../../views/PersonTable/PersonTable";
 import PaginationBar from "./../forms/paginationBar/PaginationBar";
+import PersonTable from './../../views/Tables/PersonTable/PersonTable';
 
 const PersonsPage = () => {
   let [personCount, setPersonCount] = useState(0);

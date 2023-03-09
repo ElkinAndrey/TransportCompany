@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useFetching } from "./../../hooks/useFetching";
 import Subordination from "./../../api/subordination";
-import { Link } from "react-router-dom";
-import TableLink from "../forms/tableLink/TableLink";
-import RegionTable from "./../../views/RegionTable/RegionTable";
+import RegionTable from './../../views/Tables/RegionTable/RegionTable';
 
 const RegionsPage = () => {
   const dataFetchedRef = useRef(false);

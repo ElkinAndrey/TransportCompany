@@ -1,7 +1,7 @@
 import React from "react";
 import PaginationBar from "../forms/paginationBar/PaginationBar";
-import TransportTable from "./../../views/TransportTable/TransportTable";
 import { useState } from "react";
+import TransportTable from './../../views/Tables/TransportTable/TransportTable';
 
 const TransportsPage = () => {
   let [transportCount, setTransportCount] = useState(0);

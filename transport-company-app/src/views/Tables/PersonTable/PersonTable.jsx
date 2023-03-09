@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useFetching } from "./../../hooks/useFetching";
-import Person from "./../../api/person";
-import { getDateForInput } from "./../../utils/getDateForInput";
+import Person from "./../../../api/person";
+import { getDateForInput } from "./../../../utils/getDateForInput";
+import { useFetching } from './../../../hooks/useFetching';
 
 const PersonTable = ({ page, setPage, setEnd, setPersonCount }) => {
   const len = 10;

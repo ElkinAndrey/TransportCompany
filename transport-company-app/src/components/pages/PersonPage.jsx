@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useFetching } from "./../../hooks/useFetching";
 import Person from "./../../api/person";
-import TransportMiniTable from "./../../views/TransportMiniTable/TransportMiniTable";
 import TableLink from "./../forms/tableLink/TableLink";
+import TransportMiniTable from './../../views/Tables/TransportMiniTable/TransportMiniTable';
 
 const PersonPage = () => {
   const dataFetchedRef = useRef(false);
