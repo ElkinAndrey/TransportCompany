@@ -103,6 +103,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
                         person,
                         new Master()
                         {
+                            Workshop = GetWorkshopByMasterId(personId)
                         }
                     );
                     break;
@@ -242,6 +243,30 @@ namespace TransportCompanyAPI.Persistence.Repositories
             };
 
             return brigade;
+        }
+
+        /// <summary>
+        /// Получить мастерскую по Id мастера
+        /// </summary>
+        /// <param name="masterId">Id мастера</param>
+        /// <returns>Мастерская</returns>
+        private Workshop GetWorkshopByMasterId(long masterId)
+        {
+            Workshop workshop;
+
+            string query = @$"
+                SELECT * 
+                FROM GetWorkshopByMasterId({masterId})
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            workshop = new Workshop
+            {
+                WorkshopId = dataTable.Rows[0].Field<long>("workshop_id"),
+                Name = dataTable.Rows[0].Field<string>("workshop_name") ?? "",
+            };
+
+            return workshop;
         }
     }
 }

@@ -106,5 +106,6 @@
     <Build Include="dbo\Tables\transport_person.sql" />
     <Build Include="dbo\Functions\GetSubordinationCount.sql" />
     <Build Include="dbo\Functions\GetBrigadeByForemanId.sql" />
+    <Build Include="dbo\Functions\GetWorkshopByMasterId.sql" />
   </ItemGroup>
 </Project>
