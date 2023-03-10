@@ -25,6 +25,10 @@ namespace TransportCompanyAPI.Persistence.Repositories
             this.sqlQueries = sqlQueries;
         }
 
+        public ADOTransportRepository()
+        {
+        }
+
         public async Task<IEnumerable<string[]>> GetTransportPropertiesByCategoryIdAsync(short categoryId)
         {
             List<string[]> property = new List<string[]>();
@@ -302,6 +306,23 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 });
 
             return models;
+        }
+
+        public async Task<Dictionary<string, long>> GetGarageFacilityCountByCategoryIdAsync(short categoryId)
+        {
+            Dictionary<string, long> garageFacilityCountByCategoryId = new Dictionary<string, long>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetGarageFacilityCountByCategoryId({categoryId})                
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+
+            foreach (DataRow item in dataTable.Rows)
+                garageFacilityCountByCategoryId[item.Field<string>("name") ?? ""] = item.Field<int>("count");
+
+            return garageFacilityCountByCategoryId;
         }
     }
 }

@@ -205,5 +205,21 @@ namespace TransportCompanyAPI.Service.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<Dictionary<string, long>> GetGarageFacilityCountByCategoryIdAsync(short categoryId)
+        {
+            if (categoryId < 0)
+                throw new NegativeStartScoreException(categoryId);
+
+            try
+            {
+                var count = await repositoryManager.TransportRepository.GetGarageFacilityCountByCategoryIdAsync(categoryId);
+                return count;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -107,6 +107,7 @@ const TransportPage = () => {
       </div>
 
       <h1>Водители</h1>
+      <div>Количество водителей : {transport.drivers.length}</div>
       <PersonMiniTable persons={transport.drivers} />
 
       {transport.hasOwnProperty("transportId") && (

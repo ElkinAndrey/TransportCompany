@@ -146,5 +146,12 @@ namespace TransportCompanyAPI.Service.Abstractions
             DateTime? startWriteOff,
             DateTime? endWriteOff
         );
+
+        /// <summary>
+        /// Получить количество объектов гаражного хозяйства по категории транспорта
+        /// </summary>
+        /// <param name="categoryId">Категория транспорта</param>
+        /// <returns>Количетво объектов гаражного хозяйства</returns>
+        public Task<Dictionary<string, long>> GetGarageFacilityCountByCategoryIdAsync(short categoryId);
     }
 }

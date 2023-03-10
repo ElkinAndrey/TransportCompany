@@ -1,4 +1,6 @@
-﻿using TransportCompanyAPI.Domain.Entities.TransportEntities;
+﻿using System.Data;
+using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
+using TransportCompanyAPI.Domain.Entities.TransportEntities;
 
 namespace TransportCompanyAPI.Domain.Repositories
 {
@@ -141,5 +143,12 @@ namespace TransportCompanyAPI.Domain.Repositories
             DateTime? startWriteOff,
             DateTime? endWriteOff
         );
+
+        /// <summary>
+        /// Получить количество объектов гаражного хозяйства по категории транспорта
+        /// </summary>
+        /// <param name="categoryId">Категория транспорта</param>
+        /// <returns>Количетво объектов гаражного хозяйства</returns>
+        public Task<Dictionary<string, long>> GetGarageFacilityCountByCategoryIdAsync(short categoryId);
     }
 }

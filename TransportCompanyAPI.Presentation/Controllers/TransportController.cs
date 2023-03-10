@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 using TransportCompanyAPI.Infrastructure.ViewModels.Transport;
 using TransportCompanyAPI.Service.Abstractions;
 
@@ -241,6 +242,27 @@ namespace TransportCompanyAPI.Presentation.Controllers
                     model.StartWriteOff,
                     model.EndWriteOff
                 );
+
+                return Ok(count);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить количество объектов гаражного хозяйства по категории транспорта
+        /// </summary>
+        /// <param name="categoryId">Категория транспорта</param>
+        /// <returns>Количетво объектов гаражного хозяйства</returns>
+        [HttpGet]
+        [Route("GetTransportCount/{categoryId}")]
+        public async Task<IActionResult> GetGarageFacilityCountByCategoryId(short categoryId)
+        {
+            try
+            {
+                var count = await serviceManager.TransportService.GetGarageFacilityCountByCategoryIdAsync(categoryId);
 
                 return Ok(count);
             }

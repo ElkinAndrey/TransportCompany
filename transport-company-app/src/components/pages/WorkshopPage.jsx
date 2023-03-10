@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Subordination from "./../../api/subordination";
 import { useFetching } from "./../../hooks/useFetching";
-import GarageFacility from "./../../views/GarageFacility/GarageFacility";
 import RegionTable from './../../views/Tables/RegionTable/RegionTable';
 import BrigadeTable from './../../views/Tables/BrigadeTable/BrigadeTable';
 import PersonMiniTable from './../../views/Tables/PersonMiniTable/PersonMiniTable';
+import GarageFacility from './../../views/Tables/GarageFacility/GarageFacility';
 
 const WorkshopPage = () => {
   const dataFetchedRef = useReducer(false);

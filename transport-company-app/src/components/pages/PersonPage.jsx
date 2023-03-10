@@ -50,6 +50,7 @@ const PersonPage = () => {
       {person.hasOwnProperty("transports") && (
         <div>
           <h1>Транспорт</h1>
+          <div>Количество транспорта : {person.transports.length}</div>
           <TransportMiniTable transports={person.transports} />
         </div>
       )}
