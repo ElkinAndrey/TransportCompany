@@ -109,5 +109,8 @@
     <Build Include="dbo\Functions\GetWorkshopByMasterId.sql" />
     <Build Include="dbo\Functions\GetRegionByRegionChiefId.sql" />
     <Build Include="dbo\Functions\GetGarageFacilityCountByCategoryId.sql" />
+    <Build Include="dbo\Tables\stop.sql" />
+    <Build Include="dbo\Tables\route_stop.sql" />
+    <Build Include="dbo\Tables\route.sql" />
   </ItemGroup>
 </Project>
