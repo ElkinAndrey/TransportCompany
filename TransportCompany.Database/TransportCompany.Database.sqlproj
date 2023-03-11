@@ -113,5 +113,6 @@
     <Build Include="dbo\Tables\route_stop.sql" />
     <Build Include="dbo\Tables\route.sql" />
     <Build Include="dbo\Tables\transport_route.sql" />
+    <Build Include="dbo\Functions\GetRouteByTransportId.sql" />
   </ItemGroup>
 </Project>
