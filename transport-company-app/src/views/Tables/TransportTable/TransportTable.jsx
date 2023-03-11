@@ -4,7 +4,13 @@ import { getDateForInput } from "./../../../utils/getDateForInput";
 import { useFetching } from "./../../../hooks/useFetching";
 import TableLink from "./../../../components/forms/tableLink/TableLink";
 
-const TransportTable = ({ page, setPage, setEnd, setTransportCount }) => {
+const TransportTable = ({
+  page,
+  setPage,
+  setEnd,
+  setTransportCount,
+  setCategoryId,
+}) => {
   const len = 10;
   let [transports, setTransport] = useState([]);
   let [categories, setCategories] = useState([]);
@@ -79,6 +85,7 @@ const TransportTable = ({ page, setPage, setEnd, setTransportCount }) => {
   }, []);
 
   const update = () => {
+    setCategoryId(params.transportCategoryId);
     setOldParams({ ...params });
     fetchTransport(params);
     fetchTransportCount(params);
@@ -111,9 +118,9 @@ const TransportTable = ({ page, setPage, setEnd, setTransportCount }) => {
             <th>
               <select
                 value={params.categoryId}
-                onChange={(e) =>
-                  setParams({ ...params, transportCategoryId: e.target.value })
-                }
+                onChange={(e) => {
+                  setParams({ ...params, transportCategoryId: e.target.value });
+                }}
               >
                 <option value={0}>Всё</option>
                 {categories.map((category) => (

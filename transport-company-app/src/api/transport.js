@@ -28,4 +28,8 @@ export default class Transport {
     const response = await axios.get(`${URL}/GetTransportCountries/`);
     return response;
   }
+
+  static async getGarageFacilityCountByCategoryId(categoryId) {
+    return await axios.get(`${URL}/GetGarageFacilityCountByCategoryId/${categoryId}`);
+  }
 }

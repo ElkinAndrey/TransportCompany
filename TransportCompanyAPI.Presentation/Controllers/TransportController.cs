@@ -257,7 +257,7 @@ namespace TransportCompanyAPI.Presentation.Controllers
         /// <param name="categoryId">Категория транспорта</param>
         /// <returns>Количетво объектов гаражного хозяйства</returns>
         [HttpGet]
-        [Route("GetTransportCount/{categoryId}")]
+        [Route("GetGarageFacilityCountByCategoryId/{categoryId}")]
         public async Task<IActionResult> GetGarageFacilityCountByCategoryId(short categoryId)
         {
             try
