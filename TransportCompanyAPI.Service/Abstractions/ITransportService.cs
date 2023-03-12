@@ -153,5 +153,20 @@ namespace TransportCompanyAPI.Service.Abstractions
         /// <param name="categoryId">Категория транспорта</param>
         /// <returns>Количетво объектов гаражного хозяйства</returns>
         public Task<Dictionary<string, long>> GetGarageFacilityCountByCategoryIdAsync(short categoryId);
+
+        /// <summary>
+        /// Получить грузоперевозки за указанный период
+        /// </summary>
+        /// <param name="length">Количество грузоперевозок</param>
+        /// <param name="transportId">Уникальныц Id транспорта, у которого получаются грузоперевозки</param>
+        /// <param name="firstTransportation">Начало отчета</param>
+        /// <param name="lastTransportation">Конец отчета</param>
+        /// <returns>Список с транспортировками</returns>
+        public Task<IEnumerable<CargoTransportation>> GetCargoTransportationsAsync(
+            long length,
+            long transportId,
+            DateTime? firstTransportation,
+            DateTime? lastTransportation
+        );
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
+using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Infrastructure.ViewModels.Transport;
 using TransportCompanyAPI.Service.Abstractions;
 
@@ -263,6 +264,32 @@ namespace TransportCompanyAPI.Presentation.Controllers
             try
             {
                 var count = await serviceManager.TransportService.GetGarageFacilityCountByCategoryIdAsync(categoryId);
+
+                return Ok(count);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить все грузоперевозки транспорта по Id транспорта, дате начала и конца
+        /// </summary>
+        /// <param name="model">Параметры запроса</param>
+        /// <returns>Список с грузоперевозками</returns>
+        [HttpPost]
+        [Route("GetCargoTransportations")]
+        public async Task<IActionResult> GetCargoTransportations([FromBody] GetCargoTransportationsViewModel model)
+        {
+            try
+            {
+                var count = await serviceManager.TransportService.GetCargoTransportationsAsync(
+                    model.Length, 
+                    model.TransportId, 
+                    model.FirstTransportation, 
+                    model.LastTransportation 
+                );
 
                 return Ok(count);
             }

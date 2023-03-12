@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Reflection;
 using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Enum;
@@ -353,6 +354,38 @@ namespace TransportCompanyAPI.Persistence.Repositories
             route.Stops = stops;
 
             return route;
+        }
+
+        public async Task<IEnumerable<CargoTransportation>> GetCargoTransportationsAsync(
+            long length, 
+            long transportId, 
+            DateTime? firstTransportation, 
+            DateTime? lastTransportation
+        )
+        {
+            List<CargoTransportation> cargoTransportations = new List<CargoTransportation>();
+            string generalCharactQuery = @$"
+                SELECT *
+                FROM GetCargoTransportations(
+                    {length}, 
+                    {transportId}, 
+                    '{Helpers.ConvertDateTimeInISO8601(firstTransportation)}', 
+                    '{Helpers.ConvertDateTimeInISO8601(lastTransportation)}'
+                )
+            ";
+            DataTable dataTable = sqlQueries.QuerySelect(generalCharactQuery);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                cargoTransportations.Add(new CargoTransportation
+                {
+                    CargoTransportationId = row.Field<long>("cargo_transportation_id"),
+                    Price = row.Field<decimal>("price"),
+                    AdditionalInformation = row.Field<string>("additional_information") ?? "",
+                    StartTransportation = row.Field<DateTime>("start"),
+                    EndTransportation = row.Field<DateTime?>("end"),
+                });
+            }
+            return cargoTransportations;
         }
     }
 }

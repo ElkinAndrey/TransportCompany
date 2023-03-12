@@ -221,5 +221,34 @@ namespace TransportCompanyAPI.Service.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<IEnumerable<CargoTransportation>> GetCargoTransportationsAsync(
+            long length, 
+            long transportId, 
+            DateTime? firstTransportation, 
+            DateTime? lastTransportation
+        )
+        {
+            if (length <= 0)
+                return new List<CargoTransportation>();
+
+            if (transportId <= 0)
+                throw new TransportNotFoundException(transportId);
+
+            try
+            {
+                var cargoTransportations = await repositoryManager.TransportRepository.GetCargoTransportationsAsync(
+                    length, 
+                    transportId, 
+                    firstTransportation, 
+                    lastTransportation
+                );
+                return cargoTransportations;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
