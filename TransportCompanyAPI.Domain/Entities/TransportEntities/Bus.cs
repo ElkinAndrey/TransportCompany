@@ -19,5 +19,10 @@
         /// Количество мест для инвалидов
         /// </summary>
         public int NumberPlacesForDisabled { get; set; }
+
+        /// <summary>
+        /// Маршрут
+        /// </summary>
+        public Route Route { get; set; }
     }
 }

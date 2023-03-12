@@ -5,7 +5,9 @@ RETURNS TABLE
 AS
 RETURN
 (
-	SELECT [number] AS [route_number]
+	SELECT 
+		[route].[route_id] AS [route_id],
+		[route].[number] AS [route_number]
 	FROM (
 		SELECT TOP(1) [route_id]
 		FROM [transport_route]
