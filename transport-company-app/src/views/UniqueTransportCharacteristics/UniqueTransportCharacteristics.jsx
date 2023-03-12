@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import Transport from './../../api/transport';
-import { useFetching } from './../../hooks/useFetching';
-import { getDateForInput } from './../../utils/getDateForInput';
+import Transport from "./../../api/transport";
+import { useFetching } from "./../../hooks/useFetching";
+import { getDateForInput } from "./../../utils/getDateForInput";
 
 const UniqueTransportCharacteristics = ({ transport }) => {
   const dataFetchedRef = useRef(false);
@@ -31,16 +31,19 @@ const UniqueTransportCharacteristics = ({ transport }) => {
   return (
     <div>
       <h1>Уникальные характеристики</h1>
+
       {transport.hasOwnProperty("numberSeats") ? (
         <div>Количество сидячих мест : {transport.numberSeats}</div>
       ) : (
         <div></div>
       )}
+
       {transport.hasOwnProperty("numberStandingPlaces") ? (
         <div>Количество стоячих мест : {transport.numberStandingPlaces}</div>
       ) : (
         <div></div>
       )}
+
       {transport.hasOwnProperty("numberPlacesForDisabled") ? (
         <div>
           Количество мест для инвалидов : {transport.numberPlacesForDisabled}
@@ -54,11 +57,13 @@ const UniqueTransportCharacteristics = ({ transport }) => {
       ) : (
         <div></div>
       )}
+
       {transport.hasOwnProperty("height") ? (
         <div>Высота : {transport.height}</div>
       ) : (
         <div></div>
       )}
+
       {transport.hasOwnProperty("cargoTransportations") ? (
         <div>
           <h4>
@@ -137,6 +142,13 @@ const UniqueTransportCharacteristics = ({ transport }) => {
         </div>
       ) : (
         <div></div>
+      )}
+
+      {transport.hasOwnProperty("route") && (
+        <div>
+          <div>Номер маршрута : {transport.route.number}</div>
+          <div>Маршрут : {transport.route.stops.join(" => ")}</div>
+        </div>
       )}
     </div>
   );
