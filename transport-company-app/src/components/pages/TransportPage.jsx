@@ -110,7 +110,7 @@ const TransportPage = () => {
       <div>Количество водителей : {transport.drivers.length}</div>
       <PersonMiniTable persons={transport.drivers} />
 
-      {transport.hasOwnProperty("transportId") && (
+      {transport.hasOwnProperty("transportId") && transport.transportId !== "" && (
         <div>
           <UniqueTransportCharacteristics transport={transport} />
         </div>

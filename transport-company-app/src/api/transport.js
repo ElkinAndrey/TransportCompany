@@ -30,6 +30,16 @@ export default class Transport {
   }
 
   static async getGarageFacilityCountByCategoryId(categoryId) {
-    return await axios.get(`${URL}/GetGarageFacilityCountByCategoryId/${categoryId}`);
+    return await axios.get(
+      `${URL}/GetGarageFacilityCountByCategoryId/${categoryId}`
+    );
+  }
+
+  static async getCargoTransportations(params) {
+    const response = await axios.post(
+      `${URL}/GetCargoTransportations/`,
+      params
+    );
+    return response;
   }
 }

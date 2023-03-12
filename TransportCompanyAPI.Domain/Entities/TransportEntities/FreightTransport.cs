@@ -14,5 +14,10 @@
         /// Высота
         /// </summary>
         public double Height { get; set; }
+
+        /// <summary>
+        /// Грузоперевозки
+        /// </summary>
+        public IEnumerable<CargoTransportation>? CargoTransportations { get; set; }
     }
 }

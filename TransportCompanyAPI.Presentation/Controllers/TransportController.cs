@@ -282,6 +282,9 @@ namespace TransportCompanyAPI.Presentation.Controllers
         [Route("GetCargoTransportations")]
         public async Task<IActionResult> GetCargoTransportations([FromBody] GetCargoTransportationsViewModel model)
         {
+            if (model == null)
+                return BadRequest("Неверный формат данных");
+
             try
             {
                 var count = await serviceManager.TransportService.GetCargoTransportationsAsync(

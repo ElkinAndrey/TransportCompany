@@ -18,7 +18,9 @@ const UniqueTransportCharacteristics = ({ transport }) => {
     isCargoTransportationLoading,
     cargoTransportationError,
   ] = useFetching(async (p) => {
-    const response = await Transport.getCargoaTransportations(p);
+    console.log(transport);
+    console.log(p);
+    const response = await Transport.getCargoTransportations(p);
     setCargoTransportations(response.data);
   });
 
