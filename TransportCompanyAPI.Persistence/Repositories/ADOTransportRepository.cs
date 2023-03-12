@@ -1,6 +1,4 @@
 ﻿using System.Data;
-using System.Xml.Linq;
-using TransportCompanyAPI.Domain.Entities.PersonEntities;
 using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Enum;
@@ -89,6 +87,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
                             NumberSeats = Convert.ToInt32(data["NumberSeats"]),
                             NumberStandingPlaces = Convert.ToInt32(data["NumberStandingPlaces"]),
                             NumberPlacesForDisabled = Convert.ToInt32(data["NumberPlacesForDisabled"]),
+                            Route = GetRouteByTransportIdAsync(transportId),
                         }
                     );
                     break;
@@ -107,6 +106,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
                         new ShuttleTaxi()
                         {
                             NumberSeats = Convert.ToInt32(data["NumberSeats"]),
+                            Route = GetRouteByTransportIdAsync(transportId),
                         }
                     );
                     break;
@@ -323,6 +323,36 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 garageFacilityCountByCategoryId[item.Field<string>("name") ?? ""] = item.Field<int>("count");
 
             return garageFacilityCountByCategoryId;
+        }
+
+        /// <summary>
+        /// Получить маршрут по id транспорта
+        /// </summary>
+        /// <param name="transportId">Id транспорта</param>
+        /// <returns>Маршрут</returns>
+        private Route GetRouteByTransportIdAsync(long transportId)
+        {
+            Route route = new Route();
+
+            string query = @$"
+                SELECT * 
+                FROM GetRouteNumberByTransportId({transportId})                
+            ";
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            route.RouteId = dataTable.Rows[0].Field<long>("route_id");
+            route.Number = dataTable.Rows[0].Field<string>("route_number") ?? "";
+
+            string query2 = @$"
+                SELECT * 
+                FROM GetRouteByTransportId({transportId})                
+            ";
+            DataTable dataTable2 = sqlQueries.QuerySelect(query2);
+            List<string> stops = new List<string>();
+            foreach (DataRow item in dataTable2.Rows)
+                stops.Add(item.Field<string>("stop_name") ?? "");
+            route.Stops = stops;
+
+            return route;
         }
     }
 }
