@@ -117,5 +117,6 @@
     <Build Include="dbo\Functions\GetRouteNumberByTransportId.sql" />
     <Build Include="dbo\Tables\cargo_transportation.sql" />
     <Build Include="dbo\Functions\GetCargoTransportations.sql" />
+    <Build Include="dbo\Tables\mileage.sql" />
   </ItemGroup>
 </Project>
