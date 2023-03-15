@@ -119,5 +119,6 @@
     <Build Include="dbo\Functions\GetCargoTransportations.sql" />
     <Build Include="dbo\Tables\mileage.sql" />
     <Build Include="dbo\Functions\GetMileageByTransportId.sql" />
+    <Build Include="dbo\Functions\GetMileageByCategoryId.sql" />
   </ItemGroup>
 </Project>
