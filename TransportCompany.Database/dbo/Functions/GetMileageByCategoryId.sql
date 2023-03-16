@@ -4,7 +4,7 @@
 	@end DATETIME = ''
 )
 RETURNS @TL TABLE(
-	[miliage]   INT NOT NULL
+	[miliage]   BIGINT NOT NULL
 )
 AS
 BEGIN

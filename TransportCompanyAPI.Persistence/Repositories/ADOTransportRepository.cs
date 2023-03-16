@@ -404,5 +404,23 @@ namespace TransportCompanyAPI.Persistence.Repositories
             
             return miliage;
         }
+
+        public async Task<long> GetMileageByCategoryIdAsync(long categoryId, DateTime? start, DateTime? end)
+        {
+            long miliage;
+
+            string query = @$"
+                SELECT * 
+                FROM GetMileageByCategoryId(
+                    {categoryId}, 
+                    '{Helpers.ConvertDateTimeInISO8601(start)}',                
+                    '{Helpers.ConvertDateTimeInISO8601(end)}'
+                )                
+            ";
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            miliage = dataTable.Rows[0].Field<long>("miliage");
+
+            return miliage;
+        }
     }
 }

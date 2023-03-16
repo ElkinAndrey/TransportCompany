@@ -42,4 +42,12 @@ export default class Transport {
     );
     return response;
   }
+
+  static async getMileageByCategoryId(params) {
+    const response = await axios.post(
+      `${URL}/GetMileageByCategoryId/`,
+      params
+    );
+    return response;
+  }
 }

@@ -329,5 +329,33 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Получить пробег автомобиля за определенный период
+        /// </summary>
+        /// <param name="model">Параметры получения пробега</param>
+        /// <returns>Пробег</returns>
+        [HttpPost]
+        [Route("GetMileageByCategoryId")]
+        public async Task<IActionResult> GetMileageByCategoryId([FromBody] GetMileageByCategoryIdViewModel model)
+        {
+            if (model == null)
+                return BadRequest("Неверный формат данных");
+
+            try
+            {
+                var miliage = await serviceManager.TransportService.GetMileageByCategoryIdAsync(
+                    model.CategoryId,
+                    model.Start,
+                    model.End
+                );
+
+                return Ok(miliage);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

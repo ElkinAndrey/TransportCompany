@@ -177,5 +177,14 @@ namespace TransportCompanyAPI.Service.Abstractions
         /// <param name="end">Конец отчета</param>
         /// <returns>Пробег</returns>
         public Task<int> GetMileageByTransportIdAsync(long transportId, DateTime? start, DateTime? end);
+        
+        /// <summary>
+        /// Получить пробег транспорта определенной категориии за указанный период
+        /// </summary>
+        /// <param name="categoryId">категория транспорта</param>
+        /// <param name="start">Начало отчета</param>
+        /// <param name="end">Конец отчета</param>
+        /// <returns>Пробег</returns>
+        public Task<long> GetMileageByCategoryIdAsync(long categoryId, DateTime? start, DateTime? end);
     }
 }
