@@ -168,5 +168,14 @@ namespace TransportCompanyAPI.Service.Abstractions
             DateTime? firstTransportation,
             DateTime? lastTransportation
         );
+
+        /// <summary>
+        /// Получить пробег автомобиля за определенный период
+        /// </summary>
+        /// <param name="transportId">Id траспорта</param>
+        /// <param name="start">Начало отчета</param>
+        /// <param name="end">Конец отчета</param>
+        /// <returns>Пробег</returns>
+        public Task<int> GetMileageByTransportIdAsync(long transportId, DateTime? start, DateTime? end);
     }
 }

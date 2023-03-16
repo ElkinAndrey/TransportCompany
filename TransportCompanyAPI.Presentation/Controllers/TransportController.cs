@@ -288,13 +288,41 @@ namespace TransportCompanyAPI.Presentation.Controllers
             try
             {
                 var count = await serviceManager.TransportService.GetCargoTransportationsAsync(
-                    model.Length, 
-                    model.TransportId, 
-                    model.FirstTransportation, 
-                    model.LastTransportation 
+                    model.Length,
+                    model.TransportId,
+                    model.FirstTransportation,
+                    model.LastTransportation
                 );
 
                 return Ok(count);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Получить пробег автомобиля за определенный период
+        /// </summary>
+        /// <param name="model">Параметры получения пробега</param>
+        /// <returns>Пробег</returns>
+        [HttpPost]
+        [Route("GetMileageByTransportId")]
+        public async Task<IActionResult> GetMileageByTransportId([FromBody] GetMileageByTransportIdViewModel model)
+        {
+            if (model == null)
+                return BadRequest("Неверный формат данных");
+
+            try
+            {
+                var miliage = await serviceManager.TransportService.GetMileageByTransportIdAsync(
+                    model.TransportId,
+                    model.Start,
+                    model.End
+                );
+
+                return Ok(miliage);
             }
             catch (Exception ex)
             {

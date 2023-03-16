@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Reflection;
 using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Enum;
@@ -386,6 +385,24 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 });
             }
             return cargoTransportations;
+        }
+
+        public async Task<int> GetMileageByTransportIdAsync(long transportId, DateTime? start, DateTime? end)
+        {
+            int miliage;
+
+            string query = @$"
+                SELECT * 
+                FROM GetMileageByTransportId(
+                    {transportId}, 
+                    '{Helpers.ConvertDateTimeInISO8601(start)}',                
+                    '{Helpers.ConvertDateTimeInISO8601(end)}'
+                )                
+            ";
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            miliage = dataTable.Rows[0].Field<int>("miliage");
+            
+            return miliage;
         }
     }
 }

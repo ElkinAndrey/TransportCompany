@@ -250,5 +250,28 @@ namespace TransportCompanyAPI.Service.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<int> GetMileageByTransportIdAsync(long transportId, DateTime? start, DateTime? end)
+        {
+            if (start != null && end != null && start > end)
+                return 0;
+
+            if (transportId <= 0)
+                throw new TransportNotFoundException(transportId);
+
+            try
+            {
+                var miliage = await repositoryManager.TransportRepository.GetMileageByTransportIdAsync(
+                    transportId,
+                    start,
+                    end
+                );
+                return miliage;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
