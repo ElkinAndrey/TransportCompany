@@ -1,5 +1,8 @@
-﻿using TransportCompanyAPI.Domain.Repositories;
+﻿using System.Diagnostics.Metrics;
+using TransportCompanyAPI.Domain.Entities.PersonEntities;
+using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
+using TransportCompanyAPI.Service.Exceptions;
 
 namespace TransportCompanyAPI.Service.Services
 {
@@ -22,9 +25,27 @@ namespace TransportCompanyAPI.Service.Services
             this.repositoryManager = repositoryManager;
         }
 
-        public Task<(long Count, decimal Price)> GetRepairInformationByCategoryIdAsync(short сategoryId, DateTime? start, DateTime? end)
+        public async Task<(long Count, decimal Price)> GetRepairInformationByCategoryIdAsync(short сategoryId, DateTime? start, DateTime? end)
         {
-            throw new NotImplementedException();
+            if (start != null && end != null && start > end)
+                return (0, 0);
+
+            if (сategoryId < 0)
+                throw new NegativeStartScoreException(сategoryId);
+
+            try
+            {
+                var repairInformation = await repositoryManager.RepairRepository.GetRepairInformationByCategoryIdAsync(
+                    сategoryId, 
+                    start, 
+                    end
+                );
+                return repairInformation;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

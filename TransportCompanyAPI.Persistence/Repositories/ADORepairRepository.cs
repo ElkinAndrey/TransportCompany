@@ -1,4 +1,8 @@
-﻿using TransportCompanyAPI.Domain.Repositories;
+﻿using System.Data;
+using TransportCompanyAPI.Domain.Entities.PersonEntities;
+using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
+using TransportCompanyAPI.Domain.Repositories;
+using TransportCompanyAPI.Persistence.Features;
 
 namespace TransportCompanyAPI.Persistence.Repositories
 {
@@ -22,13 +26,28 @@ namespace TransportCompanyAPI.Persistence.Repositories
             this.sqlQueries = sqlQueries;
         }
 
-        public Task<(long Count, decimal Price)> GetRepairInformationByCategoryIdAsync(
-            short сategoryId, 
+        public async Task<(long Count, decimal Price)> GetRepairInformationByCategoryIdAsync(
+            short categoryId, 
             DateTime? start, 
             DateTime? end
         )
         {
-            throw new NotImplementedException();
+            (long Count, decimal Price) repairInformation;
+
+            string query = @$"
+                SELECT * 
+                FROM GetRepairInformationByCategoryId(
+                    {categoryId},
+                    '{Helpers.ConvertDateTimeInISO8601(start)}',
+                    '{Helpers.ConvertDateTimeInISO8601(end)}'
+                )
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            repairInformation.Count = dataTable.Rows[0].Field<long>("count");
+            repairInformation.Price = dataTable.Rows[0].Field<decimal>("price");
+
+            return repairInformation;
         }
     }
 }

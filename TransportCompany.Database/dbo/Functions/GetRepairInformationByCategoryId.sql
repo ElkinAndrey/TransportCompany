@@ -8,7 +8,7 @@ AS
 RETURN
 (		
 	SELECT 
-		COUNT ([repair].[repair_id]) AS [count],
+		COUNT_BIG ([repair].[repair_id]) AS [count],
 		ISNULL(SUM ([repair].[price]), 0) AS [price]
 	FROM (
 		SELECT [transport].[transport_id]
