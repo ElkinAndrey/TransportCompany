@@ -60,5 +60,41 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Получить количество ремонтов и их цену 
+        /// по категории транспорта за обозначенный период
+        /// </summary>
+        /// <param name="model">Параметры получения</param>
+        /// <returns>
+        /// Вернет количество и стоимость
+        /// {
+        ///     count : 12
+        ///     price : 10.1
+        /// }
+        /// </returns>
+        [HttpPost]
+        [Route("GetRepairInformationByBrandId")]
+        public async Task<IActionResult> GetRepairInformationByBrandId(GetRepairInformationByBrandIdViewModel model)
+        {
+            try
+            {
+                var repairInformation = await serviceManager.RepairService.GetRepairInformationByBrandIdAsync(
+                    model.BrandId,
+                    model.Start,
+                    model.End
+                );
+
+                return Ok(new
+                {
+                    repairInformation.Count,
+                    repairInformation.Price,
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

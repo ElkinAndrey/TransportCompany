@@ -25,6 +25,29 @@ namespace TransportCompanyAPI.Service.Services
             this.repositoryManager = repositoryManager;
         }
 
+        public async Task<(long Count, decimal Price)> GetRepairInformationByBrandIdAsync(short brandId, DateTime? start, DateTime? end)
+        {
+            if (start != null && end != null && start > end)
+                return (0, 0);
+
+            if (brandId < 0)
+                throw new NegativeStartScoreException(brandId);
+
+            try
+            {
+                var repairInformation = await repositoryManager.RepairRepository.GetRepairInformationByBrandIdAsync(
+                    brandId,
+                    start,
+                    end
+                );
+                return repairInformation;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<(long Count, decimal Price)> GetRepairInformationByCategoryIdAsync(short сategoryId, DateTime? start, DateTime? end)
         {
             if (start != null && end != null && start > end)
