@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-using TransportCompanyAPI.Domain.Entities.PersonEntities;
-using TransportCompanyAPI.Domain.Repositories;
+﻿using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
 using TransportCompanyAPI.Service.Exceptions;
 
@@ -25,7 +23,11 @@ namespace TransportCompanyAPI.Service.Services
             this.repositoryManager = repositoryManager;
         }
 
-        public async Task<(long Count, decimal Price)> GetRepairInformationByBrandIdAsync(short brandId, DateTime? start, DateTime? end)
+        public async Task<(long Count, decimal Price)> GetRepairInformationByBrandIdAsync(
+            long brandId, 
+            DateTime? start, 
+            DateTime? end
+        )
         {
             if (start != null && end != null && start > end)
                 return (0, 0);
@@ -48,7 +50,11 @@ namespace TransportCompanyAPI.Service.Services
             }
         }
 
-        public async Task<(long Count, decimal Price)> GetRepairInformationByCategoryIdAsync(short сategoryId, DateTime? start, DateTime? end)
+        public async Task<(long Count, decimal Price)> GetRepairInformationByCategoryIdAsync(
+            short сategoryId, 
+            DateTime? start, 
+            DateTime? end
+        )
         {
             if (start != null && end != null && start > end)
                 return (0, 0);
@@ -61,6 +67,33 @@ namespace TransportCompanyAPI.Service.Services
                 var repairInformation = await repositoryManager.RepairRepository.GetRepairInformationByCategoryIdAsync(
                     сategoryId, 
                     start, 
+                    end
+                );
+                return repairInformation;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<(long Count, decimal Price)> GetRepairInformationByTransportIdAsync(
+            long transportId, 
+            DateTime? start, 
+            DateTime? end
+        )
+        {
+            if (start != null && end != null && start > end)
+                return (0, 0);
+
+            if (transportId < 0)
+                throw new NegativeStartScoreException(transportId);
+
+            try
+            {
+                var repairInformation = await repositoryManager.RepairRepository.GetRepairInformationByTransportIdAsync(
+                    transportId,
+                    start,
                     end
                 );
                 return repairInformation;

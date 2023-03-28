@@ -4,12 +4,12 @@
     /// Параметры для получения информации 
     /// о ремонтах по марке транспорта
     /// </summary>
-    public class GetRepairInformationByBrandIdViewModel
+    public class GetRepairInformationByTransportIdViewModel
     {
         /// <summary>
         /// Id марки транспорта
         /// </summary>
-        public long BrandId { get; set; }
+        public long TransportId { get; set; }
 
         /// <summary>
         /// Начало отчета

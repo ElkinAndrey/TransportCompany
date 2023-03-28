@@ -36,7 +36,24 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// Price - общая цена ремонтов
         /// </returns>
         public Task<(long Count, decimal Price)> GetRepairInformationByBrandIdAsync(
-            short brandId,
+            long brandId,
+            DateTime? start,
+            DateTime? end
+        );
+
+        /// <summary>
+        /// Получить количество ремонтов и их цену 
+        /// по транспорту за обозначенный период
+        /// </summary>
+        /// <param name="transportId">Id транспорта</param>
+        /// <param name="start">Начало отчета</param>
+        /// <param name="end">Конец отчета</param>
+        /// <returns>
+        /// Count - количество ремонтов
+        /// Price - общая цена ремонтов
+        /// </returns>
+        public Task<(long Count, decimal Price)> GetRepairInformationByTransportIdAsync(
+            long transportId,
             DateTime? start,
             DateTime? end
         );

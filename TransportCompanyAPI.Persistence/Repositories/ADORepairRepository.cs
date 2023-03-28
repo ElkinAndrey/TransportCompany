@@ -27,7 +27,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
         }
 
         public async Task<(long Count, decimal Price)> GetRepairInformationByBrandIdAsync(
-            short brandId, 
+            long brandId, 
             DateTime? start, 
             DateTime? end
         )
@@ -62,6 +62,30 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 SELECT * 
                 FROM GetRepairInformationByCategoryId(
                     {categoryId},
+                    '{Helpers.ConvertDateTimeInISO8601(start)}',
+                    '{Helpers.ConvertDateTimeInISO8601(end)}'
+                )
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            repairInformation.Count = dataTable.Rows[0].Field<long>("count");
+            repairInformation.Price = dataTable.Rows[0].Field<decimal>("price");
+
+            return repairInformation;
+        }
+
+        public async Task<(long Count, decimal Price)> GetRepairInformationByTransportIdAsync(
+            long transportId, 
+            DateTime? start, 
+            DateTime? end
+        )
+        {
+            (long Count, decimal Price) repairInformation;
+
+            string query = @$"
+                SELECT * 
+                FROM GetRepairInformationByTransportId(
+                    {transportId},
                     '{Helpers.ConvertDateTimeInISO8601(start)}',
                     '{Helpers.ConvertDateTimeInISO8601(end)}'
                 )
