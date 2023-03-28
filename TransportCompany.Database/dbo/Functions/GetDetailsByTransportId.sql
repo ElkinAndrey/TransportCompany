@@ -15,7 +15,7 @@ RETURN
 	FROM (
 		SELECT 
 			[repair_person_detail_action].[detail_id],
-			COUNT(*) AS [count]
+			COUNT_BIG(*) AS [count]
 
 		FROM (
 			SELECT [repair].[repair_id]

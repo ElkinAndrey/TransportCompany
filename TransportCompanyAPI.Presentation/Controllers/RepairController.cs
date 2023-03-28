@@ -216,5 +216,47 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Количество отремонтированных деталей по конкретной автомашине
+        /// </summary>
+        /// <param name="model">Параметры получения</param>
+        /// <returns>
+        /// Вернет список с названием и количеством
+        /// [
+        ///     {
+        ///         name : "двигатель"
+        ///         count : 12
+        ///     },
+        ///     {
+        ///         name : "Колесо"
+        ///         count : 10
+        ///     }
+        /// ]
+        /// </returns>
+        [HttpPost]
+        [Route("GetDetailsByTransportId")]
+        public async Task<IActionResult> GetDetailsByTransportId(GetDetailsByTransportIdViewModel model)
+        {
+            try
+            {
+                var repairInformation = await serviceManager.RepairService.GetDetailsByTransportIdAsync(
+                    model.TransportId,
+                    model.Start,
+                    model.End,
+                    model.DetailsId
+                );
+
+                return Ok(repairInformation.Select(inf => new
+                {
+                    inf.Name,
+                    inf.Count,
+                }));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
