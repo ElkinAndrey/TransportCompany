@@ -134,15 +134,21 @@ namespace TransportCompanyAPI.Presentation.Controllers
         }
 
         /// <summary>
-        /// Количество отримонтированных деталей по конкретной категории
+        /// Количество отремонтированных деталей по конкретной категории
         /// </summary>
         /// <param name="model">Параметры получения</param>
         /// <returns>
-        /// Вернет количество и стоимость
-        /// {
-        ///     count : 12
-        ///     price : 10.1
-        /// }
+        /// Вернет список с названием и количеством
+        /// [
+        ///     {
+        ///         name : "двигатель"
+        ///         count : 12
+        ///     },
+        ///     {
+        ///         name : "Колесо"
+        ///         count : 10
+        ///     }
+        /// ]
         /// </returns>
         [HttpPost]
         [Route("GetDetailsByCategoryId")]
@@ -157,7 +163,49 @@ namespace TransportCompanyAPI.Presentation.Controllers
                     model.DetailsId
                 );
 
-                return Ok(repairInformation.Select((inf) => new
+                return Ok(repairInformation.Select(inf => new
+                {
+                    inf.Name,
+                    inf.Count,
+                }));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Количество отремонтированных деталей по конкретной марке транспорта
+        /// </summary>
+        /// <param name="model">Параметры получения</param>
+        /// <returns>
+        /// Вернет список с названием и количеством
+        /// [
+        ///     {
+        ///         name : "двигатель"
+        ///         count : 12
+        ///     },
+        ///     {
+        ///         name : "Колесо"
+        ///         count : 10
+        ///     }
+        /// ]
+        /// </returns>
+        [HttpPost]
+        [Route("GetDetailsByBrandId")]
+        public async Task<IActionResult> GetDetailsByBrandId(GetDetailsByBrandIdViewModel model)
+        {
+            try
+            {
+                var repairInformation = await serviceManager.RepairService.GetDetailsByBrandIdAsync(
+                    model.BrandId,
+                    model.Start,
+                    model.End,
+                    model.DetailsId
+                );
+
+                return Ok(repairInformation.Select(inf => new
                 {
                     inf.Name,
                     inf.Count,

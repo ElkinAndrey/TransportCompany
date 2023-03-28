@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TransportCompanyAPI.Infrastructure.ViewModels.Repair
+﻿namespace TransportCompanyAPI.Infrastructure.ViewModels.Repair
 {
     /// <summary>
-    /// Параметры для получения количества деталей по категории 
+    /// Параметры для получения количества деталей по марке транспорта 
     /// </summary>
-    public class GetDetailsByCategoryIdViewModel
+    public class GetDetailsByBrandIdViewModel
     {
         /// <summary>
-        /// Id категории транспорта
+        /// Id марки транспорта
         /// </summary>
-        public short CategoryId { get; set; }
+        public long BrandId { get; set; }
 
         /// <summary>
         /// Начало отчета

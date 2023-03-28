@@ -70,5 +70,20 @@
             DateTime? end,
             IEnumerable<short> detailsId
         );
+
+        /// <summary>
+        /// Количество отримонтированных деталей по конкретной марке транспорта
+        /// </summary>
+        /// <param name="brandId">Id марки транспорта</param>
+        /// <param name="start">Начало отчета</param>
+        /// <param name="end">Конец отчета</param>
+        /// <param name="detailsId">Списко с Id деталей, количество которых нужно получить</param>
+        /// <returns>Список с деталями и их количествами</returns>
+        public Task<IEnumerable<(string Name, long Count)>> GetDetailsByBrandIdAsync(
+            long brandId,
+            DateTime? start,
+            DateTime? end,
+            IEnumerable<short> detailsId
+        );
     }
 }
