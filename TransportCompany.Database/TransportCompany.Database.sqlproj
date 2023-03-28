@@ -59,6 +59,7 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Functions\" />
+    <Folder Include="dbo\User Defined Types\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\transport.sql" />
@@ -127,5 +128,7 @@
     <Build Include="dbo\Functions\GetRepairInformationByCategoryId.sql" />
     <Build Include="dbo\Functions\GetRepairInformationByBrandId.sql" />
     <Build Include="dbo\Functions\GetRepairInformationByTransportId.sql" />
+    <Build Include="dbo\Functions\GetDetailsByCategoryId.sql" />
+    <Build Include="dbo\User Defined Types\smallint_list.sql" />
   </ItemGroup>
 </Project>
