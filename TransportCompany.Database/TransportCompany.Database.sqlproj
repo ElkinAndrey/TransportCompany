@@ -124,5 +124,6 @@
     <Build Include="dbo\Tables\repair.sql" />
     <Build Include="dbo\Tables\detail.sql" />
     <Build Include="dbo\Tables\action.sql" />
+    <Build Include="dbo\Functions\GetRepairInformationByCategoryId.sql" />
   </ItemGroup>
 </Project>
