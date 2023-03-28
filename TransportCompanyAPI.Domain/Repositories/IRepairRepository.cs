@@ -57,5 +57,20 @@ namespace TransportCompanyAPI.Domain.Repositories
             DateTime? start,
             DateTime? end
         );
+
+        /// <summary>
+        /// Количество отримонтированных деталей по конкретной категории
+        /// </summary>
+        /// <param name="сategoryId">Id категории транспорта</param>
+        /// <param name="start">Начало отчета</param>
+        /// <param name="end">Конец отчета</param>
+        /// <param name="detailsId">Списко с Id деталей, количество которых нужно получить</param>
+        /// <returns>Список с деталями и их количествами</returns>
+        public Task<IEnumerable<(string Name, long Count)>> GetDetailsByCategoryIdAsync(
+            short сategoryId,
+            DateTime? start,
+            DateTime? end,
+            IEnumerable<short> detailsId
+        );
     }
 }

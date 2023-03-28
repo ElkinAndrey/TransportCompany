@@ -26,6 +26,37 @@ namespace TransportCompanyAPI.Persistence.Repositories
             this.sqlQueries = sqlQueries;
         }
 
+        public async Task<IEnumerable<(string Name, long Count)>> GetDetailsByCategoryIdAsync(
+            short сategoryId, 
+            DateTime? start, 
+            DateTime? end, 
+            IEnumerable<short> detailsId
+        )
+        {
+            List<(string Name, long Count)> details = new List<(string Name, long Count)>();
+
+            string query = @$"
+                DECLARE @TL [smallint_list];
+                INSERT @TL VALUES ({String.Join("), (", detailsId)})
+                SELECT * 
+                FROM GetDetailsByCategoryId(
+                    {сategoryId},
+                    '{Helpers.ConvertDateTimeInISO8601(start)}',
+                    '{Helpers.ConvertDateTimeInISO8601(end)}',
+                    @TL
+                )
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            foreach (DataRow row in dataTable.Rows)
+                details.Add((
+                    Name: row.Field<string>("name") ?? "",
+                    Count: row.Field<long>("count")
+                ));
+
+            return details;
+        }
+
         public async Task<(long Count, decimal Price)> GetRepairInformationByBrandIdAsync(
             long brandId, 
             DateTime? start, 

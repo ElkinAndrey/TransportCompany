@@ -132,5 +132,41 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Количество отримонтированных деталей по конкретной категории
+        /// </summary>
+        /// <param name="model">Параметры получения</param>
+        /// <returns>
+        /// Вернет количество и стоимость
+        /// {
+        ///     count : 12
+        ///     price : 10.1
+        /// }
+        /// </returns>
+        [HttpPost]
+        [Route("GetDetailsByCategoryId")]
+        public async Task<IActionResult> GetDetailsByCategoryId(GetDetailsByCategoryIdViewModel model)
+        {
+            try
+            {
+                var repairInformation = await serviceManager.RepairService.GetDetailsByCategoryIdAsync(
+                    model.CategoryId,
+                    model.Start,
+                    model.End,
+                    model.DetailsId
+                );
+
+                return Ok(repairInformation.Select((inf) => new
+                {
+                    inf.Name,
+                    inf.Count,
+                }));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
