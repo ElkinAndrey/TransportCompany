@@ -19,5 +19,10 @@
         /// Репозиторий, отвечающий за работу с подчиненностью
         /// </summary>
         ISubordinationRepository SubordinationRepository { get; }
+
+        /// <summary>
+        /// Репозиторий, отвечающий за работу с ремонтами
+        /// </summary>
+        IRepairRepository RepairRepository { get; }
     }
 }

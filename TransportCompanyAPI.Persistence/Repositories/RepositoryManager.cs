@@ -30,7 +30,12 @@ namespace TransportCompanyAPI.Persistence.Repositories
         private readonly ISubordinationRepository subordinationRepository;
 
         /// <summary>
-        /// Конструктор
+        /// Реопзиторий для работы с ремонтами
+        /// </summary>
+        private readonly IRepairRepository repairRepository;
+
+        /// <summary>
+        /// Репозиторий для работы с остальными репозиториями
         /// </summary>
         public RepositoryManager()
         {
@@ -40,6 +45,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
             transportRepository = new ADOTransportRepository(sqlQueries);
             personRepository = new ADOPersonRepository(sqlQueries);
             subordinationRepository = new ADOSubordinationRepository(sqlQueries);
+            repairRepository = new ADORepairRepository(sqlQueries);
         }
 
         public ITransportRepository TransportRepository => transportRepository;
@@ -47,5 +53,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
         public IPersonRepository PersonRepository => personRepository;
 
         public ISubordinationRepository SubordinationRepository => subordinationRepository;
+
+        public IRepairRepository RepairRepository => repairRepository;
     }
 }

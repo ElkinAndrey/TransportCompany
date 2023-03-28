@@ -26,5 +26,10 @@ namespace TransportCompanyAPI.Service.Abstractions
         /// Сервис, отвечающий за работу с подчиненностью
         /// </summary>
         ISubordinationService SubordinationService { get; }
+
+        /// <summary>
+        /// Сервис, отвечающий за работу с ремонтами
+        /// </summary>
+        IRepairService RepairService { get; }
     }
 }
