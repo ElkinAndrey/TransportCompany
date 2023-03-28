@@ -4,7 +4,7 @@
 	@end DATETIME = ''
 )
 RETURNS @TL TABLE(
-	[miliage]   BIGINT NOT NULL
+	[mileage]   BIGINT NOT NULL
 )
 AS
 BEGIN
@@ -25,7 +25,7 @@ BEGIN
 			(@end = '' OR CONVERT(DATETIME, @end) >= [mileage].[date])
 	)
 
-	INSERT INTO @TL ([miliage]) 
+	INSERT INTO @TL ([mileage]) 
 	SELECT	ISNULL(
 				SUM ([mileageMax].[fixed_mileage]) + 
 				SUM ([mileageMin].[fixed_mileage])

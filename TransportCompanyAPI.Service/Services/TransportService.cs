@@ -261,12 +261,12 @@ namespace TransportCompanyAPI.Service.Services
 
             try
             {
-                var miliage = await repositoryManager.TransportRepository.GetMileageByTransportIdAsync(
+                var mileage = await repositoryManager.TransportRepository.GetMileageByTransportIdAsync(
                     transportId,
                     start,
                     end
                 );
-                return miliage;
+                return mileage;
             }
             catch (Exception ex)
             {
@@ -284,12 +284,12 @@ namespace TransportCompanyAPI.Service.Services
 
             try
             {
-                var miliage = await repositoryManager.TransportRepository.GetMileageByCategoryIdAsync(
+                var mileage = await repositoryManager.TransportRepository.GetMileageByCategoryIdAsync(
                     categoryId,
                     start,
                     end
                 );
-                return miliage;
+                return mileage;
             }
             catch (Exception ex)
             {

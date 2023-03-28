@@ -389,7 +389,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
         public async Task<int> GetMileageByTransportIdAsync(long transportId, DateTime? start, DateTime? end)
         {
-            int miliage;
+            int mileage;
 
             string query = @$"
                 SELECT * 
@@ -400,14 +400,14 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 )                
             ";
             DataTable dataTable = sqlQueries.QuerySelect(query);
-            miliage = dataTable.Rows[0].Field<int>("miliage");
+            mileage = dataTable.Rows[0].Field<int>("mileage");
             
-            return miliage;
+            return mileage;
         }
 
         public async Task<long> GetMileageByCategoryIdAsync(long categoryId, DateTime? start, DateTime? end)
         {
-            long miliage;
+            long mileage;
 
             string query = @$"
                 SELECT * 
@@ -418,9 +418,9 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 )                
             ";
             DataTable dataTable = sqlQueries.QuerySelect(query);
-            miliage = dataTable.Rows[0].Field<long>("miliage");
+            mileage = dataTable.Rows[0].Field<long>("mileage");
 
-            return miliage;
+            return mileage;
         }
     }
 }

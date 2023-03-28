@@ -4,7 +4,7 @@
 	@end DATETIME = ''
 )
 RETURNS @TL TABLE(
-	[miliage]   INT NOT NULL
+	[mileage]   INT NOT NULL
 )
 AS
 BEGIN

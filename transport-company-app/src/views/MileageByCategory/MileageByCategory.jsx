@@ -12,12 +12,12 @@ const MileageByCategory = () => {
     end: null,
   });
   let [categories, setCategories] = useState([]);
-  let [miliage, setMiliage] = useState("");
+    let [mileage, setMileage] = useState("");
 
-  const [fetchMiliage, isMiliageLoading, miliageError] = useFetching(
+  const [fetchMileage, isMileageLoading, mileageError] = useFetching(
     async (params) => {
       const response = await Transport.getMileageByCategoryId(params);
-      setMiliage(response.data);
+      setMileage(response.data);
     }
   );
 
@@ -30,11 +30,11 @@ const MileageByCategory = () => {
 
   useEffect(() => {
     fetchCategories();
-    fetchMiliage(params);
+    fetchMileage(params);
   }, []);
 
   const update = () => {
-    fetchMiliage(params);
+    fetchMileage(params);
   };
 
   return (
@@ -92,7 +92,7 @@ const MileageByCategory = () => {
           ))}
         </select>
 
-        <div>Пробег : {miliage}</div>
+        <div>Пробег : {mileage}</div>
 
         <div>
           <button onClick={update}>Обновить таблицу</button>

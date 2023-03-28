@@ -120,5 +120,9 @@
     <Build Include="dbo\Tables\mileage.sql" />
     <Build Include="dbo\Functions\GetMileageByTransportId.sql" />
     <Build Include="dbo\Functions\GetMileageByCategoryId.sql" />
+    <Build Include="dbo\Tables\repair_person_detail_action.sql" />
+    <Build Include="dbo\Tables\repair.sql" />
+    <Build Include="dbo\Tables\detail.sql" />
+    <Build Include="dbo\Tables\action.sql" />
   </ItemGroup>
 </Project>

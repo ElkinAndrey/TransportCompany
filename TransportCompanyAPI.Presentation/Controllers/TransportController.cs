@@ -316,13 +316,13 @@ namespace TransportCompanyAPI.Presentation.Controllers
 
             try
             {
-                var miliage = await serviceManager.TransportService.GetMileageByTransportIdAsync(
+                var mileage = await serviceManager.TransportService.GetMileageByTransportIdAsync(
                     model.TransportId,
                     model.Start,
                     model.End
                 );
 
-                return Ok(miliage);
+                return Ok(mileage);
             }
             catch (Exception ex)
             {
@@ -344,13 +344,13 @@ namespace TransportCompanyAPI.Presentation.Controllers
 
             try
             {
-                var miliage = await serviceManager.TransportService.GetMileageByCategoryIdAsync(
+                var mileage = await serviceManager.TransportService.GetMileageByCategoryIdAsync(
                     model.CategoryId,
                     model.Start,
                     model.End
                 );
 
-                return Ok(miliage);
+                return Ok(mileage);
             }
             catch (Exception ex)
             {
