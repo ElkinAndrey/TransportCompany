@@ -130,5 +130,6 @@
     <Build Include="dbo\Functions\GetRepairInformationByTransportId.sql" />
     <Build Include="dbo\Functions\GetDetailsByCategoryId.sql" />
     <Build Include="dbo\User Defined Types\smallint_list.sql" />
+    <Build Include="dbo\Functions\GetDetailsByBrandId.sql" />
   </ItemGroup>
 </Project>
