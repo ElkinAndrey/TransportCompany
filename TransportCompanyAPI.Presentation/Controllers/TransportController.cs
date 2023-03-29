@@ -357,5 +357,26 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Список транспорта по Id бригады
+        /// </summary>
+        /// <param name="brigadeId">Id бригады</param>
+        /// <returns>Список транспорта</returns>
+        [HttpGet]
+        [Route("GetTransportsByBrigadeId/{brigadeId}")]
+        public async Task<IActionResult> GetTransportsByBrigadeId(long brigadeId)
+        {
+            try
+            {
+                var transports = await serviceManager.TransportService.GetTransportsByBrigadeIdAsync(brigadeId);
+
+                return Ok(transports);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

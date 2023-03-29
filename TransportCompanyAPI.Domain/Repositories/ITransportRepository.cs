@@ -183,5 +183,12 @@ namespace TransportCompanyAPI.Domain.Repositories
         /// <param name="end">Конец отчета</param>
         /// <returns>Пробег</returns>
         public Task<long> GetMileageByCategoryIdAsync(long categoryId, DateTime? start, DateTime? end);
+
+        /// <summary>
+        /// Получить список транспорта по Id бригады
+        /// </summary>
+        /// <param name="brigadeId">Id бригады</param>
+        /// <returns>Список транспорта</returns>
+        public Task<IEnumerable<Transport>> GetTransportsByBrigadeIdAsync(long brigadeId);
     }
 }

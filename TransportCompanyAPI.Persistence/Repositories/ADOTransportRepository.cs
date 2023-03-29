@@ -5,6 +5,7 @@ using TransportCompanyAPI.Domain.Enum;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Persistence.Features;
 using TransportCompanyAPI.Persistence.Queries;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TransportCompanyAPI.Persistence.Repositories
 {
@@ -421,6 +422,18 @@ namespace TransportCompanyAPI.Persistence.Repositories
             mileage = dataTable.Rows[0].Field<long>("mileage");
 
             return mileage;
+        }
+
+        public async Task<IEnumerable<Transport>> GetTransportsByBrigadeIdAsync(long brigadeId)
+        {
+            GetTransports getTransports = new GetTransports(sqlQueries);
+            var transports = getTransports.Action(
+                offset: 0,
+                length: long.MaxValue,
+                brigadeId: brigadeId
+            );
+
+            return transports;
         }
     }
 }

@@ -296,5 +296,21 @@ namespace TransportCompanyAPI.Service.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<IEnumerable<Transport>> GetTransportsByBrigadeIdAsync(long brigadeId)
+        {
+            if (brigadeId < 0)
+                throw new NegativeStartScoreException(brigadeId);
+
+            try
+            {
+                var transports = await repositoryManager.TransportRepository.GetTransportsByBrigadeIdAsync(brigadeId);
+                return transports;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
