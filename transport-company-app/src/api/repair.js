@@ -43,4 +43,9 @@ export default class Repair {
     const response = await axios.post(`${URL}/GetRepairByPersonIdAndTransportId/`, params);
     return response;
   }
+
+  static async getDetails() {
+    const response = await axios.get(`${URL}/GetDetails/`);
+    return response;
+  }
 }
