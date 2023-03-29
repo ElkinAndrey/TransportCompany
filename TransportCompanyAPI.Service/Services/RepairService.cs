@@ -1,4 +1,6 @@
-﻿using TransportCompanyAPI.Domain.Repositories;
+﻿using TransportCompanyAPI.Domain.Entities.RepairEntities;
+using TransportCompanyAPI.Domain.Entities.TransportEntities;
+using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
 using TransportCompanyAPI.Service.Exceptions;
 
@@ -107,6 +109,33 @@ namespace TransportCompanyAPI.Service.Services
                     detailsId
                 );
                 return repairInformation;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<IEnumerable<RepairPart>> GetRepairByPersonIdAsync(
+            long personId, 
+            DateTime? start, 
+            DateTime? end
+        )
+        {
+            if (start != null && end != null && start > end)
+                return new List<RepairPart>();
+
+            if (personId < 0)
+                throw new NegativeStartScoreException(personId);
+
+            try
+            {
+                var repairs = await repositoryManager.RepairRepository.GetRepairByPersonIdAsync(
+                    personId,
+                    start,
+                    end
+                );
+                return repairs;
             }
             catch (Exception ex)
             {

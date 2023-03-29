@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using TransportCompanyAPI.Domain.Entities.RepairEntities;
+using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Persistence.Features;
 
@@ -115,6 +117,37 @@ namespace TransportCompanyAPI.Persistence.Repositories
                 ));
 
             return details;
+        }
+
+        public async Task<IEnumerable<RepairPart>> GetRepairByPersonIdAsync(long personId, DateTime? start, DateTime? end)
+        {
+            List<RepairPart> repairs = new List<RepairPart>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetRepairByPersonId(
+                    {personId},
+                    '{Helpers.ConvertDateTimeInISO8601(start)}',
+                    '{Helpers.ConvertDateTimeInISO8601(end)}'
+                )
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            foreach (DataRow row in dataTable.Rows)
+                repairs.Add(new RepairPart
+                {
+                    Detail = row.Field<string>("detail") ?? "",
+                    Action = row.Field<string>("action") ?? "",
+                    Repair = new Repair
+                    {
+                        RepairId = row.Field<long>("repair_id"),
+                        Price = row.Field<decimal>("repair_full_price"),
+                        Start = row.Field<DateTime>("repair_start"),
+                        End = row.Field<DateTime>("repair_end"),
+                    }
+                });
+
+            return repairs;
         }
 
         public async Task<(long Count, decimal Price)> GetRepairInformationByBrandIdAsync(

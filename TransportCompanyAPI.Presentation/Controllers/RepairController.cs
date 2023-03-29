@@ -258,5 +258,32 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Ремонты, выполенные специалистом за обозначенный период
+        /// </summary>
+        /// <param name="model">Параметры получения</param>
+        /// <returns>
+        /// Вернет список с частями ремонта, которые выполнил специалист
+        /// </returns>
+        [HttpPost]
+        [Route("GetRepairByPersonId")]
+        public async Task<IActionResult> GetRepairByPersonId(GetRepairByPersonIdViewModel model)
+        {
+            try
+            {
+                var repairs = await serviceManager.RepairService.GetRepairByPersonIdAsync(
+                    model.PersonId,
+                    model.Start,
+                    model.End
+                );
+
+                return Ok(repairs);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

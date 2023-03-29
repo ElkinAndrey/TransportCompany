@@ -1,4 +1,6 @@
-﻿namespace TransportCompanyAPI.Service.Abstractions
+﻿using TransportCompanyAPI.Domain.Entities.RepairEntities;
+
+namespace TransportCompanyAPI.Service.Abstractions
 {
     /// <summary>
     /// Интерфейс сервиса для работы с ремонтом 
@@ -99,6 +101,19 @@
             DateTime? start,
             DateTime? end,
             IEnumerable<short> detailsId
+        );
+
+        /// <summary>
+        /// Получить список ремонтов у сотрудника за определенный период
+        /// </summary>
+        /// <param name="personId">Id сотрудника</param>
+        /// <param name="start">Начало отчета</param>
+        /// <param name="end">Конец отчета</param>
+        /// <returns>Список с часятями ремонта, которые выполняет сотрудник</returns>
+        public Task<IEnumerable<RepairPart>> GetRepairByPersonIdAsync(
+            long personId,
+            DateTime? start,
+            DateTime? end
         );
     }
 }
