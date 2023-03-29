@@ -50,4 +50,19 @@ export default class Transport {
     );
     return response;
   }
+  
+  static async getTransportCompanies() {
+    const response = await axios.get(`${URL}/GetTransportCompanies/`);
+    return response;
+  }
+
+  static async getTransportModels(companyId) {
+    const response = await axios.get(`${URL}/GetTransportModels/${companyId}`);
+    return response;
+  }
+
+  static async getTransportYears(modelId) {
+    const response = await axios.get(`${URL}/GetTransportYears/${modelId}`);
+    return response;
+  }
 }

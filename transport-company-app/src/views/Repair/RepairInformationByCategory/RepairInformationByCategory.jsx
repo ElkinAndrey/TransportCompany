@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useFetching } from "./../../hooks/useFetching";
-import Transport from "./../../api/transport";
-import Modal from "./../../components/forms/modal/Modal";
-import { getDateForInput } from "./../../utils/getDateForInput";
+import Modal from "../../../components/forms/modal/Modal";
+import { getDateForInput } from "../../../utils/getDateForInput";
+import { useFetching } from "../../../hooks/useFetching";
+import Transport from "../../../api/transport";
+import Repair from "../../../api/repair";
 
-const MileageByCategory = () => {
+const RepairInformationByCategory = () => {
   let [modalActive, setModalActive] = useState(false);
   let [params, setParams] = useState({
     categoryId: 0,
@@ -12,14 +13,10 @@ const MileageByCategory = () => {
     end: null,
   });
   let [categories, setCategories] = useState([]);
-  let [mileage, setMileage] = useState("");
-
-  const [fetchMileage, isMileageLoading, mileageError] = useFetching(
-    async (params) => {
-      const response = await Transport.getMileageByCategoryId(params);
-      setMileage(response.data);
-    }
-  );
+  let [information, setInformation] = useState({
+    count: "",
+    price: "",
+  });
 
   const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(
     async () => {
@@ -28,13 +25,18 @@ const MileageByCategory = () => {
     }
   );
 
+  const [fetchInformation, isInformationLoading, informationError] =
+    useFetching(async (params) => {
+      const response = await Repair.getRepairInformationByCategoryId(params);
+      setInformation(response.data);
+    });
+
   useEffect(() => {
     fetchCategories();
-    fetchMileage(params);
   }, []);
 
   const update = () => {
-    fetchMileage(params);
+    fetchInformation(params);
   };
 
   return (
@@ -44,7 +46,7 @@ const MileageByCategory = () => {
           setModalActive(true);
         }}
       >
-        Посмотреть пробег по категории транспорта
+        Получить информацию о ремонтах по категории
       </button>
       <Modal active={modalActive} setActive={setModalActive}>
         <div>
@@ -92,7 +94,8 @@ const MileageByCategory = () => {
           ))}
         </select>
 
-        <div>Пробег : {mileage}</div>
+        <div>Количество : {information.count}</div>
+        <div>Общая стоимость : {information.price}</div>
 
         <div>
           <button onClick={update}>Обновить таблицу</button>
@@ -102,4 +105,4 @@ const MileageByCategory = () => {
   );
 };
 
-export default MileageByCategory;
+export default RepairInformationByCategory;
