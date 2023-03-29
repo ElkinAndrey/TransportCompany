@@ -4,6 +4,7 @@ import { useFetching } from "./../../hooks/useFetching";
 import Person from "./../../api/person";
 import TableLink from "./../forms/tableLink/TableLink";
 import TransportMiniTable from "./../../views/Tables/TransportMiniTable/TransportMiniTable";
+import RepairByPerson from "./../../views/Repair/RepairByPerson/RepairByPerson";
 
 const PersonPage = () => {
   const dataFetchedRef = useRef(false);
@@ -38,6 +39,9 @@ const PersonPage = () => {
         Дата увольнения :{" "}
         {person.dismissalDate === null ? "Не уволен" : person.dismissalDate}
       </div>
+      {person.hasOwnProperty("brigade") && (
+        <RepairByPerson personId={person.personId} />
+      )}
 
       <h1>Уникальные характеристики</h1>
       {person.hasOwnProperty("licenseNumber") && (
