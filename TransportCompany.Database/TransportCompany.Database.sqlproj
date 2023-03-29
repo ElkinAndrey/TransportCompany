@@ -134,5 +134,6 @@
     <Build Include="dbo\Functions\GetDetailsByTransportId.sql" />
     <Build Include="dbo\Functions\GetRepairByPersonId.sql" />
     <Build Include="dbo\Functions\GetRepairByPersonIdAndTransportId.sql" />
+    <Build Include="dbo\Functions\GetDetails.sql" />
   </ItemGroup>
 </Project>
