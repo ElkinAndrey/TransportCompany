@@ -116,6 +116,38 @@ namespace TransportCompanyAPI.Service.Services
             }
         }
 
+        public async Task<IEnumerable<RepairPart>> GetRepairByPersonIdAndTransportIdAsync(
+            long personId, 
+            long transportId, 
+            DateTime? start, 
+            DateTime? end
+        )
+        {
+            if (start != null && end != null && start > end)
+                return new List<RepairPart>();
+
+            if (personId < 0)
+                throw new NegativeStartScoreException(personId);
+
+            if (transportId < 0)
+                throw new NegativeStartScoreException(personId);
+
+            try
+            {
+                var repairs = await repositoryManager.RepairRepository.GetRepairByPersonIdAndTransportIdAsync(
+                    personId,
+                    transportId,
+                    start,
+                    end
+                );
+                return repairs;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<IEnumerable<RepairPart>> GetRepairByPersonIdAsync(
             long personId, 
             DateTime? start, 

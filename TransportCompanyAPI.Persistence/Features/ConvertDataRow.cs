@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using TransportCompanyAPI.Domain.Entities.PersonEntities;
+using TransportCompanyAPI.Domain.Entities.RepairEntities;
 using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
 using TransportCompanyAPI.Domain.Entities.TransportEntities;
 
@@ -128,6 +129,25 @@ namespace TransportCompanyAPI.Persistence.Features
                     ConvertSubordinationPerson("foreman", row),
                     new Foreman()
                 ),
+            };
+
+        /// <summary>
+        /// Получить часть ремонта по строке из базы данных
+        /// </summary>
+        /// <param name="row">Строка</param>
+        /// <returns>Часть ремонта</returns>
+        static public RepairPart ConvertRepairPart(DataRow row) =>
+            new RepairPart
+            {
+                Detail = row.Field<string>("detail") ?? "",
+                Action = row.Field<string>("action") ?? "",
+                Repair = new Repair
+                {
+                    RepairId = row.Field<long>("repair_id"),
+                    Price = row.Field<decimal>("repair_full_price"),
+                    Start = row.Field<DateTime>("repair_start"),
+                    End = row.Field<DateTime>("repair_end"),
+                }
             };
     }
 }

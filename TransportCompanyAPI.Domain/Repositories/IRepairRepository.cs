@@ -116,5 +116,20 @@ namespace TransportCompanyAPI.Domain.Repositories
             DateTime? start,
             DateTime? end
         );
+
+        /// <summary>
+        /// Получить список ремонтов у сотрудника за определенный период по указанной автомашине
+        /// </summary>
+        /// <param name="personId">Id сотрудника</param>
+        /// <param name="transportId">Id транспорта</param>
+        /// <param name="start">Начало отчета</param>
+        /// <param name="end">Конец отчета</param>
+        /// <returns>Список с часятями ремонта, которые выполняет сотрудник</returns>
+        public Task<IEnumerable<RepairPart>> GetRepairByPersonIdAndTransportIdAsync(
+            long personId,
+            long transportId,
+            DateTime? start,
+            DateTime? end
+        );
     }
 }

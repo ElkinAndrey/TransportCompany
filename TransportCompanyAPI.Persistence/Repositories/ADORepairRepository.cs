@@ -119,6 +119,32 @@ namespace TransportCompanyAPI.Persistence.Repositories
             return details;
         }
 
+        public async Task<IEnumerable<RepairPart>> GetRepairByPersonIdAndTransportIdAsync(
+            long personId, 
+            long transportId, 
+            DateTime? start, 
+            DateTime? end
+        )
+        {
+            List<RepairPart> repairs = new List<RepairPart>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetRepairByPersonIdAndTransportId(
+                    {personId},
+                    {transportId},
+                    '{Helpers.ConvertDateTimeInISO8601(start)}',
+                    '{Helpers.ConvertDateTimeInISO8601(end)}'
+                )
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            foreach (DataRow row in dataTable.Rows)
+                repairs.Add(ConvertDataRow.ConvertRepairPart(row));
+
+            return repairs;
+        }
+
         public async Task<IEnumerable<RepairPart>> GetRepairByPersonIdAsync(long personId, DateTime? start, DateTime? end)
         {
             List<RepairPart> repairs = new List<RepairPart>();
@@ -134,18 +160,7 @@ namespace TransportCompanyAPI.Persistence.Repositories
 
             DataTable dataTable = sqlQueries.QuerySelect(query);
             foreach (DataRow row in dataTable.Rows)
-                repairs.Add(new RepairPart
-                {
-                    Detail = row.Field<string>("detail") ?? "",
-                    Action = row.Field<string>("action") ?? "",
-                    Repair = new Repair
-                    {
-                        RepairId = row.Field<long>("repair_id"),
-                        Price = row.Field<decimal>("repair_full_price"),
-                        Start = row.Field<DateTime>("repair_start"),
-                        End = row.Field<DateTime>("repair_end"),
-                    }
-                });
+                repairs.Add(ConvertDataRow.ConvertRepairPart(row));
 
             return repairs;
         }
