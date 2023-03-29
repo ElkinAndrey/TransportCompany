@@ -6,6 +6,7 @@ import UniqueTransportCharacteristics from "./../../views/UniqueTransportCharact
 import PersonMiniTable from "./../../views/Tables/PersonMiniTable/PersonMiniTable";
 import TableLink from "./../forms/tableLink/TableLink";
 import RepairInformationByTransport from './../../views/Repair/RepairInformationByTransport/RepairInformationByTransport';
+import DetailsByTransport from './../../views/Repair/DetailsByTransport/DetailsByTransport';
 
 const TransportPage = () => {
   const dataFetchedRef = useRef(false);
@@ -71,8 +72,8 @@ const TransportPage = () => {
         <div>Год издания : {transport.yearPublishing}</div>
       </div>
 
-
       <RepairInformationByTransport transportId={transport.transportId}/>
+      <DetailsByTransport transportId={transport.transportId}/>
 
       {transport.end === null && (
         <button

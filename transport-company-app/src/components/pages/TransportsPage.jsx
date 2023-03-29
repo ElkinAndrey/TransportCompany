@@ -7,6 +7,7 @@ import MileageByCategory from "./../../views/MileageByCategory/MileageByCategory
 import RepairInformationByCategory from "../../views/Repair/RepairInformationByCategory/RepairInformationByCategory";
 import RepairInformationByBrand from "../../views/Repair/RepairInformationByBrand/RepairInformationByBrand";
 import DetailsByCategory from './../../views/Repair/DetailsByCategory/DetailsByCategory';
+import DetailsByBrand from './../../views/Repair/DetailsByBrand/DetailsByBrand';
 
 const TransportsPage = () => {
   let [transportCount, setTransportCount] = useState(0);
@@ -22,6 +23,7 @@ const TransportsPage = () => {
       <RepairInformationByCategory />
       <RepairInformationByBrand />
       <DetailsByCategory />
+      <DetailsByBrand />
       <br />
       <PaginationBar start={1} end={end} page={page} setPage={setPage} />
       <TransportTable
