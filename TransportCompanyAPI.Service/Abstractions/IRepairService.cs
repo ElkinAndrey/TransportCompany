@@ -130,5 +130,11 @@ namespace TransportCompanyAPI.Service.Abstractions
             DateTime? start,
             DateTime? end
         );
+
+        /// <summary>
+        /// Получить список с деталями
+        /// </summary>
+        /// <returns>Список с деталями</returns>
+        public Task<IEnumerable<(short Id, string Name)>> GetDetailsAsync();
     }
 }

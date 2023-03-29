@@ -25,6 +25,19 @@ namespace TransportCompanyAPI.Service.Services
             this.repositoryManager = repositoryManager;
         }
 
+        public async Task<IEnumerable<(short Id, string Name)>> GetDetailsAsync()
+        {
+            try
+            {
+                var details = await repositoryManager.RepairRepository.GetDetailsAsync();
+                return details;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<IEnumerable<(string Name, long Count)>> GetDetailsByBrandIdAsync(long brandId, DateTime? start, DateTime? end, IEnumerable<short> detailsId)
         {
             if (start != null && end != null && start > end)

@@ -26,6 +26,25 @@ namespace TransportCompanyAPI.Persistence.Repositories
             this.sqlQueries = sqlQueries;
         }
 
+        public async Task<IEnumerable<(short Id, string Name)>> GetDetailsAsync()
+        {
+            List<(short Id, string Name)> details = new List<(short Id, string Name)>();
+
+            string query = @$"
+                SELECT * 
+                FROM GetDetails()
+            ";
+
+            DataTable dataTable = sqlQueries.QuerySelect(query);
+            foreach (DataRow row in dataTable.Rows)
+                details.Add((
+                    Id: row.Field<short>("detail_id"),
+                    Name: row.Field<string>("name") ?? ""
+                ));
+
+            return details;
+        }
+
         public async Task<IEnumerable<(string Name, long Count)>> GetDetailsByBrandIdAsync(
             long brandId, 
             DateTime? start, 

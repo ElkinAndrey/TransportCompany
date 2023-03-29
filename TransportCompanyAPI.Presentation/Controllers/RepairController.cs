@@ -313,5 +313,31 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Получить список деталей
+        /// </summary>
+        /// <returns>
+        /// Вернет список с деталями
+        /// </returns>
+        [HttpGet]
+        [Route("GetDetails")]
+        public async Task<IActionResult> GetDetails()
+        {
+            try
+            {
+                var details = await serviceManager.RepairService.GetDetailsAsync();
+
+                return Ok(details.Select(detail => new
+                {
+                    detail.Id,
+                    detail.Name,
+                }));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
