@@ -380,9 +380,8 @@ namespace TransportCompanyAPI.Presentation.Controllers
         }
 
 		/// <summary>
-		/// Список транспорта по Id бригады
+		/// Получить распределение водителей по транспорту
 		/// </summary>
-		/// <param name="brigadeId">Id бригады</param>
 		/// <returns>Список транспорта</returns>
 		[HttpGet]
 		[Route("GetDistributionDriversTransport")]

@@ -75,4 +75,9 @@ export default class Transport {
     const response = await axios.post(`${URL}/GetMileageByTransportId`, params);
     return response;
   }
+
+  static async getDistributionDriversTransport() {
+    const response = await axios.get(`${URL}/GetDistributionDriversTransport`);
+    return response;
+  }
 }
