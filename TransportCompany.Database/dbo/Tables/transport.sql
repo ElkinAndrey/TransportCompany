@@ -5,7 +5,6 @@
     [region_code]           NVARCHAR (10) DEFAULT ('') NOT NULL,
     [start]                 DATETIME      NOT NULL,
     [end]                   DATETIME      NULL,
-    [mileage]               INT           DEFAULT ((0)) NOT NULL,
     [transport_category_id] SMALLINT      NOT NULL,
     [country_id]            SMALLINT      NOT NULL,
     [brand_id]              BIGINT        NOT NULL,

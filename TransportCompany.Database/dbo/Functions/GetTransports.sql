@@ -23,11 +23,24 @@ RETURN
 		[transport].[series],
 		[transport].[number],
 		[transport].[region_code],
+		[mileage] = (
+			SELECT ISNULL(MAX([fixed_mileage]), 0)
+			FROM   [mileage]
+			WHERE  
+				[mileage].[transport_id] = [transport].[transport_id] AND
+				[mileage].[date] = (
+					SELECT MAX([mileage].[date]) 
+					FROM (
+						SELECT * 
+						FROM [mileage]
+						WHERE [mileage].[transport_id] = [transport].[transport_id]
+					) AS [mileage]
+				)
+		),
 		[country].[country_code],
 		[country].[deciphering_country],
 		[transport].[start],
 		[transport].[end],
-		[transport].[mileage],
 		[brand_company].[name] AS [manufacturer_company],
 		[brand_model].[name] AS [transport_model], 
 		[brand].[year_publishing]
