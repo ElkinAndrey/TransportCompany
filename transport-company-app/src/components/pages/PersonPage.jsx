@@ -5,6 +5,7 @@ import Person from "./../../api/person";
 import TableLink from "./../forms/tableLink/TableLink";
 import TransportMiniTable from "./../../views/Tables/TransportMiniTable/TransportMiniTable";
 import RepairByPerson from "./../../views/Repair/RepairByPerson/RepairByPerson";
+import RepairByPersonAndTransport from "./../../views/Repair/RepairByPersonAndTransport/RepairByPersonAndTransport";
 
 const PersonPage = () => {
   const dataFetchedRef = useRef(false);
@@ -40,7 +41,13 @@ const PersonPage = () => {
         {person.dismissalDate === null ? "Не уволен" : person.dismissalDate}
       </div>
       {person.hasOwnProperty("brigade") && (
-        <RepairByPerson personId={person.personId} />
+        <div>
+          <RepairByPerson personId={person.personId} />
+          <RepairByPersonAndTransport
+            personId={person.personId}
+            brigadeId={person.brigade.brigadeId}
+          />
+        </div>
       )}
 
       <h1>Уникальные характеристики</h1>

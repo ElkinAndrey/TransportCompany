@@ -36,7 +36,7 @@ const RepairInformationByTransport = ({ transportId }) => {
           setModalActive(true);
         }}
       >
-        Получить информацию о ремонтах по категории
+        Получить информацию о ремонтах
       </button>
       <Modal active={modalActive} setActive={setModalActive}>
         <div>

@@ -30,6 +30,10 @@ table td {
   border-color: #d4d4d4;
 }
 
+.stringTable:hover {
+  outline: red 3px solid;
+}
+
 .selectTh td {
   background: #57c49e;
 }

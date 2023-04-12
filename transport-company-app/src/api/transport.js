@@ -65,4 +65,9 @@ export default class Transport {
     const response = await axios.get(`${URL}/GetTransportYears/${modelId}`);
     return response;
   }
+
+  static async getTransportsByBrigadeId(brigadeId) {
+    const response = await axios.get(`${URL}/GetTransportsByBrigadeId/${brigadeId}`);
+    return response;
+  }
 }
