@@ -21,7 +21,6 @@ const RepairByPersonAndTransport = ({ personId, brigadeId }) => {
 
   const [fetchRepairs, isRepairsLoading, repairsError] = useFetching(
     async (params) => {
-      console.log(params)
       const response = await Repair.getRepairByPersonIdAndTransportId(params);
       setRepairs(response.data);
     }

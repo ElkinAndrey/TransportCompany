@@ -135,5 +135,25 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
-    }
+
+		/// <summary>
+		/// Всю иерархию подчиненных
+		/// </summary>
+		/// <returns>Участки</returns>
+		[HttpGet]
+		[Route("GetAllSubjugation")]
+		public async Task<IActionResult> GetAllSubjugation()
+		{
+			try
+			{
+				var regions = await serviceManager.SubordinationService.GetAllSubjugationAsync();
+
+				return Ok(regions);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
+	}
 }

@@ -29,4 +29,9 @@ export default class Subordination {
     const response = await axios.post(`${URL}/GetSubordinationCount`, params);
     return response;
   }
+
+  static async getAllSubjugation() {
+    const response = await axios.get(`${URL}/GetAllSubjugation`);
+    return response;
+  }
 }

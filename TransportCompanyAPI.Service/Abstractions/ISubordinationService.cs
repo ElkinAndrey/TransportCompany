@@ -42,5 +42,11 @@ namespace TransportCompanyAPI.Service.Abstractions
         /// <param name="BrigadeId">Id бригады</param>
         /// <returns>Количество подчиненных</returns>
         public Task<SubordinationCount> GetSubordinationCountAsync(long RegionId, long WorkshopId, long BrigadeId);
-    }
+
+		/// <summary>
+		/// Всю иерархию подчиненных
+		/// </summary>
+		/// <returns>Участки</returns>
+		public Task<IEnumerable<Region>> GetAllSubjugationAsync();
+	}
 }

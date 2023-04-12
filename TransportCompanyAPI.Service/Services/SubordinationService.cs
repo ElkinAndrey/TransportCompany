@@ -25,7 +25,20 @@ namespace TransportCompanyAPI.Service.Services
             this.repositoryManager = repositoryManager;
         }
 
-        public async Task<Brigade> GetBrigadeAsync(long brigadeId)
+		public async Task<IEnumerable<Region>> GetAllSubjugationAsync()
+		{
+            try
+			{
+				var regions = await repositoryManager.SubordinationRepository.GetAllSubjugationAsync();
+				return regions;
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+		}
+
+		public async Task<Brigade> GetBrigadeAsync(long brigadeId)
         {
             if (brigadeId <= 0)
                 throw new WorkshopNotFoundException(brigadeId);

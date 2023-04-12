@@ -9,6 +9,7 @@ const Header = () => {
         <div><Link to={"/alltransport"} className={classes.button}>Весь транспорт</Link></div>
         <div><Link to={"/person"} className={classes.button}>Персонал</Link></div>
         <div><Link to={"/region"} className={classes.button}>Подчиненность</Link></div>
+        <div><Link to={"/allregions"} className={classes.button}>Вся подчиненность</Link></div>
     </div>
   )
 }
