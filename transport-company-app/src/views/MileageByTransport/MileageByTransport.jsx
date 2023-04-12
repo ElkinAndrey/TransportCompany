@@ -1,40 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useFetching } from "./../../hooks/useFetching";
+import React from 'react'
+import { useState } from 'react';
+import { useFetching } from './../../hooks/useFetching';
+import { useEffect } from 'react';
+import Modal from './../../components/forms/modal/Modal';
+import { getDateForInput } from './../../utils/getDateForInput';
 import Transport from "./../../api/transport";
-import Modal from "./../../components/forms/modal/Modal";
-import { getDateForInput } from "./../../utils/getDateForInput";
 
-const MileageByCategory = () => {
+const MileageByTransport = ({transportId}) => {
   let [modalActive, setModalActive] = useState(false);
   let [params, setParams] = useState({
-    categoryId: 0,
+    transportId: transportId,
     start: null,
     end: null,
   });
-  let [categories, setCategories] = useState([]);
   let [mileage, setMileage] = useState("");
 
   const [fetchMileage, isMileageLoading, mileageError] = useFetching(
     async (params) => {
-      const response = await Transport.getMileageByCategoryId(params);
+      const response = await Transport.getMileageByTransportId(params);
       setMileage(response.data);
     }
   );
 
-  const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(
-    async () => {
-      const response = await Transport.getTransportCategories();
-      setCategories(response.data);
-    }
-  );
-
   useEffect(() => {
-    fetchCategories();
-    fetchMileage(params);
+    fetchMileage({ ...params, transportId: transportId });
   }, []);
 
   const update = () => {
-    fetchMileage(params);
+    fetchMileage({ ...params, transportId: transportId });
   };
 
   return (
@@ -44,7 +37,7 @@ const MileageByCategory = () => {
           setModalActive(true);
         }}
       >
-        Посмотреть пробег по категории транспорта
+        Посмотреть пробег за период
       </button>
       <Modal active={modalActive} setActive={setModalActive}>
         <div>
@@ -78,20 +71,6 @@ const MileageByCategory = () => {
           </button>
         </div>
 
-        <select
-          value={params.categoryId}
-          onChange={(e) => {
-            setParams({ ...params, categoryId: e.target.value });
-          }}
-        >
-          <option value={0}>Всё</option>
-          {categories.map((category) => (
-            <option key={category[0]} value={category[0]}>
-              {category[1]}
-            </option>
-          ))}
-        </select>
-
         <div>Пробег : {mileage}</div>
 
         <div>
@@ -100,6 +79,6 @@ const MileageByCategory = () => {
       </Modal>
     </div>
   );
-};
+}
 
-export default MileageByCategory;
+export default MileageByTransport

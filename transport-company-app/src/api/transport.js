@@ -70,4 +70,9 @@ export default class Transport {
     const response = await axios.get(`${URL}/GetTransportsByBrigadeId/${brigadeId}`);
     return response;
   }
+
+  static async getMileageByTransportId(params) {
+    const response = await axios.post(`${URL}/GetMileageByTransportId`, params);
+    return response;
+  }
 }

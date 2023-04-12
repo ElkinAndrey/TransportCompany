@@ -135,5 +135,6 @@
     <Build Include="dbo\Functions\GetRepairByPersonId.sql" />
     <Build Include="dbo\Functions\GetRepairByPersonIdAndTransportId.sql" />
     <Build Include="dbo\Functions\GetDetails.sql" />
+    <Build Include="dbo\Functions\GetAllSubjugation.sql" />
   </ItemGroup>
 </Project>

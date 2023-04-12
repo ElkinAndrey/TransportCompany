@@ -7,6 +7,7 @@ import PersonMiniTable from "./../../views/Tables/PersonMiniTable/PersonMiniTabl
 import TableLink from "./../forms/tableLink/TableLink";
 import RepairInformationByTransport from './../../views/Repair/RepairInformationByTransport/RepairInformationByTransport';
 import DetailsByTransport from './../../views/Repair/DetailsByTransport/DetailsByTransport';
+import MileageByTransport from "../../views/MileageByTransport/MileageByTransport";
 
 const TransportPage = () => {
   const dataFetchedRef = useRef(false);
@@ -72,6 +73,7 @@ const TransportPage = () => {
         <div>Год издания : {transport.yearPublishing}</div>
       </div>
 
+      <MileageByTransport transportId={transport.transportId}/>
       <RepairInformationByTransport transportId={transport.transportId}/>
       <DetailsByTransport transportId={transport.transportId}/>
 
