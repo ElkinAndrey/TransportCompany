@@ -193,5 +193,11 @@ namespace TransportCompanyAPI.Service.Abstractions
         /// <param name="brigadeId">Id бригады</param>
         /// <returns>Список транспорта</returns>
         public Task<IEnumerable<Transport>> GetTransportsByBrigadeIdAsync(long brigadeId);
-    }
+
+		/// <summary>
+		/// Получить распределение водителей по транспорту
+		/// </summary>
+		/// <returns>Список транспорта</returns>
+		public Task<IEnumerable<Transport>> GetDistributionDriversTransportAsync();
+	}
 }

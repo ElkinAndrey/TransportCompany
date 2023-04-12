@@ -1,4 +1,5 @@
-﻿using TransportCompanyAPI.Domain.Entities.TransportEntities;
+﻿using TransportCompanyAPI.Domain.Entities.SubordinationEntities;
+using TransportCompanyAPI.Domain.Entities.TransportEntities;
 using TransportCompanyAPI.Domain.Repositories;
 using TransportCompanyAPI.Service.Abstractions;
 using TransportCompanyAPI.Service.Exceptions;
@@ -312,5 +313,18 @@ namespace TransportCompanyAPI.Service.Services
                 throw new Exception(ex.Message);
             }
         }
-    }
+
+		public async Task<IEnumerable<Transport>> GetDistributionDriversTransportAsync()
+        {
+            try
+            {
+				var transports = await repositoryManager.TransportRepository.GetDistributionDriversTransportAsync();
+				return transports;
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+		}
+	}
 }

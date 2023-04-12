@@ -378,5 +378,26 @@ namespace TransportCompanyAPI.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
-    }
+
+		/// <summary>
+		/// Список транспорта по Id бригады
+		/// </summary>
+		/// <param name="brigadeId">Id бригады</param>
+		/// <returns>Список транспорта</returns>
+		[HttpGet]
+		[Route("GetDistributionDriversTransport")]
+		public async Task<IActionResult> GetDistributionDriversTransport()
+		{
+			try
+			{
+				var transports = await serviceManager.TransportService.GetDistributionDriversTransportAsync();
+
+				return Ok(transports);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
+	}
 }
